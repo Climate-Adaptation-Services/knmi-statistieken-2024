@@ -35,7 +35,7 @@
 
   colorScale.set(scaleLinear()
     // .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
-    .domain([150,250])
+    .domain([150,450])
     .range(["white", "red"]))
 
   const period_options = [

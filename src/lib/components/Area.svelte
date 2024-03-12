@@ -66,6 +66,15 @@
       <stop offset="100%" stop-color={$colorScale(laagValue)} />
     </linearGradient>
   </defs>
-  <rect class='whiterect' x={0} width={w} height={h-2} fill='white'/>  
 </g>
+<g class='circles'>
+  {#each [['Klimaat 2050', laagValue], ['Klimaat 2100', laagValue], ['Klimaat 2050', hoog2050Value], ['Klimaat 2100', hoog2100Value]] as circleData, i}
+    <g transform='translate({xScale(circleData[0])},{yScale(circleData[1])})'>
+      <circle fill={$colorScale(circleData[1])} r='4' stroke='black'/>
+      <text text-anchor='middle' dy={(i > 1) ? '-0.7em' : '1.4em'}>{circleData[1]}</text>
+    </g>
+  {/each}
+</g>
+<rect class='whiterect' x={0} width={w} height={h-2} fill='white'/>
+
 
