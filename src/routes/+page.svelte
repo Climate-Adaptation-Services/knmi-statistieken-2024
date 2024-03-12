@@ -35,7 +35,7 @@
     <pre style='color:white'>Loading...</pre>
   {:then res}
     <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-      {#if mapWidth && browser}
+      {#if mapWidth}
         <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
     </div>

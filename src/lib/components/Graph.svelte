@@ -43,7 +43,7 @@
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
-      <Area {datajson} {xScale} {yScale}
+      <Area {datajson} {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight}/>
       <g class='yAxis' transform='translate({0},{0})'></g>
     </g>
