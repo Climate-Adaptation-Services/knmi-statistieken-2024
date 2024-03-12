@@ -80,7 +80,7 @@
       {#each currentPeriod.features as feature, i}
         <path
           d={'M' + path(feature).split('M')[1]}
-          class={'gridcode-' + feature.properties.Id}
+          class={'rasterblokje ' + 'gridcode-' + feature.properties.Id}
           fill={$colorScale(feature.properties.gridcode)}
           stroke={(feature.properties.Id === $gridSelection) ? 'cyan' : 'white'}
           stroke-width={(feature.properties.Id === $gridSelection) ? '3' : '1'}
@@ -113,6 +113,10 @@
 
   .NLstad{
     pointer-events: none;
+  }
+
+  .rasterblokje{
+    transition: all 2s;
   }
 
 </style>
