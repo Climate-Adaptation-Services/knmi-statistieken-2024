@@ -1,5 +1,5 @@
 <script>
-  import { geoMercator, geoPath, extent, scaleLinear, select } from 'd3';
+  import { geoMercator, geoPath, extent, scaleLinear, select, selectAll } from 'd3';
   import flip from '@turf/flip'
   import rewind from '@turf/rewind'
   import { gridSelection } from '$lib/stores';
@@ -30,6 +30,7 @@
   afterUpdate(() => {select('.gridcode-' + $gridSelection).raise()})
 
   function click(feature){
+    select('.whiterect').interrupt('ease').attr('x', 0)
     gridSelection.set(feature.properties.Id)
   }
 

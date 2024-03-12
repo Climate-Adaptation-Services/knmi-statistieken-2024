@@ -7,8 +7,8 @@
 
   export let xScale;
   export let yScale;
-  export let width;
-  export let height;
+  export let w;
+  export let h;
   export let datajson;
 
   const ref = datajson[1]
@@ -50,9 +50,17 @@
         strokeWidth: 2
       });
     svgElement.appendChild(path);
+
+    d3.select('.whiterect')
+      .raise()
+      .transition('ease').duration(2000).ease(d3.easeQuadOut)
+      .attr('x', w)
+      
   })
 
 </script>
 
-<g class='rough' bind:this={svgElement} height={height} width={width}></g>
+<g class='rough' bind:this={svgElement} height={h} width={w}>
+  <rect class='whiterect' x={0} width={w} height={h-2} fill='white'/>  
+</g>
 
