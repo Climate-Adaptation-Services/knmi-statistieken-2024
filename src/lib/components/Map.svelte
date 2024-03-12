@@ -2,7 +2,7 @@
   import { geoMercator, geoPath, extent, scaleLinear, select, selectAll } from 'd3';
   import flip from '@turf/flip'
   import rewind from '@turf/rewind'
-  import { gridSelection } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection } from '$lib/stores';
   import { afterUpdate } from 'svelte';
 
   export let datajson
@@ -11,9 +11,19 @@
   export let NLsteden
 
   const provincies = datajson[0]
-  const neerslagtekort_ref = datajson[1]
+  $: currentPeriod = ($periodSelection === 'Huidig klimaat')
+    ? datajson[1]
+    : ($periodSelection === 'Klimaat laag')
+      ? datajson[2]
+      : ($periodSelection === 'Klimaat 2050 hoog')
+        ? datajson[3]
+        : ($periodSelection === 'Klimaat 2100 hoog')
+          ? datajson[4]
+          : null
+
 
   console.log(datajson)
+  $: console.log($periodSelection)
 
   $: titleHeight = 0.2*h
   $: mapHeight = 0.8*h
@@ -23,9 +33,17 @@
   
   $: path = geoPath(projection);
 
-  const color = scaleLinear()
-    .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
-    .range(["pink", "red"])
+  colorScale.set(scaleLinear()
+    // .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
+    .domain([150,250])
+    .range(["white", "red"]))
+
+  const period_options = [
+      { value: 'Huidig klimaat', label: 'Huidig klimaat'},
+      { value: 'Klimaat laag', label: 'Klimaat laag 2050/2100'},
+      { value: 'Klimaat 2050 hoog', label: 'Klimaat 2050 hoog'},
+      { value: 'Klimaat 2100 hoog', label: 'Klimaat 2100 hoog'}
+  ];
 
   afterUpdate(() => {select('.gridcode-' + $gridSelection).raise()})
 
@@ -38,7 +56,11 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <h3>Neerslagtekort</h3>
-  <p>Pas locatie aan op kaart</p>
+  <select name="periods" id="periods" bind:value={$periodSelection}>
+    {#each period_options as option, i}
+      <option value={option.value} selected={(i === 0) ? true : false}>{option.label}</option>
+    {/each}
+  </select>  <p>Pas locatie aan op kaart</p>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
@@ -55,11 +77,11 @@
       {/each}
     </g>
     <g class='rasterdata'>
-      {#each neerslagtekort_ref.features as feature, i}
+      {#each currentPeriod.features as feature, i}
         <path
           d={'M' + path(feature).split('M')[1]}
           class={'gridcode-' + feature.properties.Id}
-          fill={color(feature.properties.gridcode)}
+          fill={$colorScale(feature.properties.gridcode)}
           stroke={(feature.properties.Id === $gridSelection) ? 'cyan' : 'white'}
           stroke-width={(feature.properties.Id === $gridSelection) ? '3' : '1'}
           on:click={() => click(feature)}

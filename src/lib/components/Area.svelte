@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection } from '$lib/stores';
+  import { gridSelection, colorScale } from '$lib/stores';
 
   export let xScale;
   export let yScale;
@@ -27,7 +27,6 @@
     {'period':'Klimaat 2100', 'laag':laagValue, 'hoog':hoog2100Value}
   ]
 
-
   const areaPath = d3.area()
     .x(d => xScale(d.period))
     .y0(d => yScale(d.laag))
@@ -40,12 +39,12 @@
 
     const path = rc.path(areaPath(data),
       { 
-        roughness: 0.6, 
-        fill: 'black', 
+        roughness: 0.8, 
+        fill: 'url("#roughGradient")', 
         stroke: 'none',
         fillStyle:'hachure',
         fillWeight: 1,
-        hachureGap: 4,
+        hachureGap: 0.5,
         hachureAngle: 45,
         strokeWidth: 2
       });
@@ -61,6 +60,12 @@
 </script>
 
 <g class='rough' bind:this={svgElement} height={h} width={w}>
+  <defs>
+    <linearGradient id="roughGradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color={$colorScale(hoog2100Value)} />
+      <stop offset="100%" stop-color={$colorScale(laagValue)} />
+    </linearGradient>
+  </defs>
   <rect class='whiterect' x={0} width={w} height={h-2} fill='white'/>  
 </g>
 

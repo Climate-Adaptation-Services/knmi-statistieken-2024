@@ -2,6 +2,7 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
+    import { browser } from '$app/environment';
 
   export let data
 
@@ -34,7 +35,7 @@
     <pre style='color:white'>Loading...</pre>
   {:then res}
     <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-      {#if mapWidth}
+      {#if mapWidth && browser}
         <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
     </div>

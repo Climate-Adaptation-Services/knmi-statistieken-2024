@@ -1,6 +1,6 @@
 <script>
   import * as d3 from 'd3';
-  import { afterUpdate } from 'svelte';
+  import { afterUpdate, onMount } from 'svelte';
   import Area from './Area.svelte';
 
   export let w
@@ -19,7 +19,7 @@
     .range([0, innerWidth-margin.right])
 
   $: yScale = d3.scaleLinear()
-    .domain([0,400])
+    .domain([0,350])
     .range([innerHeight, margin.top])
     .nice()
 
@@ -27,7 +27,11 @@
   $: yAxis = d3.axisLeft(yScale)
 
   afterUpdate(() => d3.select('.xAxis').call(xAxis), [xAxis]);
-  afterUpdate(() => d3.select('.yAxis').call(yAxis), [yAxis]);
+  afterUpdate(() => {
+    d3.select('.yAxis').call(yAxis)
+    d3.selectAll('.domain').attr('stroke', 'lightgrey')
+    d3.selectAll('.tick line').attr('stroke', 'lightgrey')
+  },[yAxis]);
 
 </script>
 
@@ -36,6 +40,7 @@
 </div>
 <div class='graph-div' style='height:{graphHeight}px'>
   <svg class='graph-svg'>
+
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
       <Area {datajson} {xScale} {yScale}
