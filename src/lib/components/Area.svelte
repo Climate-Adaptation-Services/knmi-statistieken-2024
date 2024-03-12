@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-    import { gridSelection } from '$lib/stores';
+  import { gridSelection } from '$lib/stores';
 
   export let xScale;
   export let yScale;
