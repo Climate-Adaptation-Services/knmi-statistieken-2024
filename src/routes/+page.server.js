@@ -1,11 +1,7 @@
-// import { dsv } from 'd3'
+import { dsv } from 'd3'
 
-// export async function load(){
-//   const provincies = await dsv(';', "")
-//   const neerslagtekort_ref = await dsv(';', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_ref.geojson")
-//   const neerslagtekort_laag_2050_2100 = await dsv(';', "")
-//   const neerslagtekort_2050HD = await dsv(';', "")
-//   const neerslagtekort_2100HD = await dsv(';', "")
+export async function load(){
+  const NLsteden = await dsv(';', "https://gist.githubusercontent.com/stichtingcas/6e8f37f4fc7a47a093c2414d948e106c/raw/dae6c599c2fc7e808b4b791b868e95d0f64d15d9/NLstedenCoordinaten")
 
-//   return { provincies, proces, product, bpz, pijlen, omgeving };
-// }
+  return { NLsteden };
+}

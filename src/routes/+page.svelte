@@ -3,6 +3,10 @@
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
 
+  export let data
+
+  $: console.log(data)
+
   const getData = (async () => {
 		const response = await Promise.all([
       fetch('https://cartomap.github.io/nl/wgs84/provincie_2024.geojson'),
@@ -17,25 +21,31 @@
 
   let mapWidth;
   let mapHeight;
+  let sidepanelWidth;
+  let sidepanelHeight;
 
 </script>
 
 <div class='container'>
-  <div class='side-panel'>
-    <SidePanel />
+  <div class='side-panel' bind:clientWidth={sidepanelWidth} bind:clientHeight={sidepanelHeight}>
+    <SidePanel w={sidepanelWidth} h={sidepanelHeight}/>
   </div>
-  <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-    {#await getData}
-      <pre style='color:white'>Loading...</pre>
-    {:then res}
-      <Map datajson={res} w={mapWidth} h={mapHeight}/>
-    {:catch error}
-      <p>An error occurred!</p>
-    {/await}
-  </div>
-  <div class='graph'>
-    <Graph h={mapHeight}/>
-  </div>
+  {#await getData}
+    <pre style='color:white'>Loading...</pre>
+  {:then res}
+    <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
+      {#if mapWidth}
+        <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
+      {/if}
+    </div>
+    <div class='graph'>
+      {#if mapWidth}
+        <Graph datajson={res} w={mapWidth} h={mapHeight}/>
+      {/if}
+    </div>
+  {:catch error}
+    <p>An error occurred!</p>
+  {/await}
 </div>
 
 
@@ -50,14 +60,14 @@
   }
 
   .side-panel{
-    width:26%;
-    border-right: 2px solid grey;
+    width:22%;
+    /* border-right: 2px solid grey; */
   }
   .map{
-    width:37%;
+    width:39%;
   }
   .graph{
-    width:36%;
+    width:38%;
   }
 
 </style>
