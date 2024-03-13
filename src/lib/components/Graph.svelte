@@ -10,12 +10,12 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:60, left:40, bottom:160, right:40}
+  const margin = {top:60, left:50, bottom:160, right:40}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
   $: xScale = d3.scalePoint()
-    .domain(['Huidig', 'Klimaat 2050', 'Klimaat 2100'])
+    .domain(['Huidig klimaat', 'Klimaat 2050', 'Klimaat 2100'])
     .range([0, innerWidth-margin.right])
 
   $: yScale = d3.scaleLinear()

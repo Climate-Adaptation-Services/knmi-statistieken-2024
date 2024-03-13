@@ -23,7 +23,7 @@
   $: hoog2100Value = hoog2100.features.filter(d => d.properties.Id === $gridSelection)[0].properties.gridcode
 
   $: data = [
-    {'period':'Huidig', 'laag':refValue, 'hoog':refValue},
+    {'period':'Huidig klimaat', 'laag':refValue, 'hoog':refValue},
     {'period':'Klimaat 2050', 'laag':laagValue, 'hoog':hoog2050Value},
     {'period':'Klimaat 2100', 'laag':laagValue, 'hoog':hoog2100Value}
   ]
