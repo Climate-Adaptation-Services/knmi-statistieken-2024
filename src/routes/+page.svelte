@@ -3,11 +3,10 @@
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
   import Legend from '$lib/components/Legend.svelte';
-    import { colorScale } from '$lib/stores.js';
+  import { colorScale, indicatorData } from '$lib/stores.js';
 
   export let data
-
-  $: console.log(data)
+  indicatorData.set(data)
 
   const getData = (async () => {
 		const response = await Promise.all([
@@ -19,7 +18,6 @@
     ])
     return [await response[0].json(), await response[1].json()]
 	})()
-
 
   let mapWidth;
   let mapHeight;
@@ -43,13 +41,13 @@
     {/if}
     <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
       {#if mapWidth && data}
-        <Map datajson={res} {data} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
+        <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
     </div>
 
     <div class='graph'>
       {#if mapWidth}
-        <Graph {data} w={mapWidth} h={mapHeight}/>
+        <Graph w={mapWidth} h={mapHeight}/>
       {/if}
     </div>
   {:catch error}

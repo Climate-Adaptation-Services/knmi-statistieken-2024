@@ -1,15 +1,16 @@
 <script>
+// @ts-nocheck
+
   import { geoMercator, geoPath, extent, scaleLinear, select, selectAll } from 'd3';
   import flip from '@turf/flip'
   import rewind from '@turf/rewind'
-  import { colorScale, gridSelection, periodSelection } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData } from '$lib/stores';
   import { afterUpdate } from 'svelte';
 
   export let datajson
   export let w
   export let h
   export let NLsteden
-  export let data
 
   const provincies = datajson[0]
   const cellen = datajson[1];
@@ -70,10 +71,12 @@
     </g>
     <g class='rasterdata'>
       {#each cellen.features as feature, i}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
         <path
           d={'M' + path(feature).split('M')[1]}
           class={'rasterblokje ' + 'id-' + feature.properties.Id}
-          fill={$colorScale(+data.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
+          fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
           stroke={(feature.properties.Id == $gridSelection) ? 'cyan' : 'white'}
           stroke-width={(feature.properties.Id == $gridSelection) ? '3' : '1'}
           on:click={() => click(feature)}

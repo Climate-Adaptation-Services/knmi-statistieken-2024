@@ -1,12 +1,12 @@
 <script>
-  import { colorScale } from "$lib/stores";
+  import { colorScale, gridSelectionValue } from "$lib/stores";
   import { axisLeft, select, selectAll, scaleLinear } from "d3";
   import { afterUpdate } from "svelte";
 
   export let w;
   export let h;
 
-  const margin = {top:h/3, left:100, bottom:h/5, right:20}
+  const margin = {top:h/3, left:70, bottom:h/5, right:20}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = h - margin.top - margin.bottom
 
@@ -35,6 +35,8 @@
   <g transform='translate({margin.left},{margin.top})'>
     <rect x='0' y='0' width='30' stroke='black' stroke-width='0.2' height={innerHeight} fill='url(#legend-gradient)'/>
     <g class='legendAxis' transform='translate({0},{0})' style='font-size:13px'></g>
+    <line y1={legendScale($gridSelectionValue)} x1='0' x2='30' y2={legendScale($gridSelectionValue)} stroke='cyan' stroke-width='4'/>
+    <text font-size='18' y={legendScale($gridSelectionValue) + 5} x='35'>{Math.round(10*$gridSelectionValue)/10}</text>
   </g>
 </svg>
 

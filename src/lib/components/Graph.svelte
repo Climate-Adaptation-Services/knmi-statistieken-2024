@@ -5,7 +5,6 @@
 
   export let w
   export let h
-  export let data
 
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
@@ -44,7 +43,7 @@
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
-      <Area {data} {xScale} {yScale} {innerHeight}
+      <Area {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight}/>
       <g class='yAxis' transform='translate({0},{0})'></g>
     </g>
