@@ -39,8 +39,8 @@
         fill: color, 
         stroke: 'none',
         fillStyle:'hacure',
-        fillWeight: 3,
-        hachureGap: 4,
+        fillWeight: 1.5,
+        hachureGap: 2,
         hachureAngle: angle,
         strokeWidth: 2,
       });
@@ -60,7 +60,7 @@
       .transition('ease').duration(2000).ease(d3.easeQuadOut)
       .attr('x', w)
     
-    d3.selectAll('.rough g').style('opacity', '0.4')
+    d3.selectAll('.rough g').style('opacity', '0.3')
 
       
   })
@@ -82,7 +82,7 @@
         {#if i < 2 && j === 0}
           <line y1={0} y2={innerHeight - yScale(datalist[1].p5)} stroke='#8E8883' stroke-dasharray="4 4" stroke-width='2'/>
         {/if}
-        <circle fill={$colorScale(circleData[1])} r='4' stroke='black'/>
+        <circle fill={(j === 0) ? '#17A3D3' : 'red'} r='4' stroke='black'/>
         <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text>
       </g>
     {/each}

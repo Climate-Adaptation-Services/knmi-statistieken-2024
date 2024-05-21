@@ -27,7 +27,7 @@
 
   colorScale.set(scaleLinear()
     // .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
-    .domain([0,30])
+    .domain([0,60])
     .range(["white", "red"]))
 
   const period_options = [
@@ -74,8 +74,8 @@
           d={'M' + path(feature).split('M')[1]}
           class={'rasterblokje ' + 'id-' + feature.properties.Id}
           fill={$colorScale(+data.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
-          stroke={(feature.properties.Id === $gridSelection) ? 'cyan' : 'white'}
-          stroke-width={(feature.properties.Id === $gridSelection) ? '3' : '1'}
+          stroke={(feature.properties.Id == $gridSelection) ? 'cyan' : 'white'}
+          stroke-width={(feature.properties.Id == $gridSelection) ? '3' : '1'}
           on:click={() => click(feature)}
         />      
       {/each}

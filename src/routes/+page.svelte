@@ -2,8 +2,8 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { browser } from '$app/environment';
   import Legend from '$lib/components/Legend.svelte';
+    import { colorScale } from '$lib/stores.js';
 
   export let data
 
@@ -36,14 +36,17 @@
   {#await getData}
     <pre style='color:white'>Loading...</pre>
   {:then res}
+    {#if mapWidth && $colorScale}
+      <div class='legend' bind:clientWidth={legendWidth}>
+        <Legend w={legendWidth} h={mapHeight}/>
+      </div>
+    {/if}
     <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
       {#if mapWidth && data}
         <Map datajson={res} {data} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
     </div>
-    <div class='legend' bind:clientWidth={legendWidth}>
-      <Legend w={legendWidth} h={mapHeight}/>
-    </div>
+
     <div class='graph'>
       {#if mapWidth}
         <Graph {data} w={mapWidth} h={mapHeight}/>
@@ -74,7 +77,7 @@
   }
   .legend{
     width:8%;
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
   }
   .graph{
     width:34%;
