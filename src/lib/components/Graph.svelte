@@ -5,12 +5,12 @@
 
   export let w
   export let h
-  export let datajson
+  export let data
 
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:60, left:50, bottom:160, right:40}
+  const margin = {top:100, left:60, bottom:160, right:40}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
@@ -19,14 +19,15 @@
     .range([0, innerWidth-margin.right])
 
   $: yScale = d3.scaleLinear()
-    .domain([0,350])
-    .range([innerHeight, margin.top])
+    .domain([0,80])
+    .range([innerHeight-10, margin.top])
     .nice()
 
   $: xAxis = d3.axisBottom(xScale).ticks(3)
   $: yAxis = d3.axisLeft(yScale)
 
   afterUpdate(() => d3.select('.xAxis').call(xAxis), [xAxis]);
+
   afterUpdate(() => {
     d3.select('.yAxis').call(yAxis)
     d3.selectAll('.domain').attr('stroke', 'lightgrey')
@@ -43,7 +44,7 @@
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
-      <Area {datajson} {xScale} {yScale} {innerHeight}
+      <Area {data} {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight}/>
       <g class='yAxis' transform='translate({0},{0})'></g>
     </g>

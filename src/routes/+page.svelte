@@ -2,7 +2,8 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-    import { browser } from '$app/environment';
+  import { browser } from '$app/environment';
+  import Legend from '$lib/components/Legend.svelte';
 
   export let data
 
@@ -11,12 +12,12 @@
   const getData = (async () => {
 		const response = await Promise.all([
       fetch('https://cartomap.github.io/nl/wgs84/provincie_2024.geojson'),
-      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_ref.geojson'),
-      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_laag_2050_2100.geojson'),
-      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2050HD.geojson'),
-      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2100HD.geojson')
+      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/tropdagen_ref_cellen.geojson'),
+      // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_laag_2050_2100.geojson'),
+      // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2050HD.geojson'),
+      // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2100HD.geojson')
     ])
-    return [await response[0].json(), await response[1].json(), await response[2].json(), await response[3].json(), await response[4].json()]
+    return [await response[0].json(), await response[1].json()]
 	})()
 
 
@@ -24,6 +25,7 @@
   let mapHeight;
   let sidepanelWidth;
   let sidepanelHeight;
+  let legendWidth;
 
 </script>
 
@@ -35,13 +37,16 @@
     <pre style='color:white'>Loading...</pre>
   {:then res}
     <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-      {#if mapWidth}
-        <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
+      {#if mapWidth && data}
+        <Map datajson={res} {data} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
+    </div>
+    <div class='legend' bind:clientWidth={legendWidth}>
+      <Legend w={legendWidth} h={mapHeight}/>
     </div>
     <div class='graph'>
       {#if mapWidth}
-        <Graph datajson={res} w={mapWidth} h={mapHeight}/>
+        <Graph {data} w={mapWidth} h={mapHeight}/>
       {/if}
     </div>
   {:catch error}
@@ -55,7 +60,7 @@
     height: 100%;
   }
 
-  .side-panel, .map, .graph{
+  .side-panel, .map, .graph, .legend{
     float:left;
     height:100%;
   }
@@ -65,10 +70,14 @@
     /* border-right: 2px solid grey; */
   }
   .map{
-    width:39%;
+    width:35%;
+  }
+  .legend{
+    width:8%;
+    background-color: lightgrey;
   }
   .graph{
-    width:38%;
+    width:34%;
   }
 
 </style>
