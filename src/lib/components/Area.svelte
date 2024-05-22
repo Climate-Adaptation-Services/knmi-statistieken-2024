@@ -14,12 +14,12 @@
   $: dataSelected = $indicatorData.tropische_dagen.filter(d => +d.index === $gridSelection)[0]
 
   $: datalist_laag = [
-    {'period':'Huidig klimaat', 'p5':dataSelected.ref, 'p95':dataSelected.ref},
+    {'period':'Huidig klimaat', 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'Klimaat 2050', 'p5':dataSelected['2050laag_p5'], 'p95':dataSelected['2050laag_p95']},
     {'period':'Klimaat 2100', 'p5':dataSelected['2100laag_p5'], 'p95':dataSelected['2100laag_p95']}
   ]
   $: datalist_hoog = [
-    {'period':'Huidig klimaat', 'p5':dataSelected.ref, 'p95':dataSelected.ref},
+    {'period':'Huidig klimaat', 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'Klimaat 2050', 'p5':dataSelected['2050hoog_p5'], 'p95':dataSelected['2050hoog_p95']},
     {'period':'Klimaat 2100', 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
@@ -32,12 +32,12 @@
   function createRoughArea(datalist, rc, angle, color){
     const path = rc.path(areaPath(datalist),
       { 
-        roughness: 0.4, 
+        roughness: 0, 
         fill: color, 
         stroke: 'none',
-        fillStyle:'hacure',
-        fillWeight: 1.5,
-        hachureGap: 2,
+        fillStyle:'solid',
+        fillWeight: 3,
+        hachureGap: 6,
         hachureAngle: angle,
         strokeWidth: 2,
       });
@@ -57,7 +57,7 @@
       .transition('ease').duration(2000).ease(d3.easeQuadOut)
       .attr('x', w)
     
-    d3.selectAll('.rough g').style('opacity', '0.3')
+    d3.selectAll('.rough g').style('opacity', '0.2')
 
       
   })
@@ -79,8 +79,8 @@
         {#if i < 2 && j === 0}
           <line y1={0} y2={innerHeight - yScale(datalist[1].p5)} stroke='#8E8883' stroke-dasharray="4 4" stroke-width='2'/>
         {/if}
-        <circle fill={(j === 0) ? '#17A3D3' : 'red'} r='4' stroke='black'/>
-        <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text>
+        <circle fill={(j === 0) ? '#17A3D3' : 'red'} r='4' stroke='none'/>
+        <!-- <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text> -->
       </g>
     {/each}
   {/each}

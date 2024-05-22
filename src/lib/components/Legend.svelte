@@ -1,12 +1,12 @@
 <script>
-  import { colorScale, gridSelectionValue } from "$lib/stores";
+  import { colorScale, gridHoverValue, gridSelectionValue } from "$lib/stores";
   import { axisLeft, select, selectAll, scaleLinear } from "d3";
   import { afterUpdate } from "svelte";
 
   export let w;
   export let h;
 
-  const margin = {top:h/3, left:70, bottom:h/5, right:20}
+  const margin = {top:50, left:80, bottom:h/2, right:20}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = h - margin.top - margin.bottom
 
@@ -25,7 +25,7 @@
 
 </script>
 
-<svg>
+<g class='legend'>
   <defs>
     <linearGradient id="legend-gradient" gradientTransform="rotate(90)">
       <stop stop-color="red" offset="0%" />
@@ -33,12 +33,19 @@
     </linearGradient>
   </defs>
   <g transform='translate({margin.left},{margin.top})'>
-    <rect x='0' y='0' width='30' stroke='black' stroke-width='0.2' height={innerHeight} fill='url(#legend-gradient)'/>
+    <text font-size='18' y='-15'>Aantal dagen</text>
+    <rect x='0' y='0' width='20' stroke='black' stroke-width='0.2' height={innerHeight} fill='url(#legend-gradient)'/>
     <g class='legendAxis' transform='translate({0},{0})' style='font-size:13px'></g>
-    <line y1={legendScale($gridSelectionValue)} x1='0' x2='30' y2={legendScale($gridSelectionValue)} stroke='cyan' stroke-width='4'/>
-    <text font-size='18' y={legendScale($gridSelectionValue) + 5} x='35'>{Math.round(10*$gridSelectionValue)/10}</text>
+    <line y1={legendScale($gridSelectionValue)} x1='0' x2='28' y2={legendScale($gridSelectionValue)} stroke='cyan' stroke-width='4'/>
+    {#if !$gridHoverValue}
+      <text font-size='18' y={legendScale($gridSelectionValue) + 5} x='35'>{Math.round(10*$gridSelectionValue)/10}</text>
+    {/if}
+    {#if $gridHoverValue}
+      <line y1={legendScale($gridHoverValue)} x1='0' x2='28' y2={legendScale($gridHoverValue)} stroke='grey' stroke-width='4'/>
+      <text font-size='18' y={legendScale($gridHoverValue) + 5} x='35'>{Math.round(10*$gridHoverValue)/10}</text>
+      {/if}
   </g>
-</svg>
+</g>
 
 
 

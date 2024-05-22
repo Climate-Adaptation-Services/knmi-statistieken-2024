@@ -1,11 +1,10 @@
 <script>
 // @ts-nocheck
 
-  import { geoMercator, geoPath, extent, scaleLinear, select, selectAll } from 'd3';
-  import flip from '@turf/flip'
-  import rewind from '@turf/rewind'
-  import { colorScale, gridSelection, periodSelection, indicatorData } from '$lib/stores';
+  import { geoMercator, geoPath, scaleLinear, select } from 'd3';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover } from '$lib/stores';
   import { afterUpdate } from 'svelte';
+  import Legend from './Legend.svelte';
 
   export let datajson
   export let w
@@ -18,11 +17,13 @@
   console.log(datajson)
   $: console.log($periodSelection)
 
+  const legendMargin = 50
+
   $: titleHeight = 0.2*h
   $: mapHeight = 0.8*h
 
   $: projection = geoMercator()
-    .fitExtent([[60,10],[w-20, mapHeight - 40]], provincies)
+    .fitExtent([[60,10],[w-20-legendMargin, mapHeight - 40]], provincies)
   
   $: path = geoPath(projection);
 
@@ -38,11 +39,20 @@
       { value: '2100hoog', label: 'Klimaat 2100 hoog'}
   ];
 
-  afterUpdate(() => {select('.id-' + $gridSelection).raise()})
+  afterUpdate(() => select('.id-' + $gridSelection).raise())
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
     gridSelection.set(feature.properties.Id)
+  }
+
+  function mouseOver(feature){
+    gridHover.set(feature.properties.Id)
+    select('.id-' + $gridHover).raise()
+  }
+
+  function mouseOut(){
+    gridHover.set(null)
   }
 
 </script>
@@ -57,44 +67,52 @@
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    <g class='provincies'>
-      {#each provincies.features as feature}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-        <path
-          d={path(feature)}
-          class='shape'
-          fill='#fcfbf2'
-          stroke='grey'
-        />
-      {/each}
-    </g>
-    <g class='rasterdata'>
-      {#each cellen.features as feature, i}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <path
-          d={'M' + path(feature).split('M')[1]}
-          class={'rasterblokje ' + 'id-' + feature.properties.Id}
-          fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
-          stroke={(feature.properties.Id == $gridSelection) ? 'cyan' : 'white'}
-          stroke-width={(feature.properties.Id == $gridSelection) ? '3' : '1'}
-          on:click={() => click(feature)}
-        />      
-      {/each}
-    </g>
-    {#each NLsteden as NLstad, i}
-      <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
-        <circle
-          fill={'black'}
-          r='3'
-        />
-        <text font-size='12' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
-          {NLstad.Stad}
-        </text>
+    <Legend w={w*0.2} h={mapHeight}/>
+    <g transform='translate({legendMargin},0)'>
+      <g class='provincies'>
+        {#each provincies.features as feature}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+          <path
+            d={path(feature)}
+            class='shape'
+            fill='#fcfbf2'
+            stroke='grey'
+          />
+        {/each}
       </g>
-    {/each}
-
+      <g class='rasterdata'>
+        {#each cellen.features as feature, i}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <path
+            d={'M' + path(feature).split('M')[1]}
+            class={'rasterblokje ' + 'id-' + feature.properties.Id}
+            fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
+            stroke={(feature.properties.Id == $gridSelection)
+              ? 'cyan' 
+              : (feature.properties.Id == $gridHover)
+                ? 'grey'
+                : 'white'}
+            stroke-width={(feature.properties.Id == $gridSelection) ? '3' : '1'}
+            on:click={() => click(feature)}
+            on:mouseover={() => mouseOver(feature)}
+            on:mouseout={() => mouseOut()}
+          />      
+        {/each}
+      </g>
+      {#each NLsteden as NLstad, i}
+        <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
+          <circle
+            fill={'black'}
+            r='3'
+          />
+          <text font-size='12' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
+            {NLstad.Stad}
+          </text>
+        </g>
+      {/each}
+    </g>
   </svg>
 </div>
 
@@ -111,7 +129,7 @@
   }
 
   .rasterblokje{
-    transition: all 2s;
+    /* transition: all 2s; */
   }
 
 </style>
