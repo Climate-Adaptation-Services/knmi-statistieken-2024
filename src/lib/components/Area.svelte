@@ -24,6 +24,9 @@
     {'period':'Klimaat 2100', 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
 
+  $: console.log(yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95), yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95), yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95) - (yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95)))
+  $: strokeDif = yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95) - (yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95))
+
   const areaPath = d3.area()
     .x(d => xScale(d.period))
     .y0(d => yScale(d.p5))
@@ -74,15 +77,17 @@
 </g>
 <g class='circles'>
   {#each [datalist_laag, datalist_hoog] as datalist, j}
+    <g class='dashed_lines'>
+      <line stroke={(j === 0) ? '#17A3D3' : 'red'} y2={yScale(datalist[1].p5)} y1={yScale(datalist[1].p95)} x1={xScale(datalist[1].period)} x2={xScale(datalist[1].period)} stroke-dasharray="8 8" stroke-dashoffset={(j === 0) ? -strokeDif/2 : '0'} stroke-width='2.8'/>
+      <line stroke={(j === 0) ? '#17A3D3' : 'red'} y2={yScale(datalist[2].p5)} y1={yScale(datalist[2].p95)} x1={xScale(datalist[2].period)} x2={xScale(datalist[2].period)} stroke-dasharray="8 8" stroke-width='2.8'/>
+    </g>
     {#each [['Klimaat 2050', datalist[1].p5], ['Klimaat 2100', datalist[2].p5], ['Klimaat 2050', datalist[1].p95], ['Klimaat 2100', datalist[2].p95]] as circleData, i}
       <g transform='translate({xScale(circleData[0])},{yScale(circleData[1])})'>
-        {#if i < 2 && j === 0}
-          <line y1={0} y2={innerHeight - yScale(datalist[1].p5)} stroke='#8E8883' stroke-dasharray="4 4" stroke-width='2'/>
-        {/if}
         <circle fill={(j === 0) ? '#17A3D3' : 'red'} r='4' stroke='none'/>
         <!-- <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text> -->
       </g>
     {/each}
+
   {/each}
 </g>
 <rect class='whiterect' x={0} width={w} height={h-2} fill='#fcfbf2'/>
