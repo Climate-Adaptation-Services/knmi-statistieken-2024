@@ -10,7 +10,7 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:h/10, left:60, bottom:160, right:60}
+  const margin = {top:h/15, left:60, bottom:160, right:60}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
@@ -32,7 +32,7 @@
     d3.select('.yAxis').call(yAxis)
     d3.selectAll('.domain').attr('stroke', 'lightgrey')
     d3.selectAll('.tick line').attr('stroke', 'lightgrey')
-  },[yAxis]);
+  });
 
 </script>
 

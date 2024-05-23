@@ -78,6 +78,7 @@
   </g>
   <g class='circles'>
     <!-- Eerst alle dashed lines, dan alle circles -->
+    <line class='visible-on-hover' stroke={'black'} y2={yScale(datalist_laag[0].p5)} y1={yScale(datalist_hoog[0].p95)} x1={xScale('Huidig klimaat')} x2={xScale('Huidig klimaat')} stroke-dasharray="8 8" stroke-width='2.8'/>
     {#each [datalist_laag, datalist_hoog] as datalist, j}
       <g class='visible-on-hover dashed-lines'>
         <line stroke={(j === 0) ? '#17A3D3' : 'red'} y2={yScale(datalist[1].p5)} y1={yScale(datalist[1].p95)} x1={xScale(datalist[1].period)} x2={xScale(datalist[1].period)} stroke-dasharray="8 8" stroke-dashoffset={(j === 0) ? -strokeDif/2 : '0'} stroke-width='2.8'/>
@@ -103,7 +104,7 @@
                   ? '#17A3D3' 
                   : 'red'} 
               r='4' stroke='none'/>
-            <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text>
+            <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={'-0.4em'}>{Math.round(circleData[1]*10)/10}</text>
           </g>
         {/each}
       {/each}
