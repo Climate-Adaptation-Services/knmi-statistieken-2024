@@ -4,6 +4,7 @@
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
   import { gridSelection, colorScale, indicatorData, indicatorSelection } from '$lib/stores';
+  import GraphLegend from './GraphLegend.svelte';
 
   export let xScale;
   export let yScale;
@@ -68,6 +69,10 @@
 </script>
 
 <g class='graph-content'>
+  <text class='hidden-on-hover' font-size='13' y={yScale(70)} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
+  <g class='visible-on-hover'>
+    <GraphLegend {xScale} {yScale}/>
+  </g>
   <g class='rough' bind:this={svgElement} height={h} width={w}>
     <defs>
       <linearGradient id="roughGradient" x1="0" x2="0" y1="0" y2="1">
@@ -122,4 +127,9 @@
   .graph-content:hover .visible-on-hover{
     visibility: visible;
   }
+
+  .graph-content:hover .hidden-on-hover{
+    visibility: hidden;
+  }
+  
 </style>

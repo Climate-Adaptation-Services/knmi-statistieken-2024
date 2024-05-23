@@ -10,7 +10,7 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:h/15, left:60, bottom:160, right:60}
+  const margin = {top:h/15, left:60, bottom:100, right:60}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
@@ -43,7 +43,6 @@
   <svg class='graph-svg'>
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
-      <text font-size='13' y={yScale(70)} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
       <g class='yAxis' transform='translate({0},{0})'></g>
       <GraphContent {xScale} {yScale} {innerHeight}
