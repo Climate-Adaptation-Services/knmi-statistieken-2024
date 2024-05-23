@@ -1,6 +1,6 @@
 <script>
   import { colorScale, gridHoverValue, gridSelectionValue } from "$lib/stores";
-  import { axisLeft, select, selectAll, scaleLinear } from "d3";
+  import { axisLeft, select, selectAll, scaleLinear, extent } from "d3";
   import { afterUpdate } from "svelte";
 
   export let w;
@@ -11,7 +11,7 @@
   $: innerHeight = h - margin.top - margin.bottom
 
   $: legendScale = scaleLinear()
-    .domain($colorScale.domain())
+    .domain(extent($colorScale.domain()))
     .range([innerHeight, 0])
     .nice()
 
@@ -23,13 +23,15 @@
     selectAll('.tick line').attr('stroke', 'lightgrey')
   });
 
+
 </script>
 
 <g class='legend'>
   <defs>
     <linearGradient id="legend-gradient" gradientTransform="rotate(90)">
-      <stop stop-color="red" offset="0%" />
-      <stop stop-color="white" offset="100%" />
+      {#each $colorScale.range().reverse() as color, i}
+        <stop stop-color={color} offset="{(100/($colorScale.domain().length-1))*i}%" />
+      {/each}
     </linearGradient>
   </defs>
   <g transform='translate({margin.left},{margin.top})'>

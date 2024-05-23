@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-  import { geoMercator, geoPath, scaleLinear, select } from 'd3';
+  import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
   import { colorScale, gridSelection, periodSelection, indicatorData, gridHover } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
@@ -29,8 +29,8 @@
 
   colorScale.set(scaleLinear()
     // .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
-    .domain([0,60])
-    .range(["white", "red"]))
+    .domain([0,10,20,30,40,50,60])
+    .range(['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']))
 
   const period_options = [
       { value: 'ref', label: 'Huidig klimaat'},
@@ -67,7 +67,9 @@
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    <Legend w={w*0.2} h={mapHeight}/>
+    {#if $colorScale}
+      <Legend w={w*0.2} h={mapHeight}/>
+    {/if}
     <g transform='translate({legendMargin},0)'>
       <g class='provincies'>
         {#each provincies.features as feature}

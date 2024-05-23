@@ -38,7 +38,6 @@
         <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
       {/if}
     </div>
-
     <div class='graph'>
       {#if mapWidth}
         <Graph w={mapWidth} h={mapHeight}/>
