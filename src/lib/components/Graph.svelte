@@ -42,6 +42,7 @@
   <svg class='graph-svg'>
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
+      <text font-size='13' y={yScale(70)} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
       <GraphContent {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight}/>

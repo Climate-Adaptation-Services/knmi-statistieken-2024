@@ -86,7 +86,7 @@
       <g class='median-line' stroke='{(j === 0) ? '#17A3D3' : 'red'}'>
         <line x1={xScale('Huidig klimaat')} x2={xScale('Klimaat 2050')} y1={yScale(datalist[0].median)} y2={yScale(datalist[1].median)}/>
         <line x1={xScale('Klimaat 2050')} x2={xScale('Klimaat 2100')} y1={yScale(datalist[1].median)} y2={yScale(datalist[2].median)}/>
-        <g font-size='11' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 20},{yScale(datalist[2].median)-10})'>
+        <g font-size='11' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 20},{yScale(datalist[2].median)-8})'>
           <text>Langjarig</text>
           <text y='1em'>Gemiddelde</text>
           <text y='2em'>Over 30 jaar</text>
