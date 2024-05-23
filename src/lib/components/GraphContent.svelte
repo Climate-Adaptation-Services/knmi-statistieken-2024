@@ -69,7 +69,7 @@
 </script>
 
 <g class='graph-content'>
-  <text class='hidden-on-hover' font-size='13' y={yScale(70)} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
+  <text class='hidden-on-hover' font-size='13' y={30} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
   <g class='visible-on-hover'>
     <GraphLegend {xScale} {yScale}/>
   </g>
