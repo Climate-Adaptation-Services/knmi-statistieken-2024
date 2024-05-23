@@ -2,6 +2,7 @@
   import * as d3 from 'd3';
   import { afterUpdate, onMount } from 'svelte';
   import GraphContent from './GraphContent.svelte';
+  import { indicatorData, indicatorSelection } from '$lib/stores';
 
   export let w
   export let h
@@ -18,7 +19,7 @@
     .range([0, innerWidth-margin.right])
 
   $: yScale = d3.scaleLinear()
-    .domain([0,80])
+    .domain([0,d3.max($indicatorData[$indicatorSelection].map(d => d['2100hoog_p95']))])
     .range([innerHeight, margin.top])
     .nice()
 

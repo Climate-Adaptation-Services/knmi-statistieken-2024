@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, colorScale, indicatorData } from '$lib/stores';
+  import { gridSelection, colorScale, indicatorData, indicatorSelection } from '$lib/stores';
 
   export let xScale;
   export let yScale;
@@ -11,7 +11,7 @@
   export let h;
   export let innerHeight;
 
-  $: dataSelected = $indicatorData.tropische_dagen.filter(d => +d.index === $gridSelection)[0]
+  $: dataSelected = $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0]
 
   $: datalist_laag = [
     {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},

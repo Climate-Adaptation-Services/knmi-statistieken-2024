@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
 
@@ -14,8 +14,7 @@
   const provincies = datajson[0]
   const cellen = datajson[1];
 
-  console.log(datajson)
-  $: console.log($periodSelection)
+  console.log('datajson', datajson)
 
   const legendMargin = 50
 
@@ -27,10 +26,11 @@
   
   $: path = geoPath(projection);
 
-  colorScale.set(scaleLinear()
-    // .domain(extent(neerslagtekort_ref.features, d => d.properties.gridcode))
+  colorScale.set(
+    scaleLinear()
     .domain([0,10,20,30,40,50,60])
-    .range(['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']))
+    .range(['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000'])
+  )
 
   const period_options = [
       { value: 'ref', label: 'Huidig klimaat'},
@@ -58,7 +58,7 @@
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
-  <h3>Tropische dagen</h3>
+  <h3>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'}</h3>
   <select name="periods" id="periods" bind:value={$periodSelection}>
     {#each period_options as option, i}
       <option value={option.value} selected={(i === 0) ? true : false}>{option.label}</option>
@@ -90,7 +90,7 @@
           <path
             d={'M' + path(feature).split('M')[1]}
             class={'rasterblokje ' + 'id-' + feature.properties.gridcode}
-            fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.gridcode)[0][$periodSelection])}
+            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties.gridcode)[0][$periodSelection])}
             stroke={(feature.properties.gridcode == $gridSelection)
               ? 'cyan' 
               : (feature.properties.gridcode == $gridHover)

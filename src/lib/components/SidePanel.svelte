@@ -1,10 +1,33 @@
 <script>
-  import { select } from 'd3';
+  import { indicatorSelection, colorScale } from '$lib/stores';
+  import { select, scaleLinear } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
+  import Select from 'svelte-select'
 
   export let w;
   export let h;
+
+  const indicatoren = [
+    {label:'Tropische dagen', value:'tropischedagen'},
+    {label:'Reeks droge dagen', value:'reeksdrogedagen'}
+  ]
+
+  function onChange(e){
+    indicatorSelection.set(e.detail.value)
+
+    const domain = ($indicatorSelection === 'tropischedagen')
+      ? [0,10,20,30,40,50,60]
+      : [14,15,16,17,18,19,20]
+    const range = ($indicatorSelection === 'tropischedagen')
+      ? ['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']
+      : ['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']
+    colorScale.set(
+      scaleLinear()
+      .domain(domain)
+      .range(range)
+    )
+  }
   
   let svgElement;
   afterUpdate(() => {
@@ -55,6 +78,9 @@
     {/each}
   </div>
   <h3>Selecteer indicator</h3>
+  <div class='selection-div'>
+    <Select items={indicatoren} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChange}/>
+  </div>
 </div>
 
 

@@ -5,6 +5,7 @@
   import { colorScale, indicatorData } from '$lib/stores.js';
 
   export let data
+  $: console.log(data)
   indicatorData.set(data)
 
   const getData = (async () => {
