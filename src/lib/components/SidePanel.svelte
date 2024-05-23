@@ -81,6 +81,9 @@
   <div class='selection-div'>
     <Select items={indicatoren} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChange}/>
   </div>
+  {#if $indicatorSelection === 'tropischedagen'}
+    <p style='color:white; padding:20px; font-size:11.5px'>De grafieken tonen het gemiddelde aantal tropische nachten per jaar in huidige klimaat (1990-2020) en voor het klimaat rond 2050 en 2100 (waarden voor het laagste (Ln) en hoogste (Hd) KNMI’23 klimaatscenario). We spreken in Nederland van een tropische nacht als de minimumtemperatuur 20 °C of hoger is. Het hoogste aantal tropische nachten wordt in het zuidwesten van ons land op station Vlissingen behaald. Door de temperende werking van de zee koelt het langs de kust ’s nachts minder af. In het noordwesten komen het laagst aantal tropische nachten voor, doordat daar de temperatuur gemiddeld lager is dan in het zuiden. De metingen zijn gedaan in het landelijk gebied. Het Hitte-eiland effect zorgt ervoor dat het werkelijk aantal tropische nachten in steden hoger zal zijn dan de grafiek hierboven aangeeft. In de toekomst zal het aantal tropische nachten overal in Nederland stijgen. Tropische nachten zorgen voor hittestress, doordat mensen minder goed slapen en minder goed herstellen van hittestress overdag. Dit kan overdag leiden tot bijvoorbeeld arbeidsproductiviteitsverlies.</p>
+  {/if}
 </div>
 
 
