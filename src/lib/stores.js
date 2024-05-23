@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store"
 
 export const indicatorData = writable(null)
-export const gridSelection = writable(465)
+export const gridSelection = writable(689)
 export const colorScale = writable(null)
 export const periodSelection = writable('ref')
 export const gridHover = writable(null)

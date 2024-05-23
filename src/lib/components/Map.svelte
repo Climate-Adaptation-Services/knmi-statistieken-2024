@@ -43,11 +43,11 @@
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
-    gridSelection.set(feature.properties.Id)
+    gridSelection.set(feature.properties.gridcode)
   }
 
   function mouseOver(feature){
-    gridHover.set(feature.properties.Id)
+    gridHover.set(feature.properties.gridcode)
     select('.id-' + $gridHover).raise()
   }
 
@@ -87,14 +87,14 @@
           <!-- svelte-ignore a11y-no-static-element-interactions -->
           <path
             d={'M' + path(feature).split('M')[1]}
-            class={'rasterblokje ' + 'id-' + feature.properties.Id}
-            fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.Id)[0][$periodSelection])}
-            stroke={(feature.properties.Id == $gridSelection)
+            class={'rasterblokje ' + 'id-' + feature.properties.gridcode}
+            fill={$colorScale(+$indicatorData.tropische_dagen.filter(d => +d.index === feature.properties.gridcode)[0][$periodSelection])}
+            stroke={(feature.properties.gridcode == $gridSelection)
               ? 'cyan' 
-              : (feature.properties.Id == $gridHover)
+              : (feature.properties.gridcode == $gridHover)
                 ? 'grey'
                 : 'white'}
-            stroke-width={(feature.properties.Id == $gridSelection) ? '3' : '1'}
+            stroke-width={(feature.properties.gridcode == $gridSelection) ? '3' : '1'}
             on:click={() => click(feature)}
             on:mouseover={() => mouseOver(feature)}
             on:mouseout={() => mouseOut()}
