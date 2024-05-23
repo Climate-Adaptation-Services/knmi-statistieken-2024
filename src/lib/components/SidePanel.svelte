@@ -54,6 +54,7 @@
       </div>
     {/each}
   </div>
+  <h3>Selecteer indicator</h3>
 </div>
 
 
@@ -76,7 +77,7 @@
     align-items: center;
   }
 
-  h2{
+  h2, h3{
     color:white;
     width:100%;
     text-align:center;
