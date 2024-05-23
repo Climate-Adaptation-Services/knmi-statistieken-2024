@@ -58,7 +58,7 @@
     d3.select('.whiterect')
       .raise()
       .transition('ease').duration(2000).ease(d3.easeQuadOut)
-      .attr('x', w)
+      .attr('x', w*1.3)
     
     d3.selectAll('.rough g').style('opacity', '0.2')
 
@@ -79,7 +79,7 @@
   <g class='circles'>
     <!-- Eerst alle dashed lines, dan alle circles -->
     {#each [datalist_laag, datalist_hoog] as datalist, j}
-      <g class='visible-on-hover'>
+      <g class='visible-on-hover dashed-lines'>
         <line stroke={(j === 0) ? '#17A3D3' : 'red'} y2={yScale(datalist[1].p5)} y1={yScale(datalist[1].p95)} x1={xScale(datalist[1].period)} x2={xScale(datalist[1].period)} stroke-dasharray="8 8" stroke-dashoffset={(j === 0) ? -strokeDif/2 : '0'} stroke-width='2.8'/>
         <line stroke={(j === 0) ? '#17A3D3' : 'red'} y2={yScale(datalist[2].p5)} y1={yScale(datalist[2].p95)} x1={xScale(datalist[2].period)} x2={xScale(datalist[2].period)} stroke-dasharray="8 8" stroke-width='2.8'/>
       </g>
@@ -88,16 +88,21 @@
         <line x1={xScale('Klimaat 2050')} x2={xScale('Klimaat 2100')} y1={yScale(datalist[1].median)} y2={yScale(datalist[2].median)}/>
         <g font-size='11' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 20},{yScale(datalist[2].median)-8})'>
           <text>Langjarig</text>
-          <text y='1em'>Gemiddelde</text>
-          <text y='2em'>Over 30 jaar</text>
+          <text y='1em'>gemiddelde</text>
+          <text y='2em'>over 30 jaar</text>
         </g>
       </g>
     {/each}
     <g class='visible-on-hover'>
       {#each [datalist_laag, datalist_hoog] as datalist, j}
-        {#each [['Klimaat 2050', datalist[1].p5], ['Klimaat 2100', datalist[2].p5], ['Klimaat 2050', datalist[1].p95], ['Klimaat 2100', datalist[2].p95]] as circleData, i}
+        {#each [['Huidig klimaat', datalist[0].p5], ['Huidig klimaat', datalist[0].p95], ['Klimaat 2050', datalist[1].p5], ['Klimaat 2100', datalist[2].p5], ['Klimaat 2050', datalist[1].p95], ['Klimaat 2100', datalist[2].p95]] as circleData, i}
           <g transform='translate({xScale(circleData[0])},{yScale(circleData[1])})'>
-            <circle fill={(j === 0) ? '#17A3D3' : 'red'} r='4' stroke='none'/>
+            <circle fill={(i < 2) 
+                ? 'black' 
+                : (j === 0)
+                  ? '#17A3D3' 
+                  : 'red'} 
+              r='4' stroke='none'/>
             <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={(i > 1) ? '-0.4em' : '1.1em'}>{Math.round(circleData[1]*10)/10}</text>
           </g>
         {/each}
