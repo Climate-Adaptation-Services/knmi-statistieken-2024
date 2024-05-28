@@ -11,6 +11,7 @@
   export let w;
   export let h;
   export let innerHeight;
+  export let margin
 
   $: dataSelected = $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0]
 
@@ -25,7 +26,6 @@
     {'period':'Klimaat 2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
 
-  $: console.log(yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95), yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95), yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95) - (yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95)))
   $: strokeDif = yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95) - (yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95))
 
   const areaPath = d3.area()
@@ -81,7 +81,7 @@
 
 <g class='graph-content'>
   <g>
-    <GraphLegend {xScale} {yScale} h={innerHeight} {areaHover} {areaMouseOut}/>
+    <GraphLegend {xScale} {yScale} {w} h={innerHeight} {areaHover} {areaMouseOut} {margin} />
   </g>
   <g class='rough' height={h} width={w}>
     <g class='otherscenario-laag' bind:this={svgElementLaag} on:mouseover={() => areaHover('laag')} on:mouseout={() => areaMouseOut('laag')}></g>

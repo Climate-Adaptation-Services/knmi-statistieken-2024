@@ -10,7 +10,7 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:h/15, left:60, bottom:160, right:60}
+  const margin = {top:h/8, left:60, bottom:80, right:60}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
@@ -38,7 +38,7 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <h3>Statistieken voor locatie op kaart</h3>
-  <p>Beweeg de muis over de grafiek voor meer info</p>
+  <p>Beweeg de muis over de grafiek of legenda voor meer info</p>
 </div>
 <div class='graph-div' style='height:{graphHeight}px'>
   <svg class='graph-svg'>
@@ -47,7 +47,7 @@
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
       <g class='yAxis' transform='translate({0},{0})'></g>
       <GraphContent {xScale} {yScale} {innerHeight}
-        w={innerWidth} h={innerHeight}/>
+        w={innerWidth} h={innerHeight} {margin}/>
     </g>
   </svg>
 </div>
