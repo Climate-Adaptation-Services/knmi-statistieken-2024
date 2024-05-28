@@ -132,7 +132,7 @@
     </g>
   </g>
 </g>
-<rect class='whiterect' x={0} width={w} height={h-2} fill='#fcfbf2'/>
+<rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight} fill='#fcfbf2'/>
 
 
 <style>
