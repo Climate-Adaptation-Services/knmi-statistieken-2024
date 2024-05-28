@@ -125,7 +125,8 @@
                   ? '#17A3D3' 
                   : 'red'} 
               r='4' stroke='none'/>
-            <text text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1]*10)/10}</text>
+            <text style='fill:{(i < 2) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
+            text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
           </g>
         {/each}
       {/each}
