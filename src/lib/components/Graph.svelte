@@ -38,6 +38,7 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <h3>Statistieken voor locatie op kaart</h3>
+  <p>Beweeg de muis over de grafiek voor meer info</p>
 </div>
 <div class='graph-div' style='height:{graphHeight}px'>
   <svg class='graph-svg'>

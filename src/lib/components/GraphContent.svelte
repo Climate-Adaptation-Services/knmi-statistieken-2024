@@ -80,7 +80,6 @@
 </script>
 
 <g class='graph-content'>
-  <text class='hidden-on-hover' font-size='13' y={30} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
   <g>
     <GraphLegend {xScale} {yScale} h={innerHeight} {areaHover} {areaMouseOut}/>
   </g>
@@ -94,7 +93,7 @@
       </linearGradient>
     </defs>
   </g>
-  <g class='circles'>
+  <g class='circles' pointer-events='none'>
     <!-- Eerst alle dashed lines, dan alle circles -->
     <line class='visible-on-hover' stroke={'black'} y2={yScale(datalist_laag[0].p5)} y1={yScale(datalist_hoog[0].p95)} x1={xScale('Huidig klimaat')} x2={xScale('Huidig klimaat')} stroke-dasharray="8 8" stroke-width='2.8'/>
     {#each [['laag', datalist_laag], ['hoog', datalist_hoog]] as datalist}

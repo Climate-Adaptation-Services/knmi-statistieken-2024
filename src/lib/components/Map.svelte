@@ -63,7 +63,8 @@
     {#each period_options as option, i}
       <option value={option.value} selected={(i === 0) ? true : false}>{option.label}</option>
     {/each}
-  </select>  <p>Pas locatie aan op kaart</p>
+  </select>
+  <p>Pas locatie aan op kaart</p>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
