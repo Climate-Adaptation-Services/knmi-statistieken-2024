@@ -81,8 +81,8 @@
 
 <g class='graph-content'>
   <text class='hidden-on-hover' font-size='13' y={30} x='30' font-style='italic'>Beweeg de muis over de grafiek voor meer info...</text>
-  <g class='visible-on-hover'>
-    <GraphLegend {xScale} {yScale}/>
+  <g>
+    <GraphLegend {xScale} {yScale} h={innerHeight} {areaHover} {areaMouseOut}/>
   </g>
   <g class='rough' height={h} width={w}>
     <g class='otherscenario-laag' bind:this={svgElementLaag} on:mouseover={() => areaHover('laag')} on:mouseout={() => areaMouseOut('laag')}></g>
@@ -105,9 +105,14 @@
       <g class='median-line' stroke='{(datalist[0] === 'laag') ? '#17A3D3' : 'red'}'>
         <line class='otherscenario-{datalist[0]}' x1={xScale('Huidig klimaat')} x2={xScale('Klimaat 2050')} y1={yScale(datalist[1][0].median)} y2={yScale(datalist[1][1].median)}/>
         <line class='otherscenario-{datalist[0]}' x1={xScale('Klimaat 2050')} x2={xScale('Klimaat 2100')} y1={yScale(datalist[1][1].median)} y2={yScale(datalist[1][2].median)}/>
-        <g font-size='11' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 20},{yScale(datalist[1][2].median) + 3})'>
-          <text class='otherscenario-{datalist[0]}' cursor='default' on:mouseover={() => areaHover(datalist[0])} on:mouseout={() => areaMouseOut(datalist[0])}>{(datalist[0] === 'laag') ? 'Laag scenario' : 'Hoog scenario'}</text>
-          <!-- <text y='1em'>Scenario</text> -->
+        <g class='scenario-{datalist[0]}' font-size='11px' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 15},{0})'>
+            <g transform='translate({0},{yScale(datalist[1][2].median) - 8})'>
+              <text>Langjarig</text>  
+              <text y='1em'>gemiddelde</text>  
+              <text y='2em'>over 30 jaar</text>  
+            </g>
+            <text y={yScale(datalist[1][2].p95)}>95%</text>  
+            <text y={yScale(datalist[1][2].p5)}>5%</text>  
         </g>
       </g>
     {/each}
@@ -121,7 +126,7 @@
                   ? '#17A3D3' 
                   : 'red'} 
               r='4' stroke='none'/>
-            <text text-anchor={(circleData[0] === 'Klimaat 2050') ? 'end' : ''} dx={(circleData[0] === 'Klimaat 2050') ? '-0.5em' : '0.5em'} dy={'-0.4em'}>{Math.round(circleData[1]*10)/10}</text>
+            <text text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1]*10)/10}</text>
           </g>
         {/each}
       {/each}

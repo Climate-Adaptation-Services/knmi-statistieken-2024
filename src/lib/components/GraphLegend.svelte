@@ -1,21 +1,24 @@
 <script>
   export let yScale;
   export let xScale;
-
-  const circle_95_y = 120
+  export let h
+  export let areaHover
+  export let areaMouseOut
 
 </script>
 
-<g transform='translate({50},{50})'>
-  <line stroke={'grey'} y1={circle_95_y} y2={0} x1={0} x2={0} stroke-dasharray="8 8" stroke-width='2.8'/>
-  <text font-size='12px' x={20} y={circle_95_y/2 + 5}>Jaar op jaar variatie (90% band)</text>  
-  <circle fill={'grey'} r='4' stroke='none'/>
-  <text x={20} y={5}>95%</text>  
-  <circle fill={'grey'} r='4' cy={circle_95_y} stroke='none'/>
-  <text x={20} y={circle_95_y + 5}>5%</text>  
+<g transform='translate({0},{h + 60})' font-size='13'>
+  <text class='legend-text-hoog otherscenario-hoog' fill='red' cursor='default' on:mouseover={() => areaHover('hoog')} on:mouseout={() => areaMouseOut('hoog')}>Hoog scenario</text>
+  <text class='legend-text-laag otherscenario-laag' x='150px' cursor='default' on:mouseover={() => areaHover('laag')} on:mouseout={() => areaMouseOut('laag')}>Laag scenario</text>
 </g>
 
 
 <style>
+  .legend-text-hoog{
+    fill:red
+  }
+  .legend-text-laag{
+    fill:#17A3D3
+  }
 
 </style>
