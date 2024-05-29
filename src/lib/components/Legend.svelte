@@ -40,11 +40,11 @@
     <g class='legendAxis' transform='translate({0},{0})' style='font-size:13px'></g>
     <line y1={legendScale($gridSelectionValue)} x1='0' x2='28' y2={legendScale($gridSelectionValue)} stroke='cyan' stroke-width='4'/>
     {#if !$gridHoverValue}
-      <text font-size='18' y={legendScale($gridSelectionValue) + 5} x='35'>{Math.round(10*$gridSelectionValue)/10}</text>
+      <text font-size='18' y={legendScale($gridSelectionValue) + 5} x='35'>{Math.round($gridSelectionValue)}</text>
     {/if}
     {#if $gridHoverValue}
       <line y1={legendScale($gridHoverValue)} x1='0' x2='28' y2={legendScale($gridHoverValue)} stroke='grey' stroke-width='4'/>
-      <text font-size='18' y={legendScale($gridHoverValue) + 5} x='35'>{Math.round(10*$gridHoverValue)/10}</text>
+      <text font-size='18' y={legendScale($gridHoverValue) + 5} x='35'>{Math.round($gridHoverValue)}</text>
       {/if}
   </g>
 </g>
