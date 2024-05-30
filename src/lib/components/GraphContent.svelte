@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, colorScale, indicatorData, indicatorSelection } from '$lib/stores';
+  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover } from '$lib/stores';
   import GraphLegend from './GraphLegend.svelte';
 
   export let xScale;
@@ -132,8 +132,17 @@
       {/each}
     </g>
   </g>
+  <g class='current-map-selection'>
+    <g transform='translate({xScale($periodName)},{yScale(dataSelected[$periodSelection])})'>
+      <circle r='5' fill='none' stroke='cyan' stroke-width='3'/>
+      <text text-anchor='middle' class='hidden-on-hover' style='fill:black' font-size='10' dy='1.8em'>Mediaan selectie</text>
+    </g>
+    {#if $gridHover}
+      <circle cx={xScale($periodName)} cy={yScale($indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection])} r='5' fill='none' stroke='grey' stroke-width='3'/>
+    {/if}
+  </g>
 </g>
-<rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight} fill='#fcfbf2'/>
+<rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
 
 
 <style>

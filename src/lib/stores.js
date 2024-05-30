@@ -4,8 +4,17 @@ export const indicatorSelection = writable('tropischedagen');
 export const indicatorData = writable(null)
 export const gridSelection = writable(689)
 export const colorScale = writable(null)
-export const periodSelection = writable('ref')
 export const gridHover = writable(null)
+export const periodSelection = writable('ref')
+
+export const periodName = derived(
+  [periodSelection],
+  ([$periodSelection]) => ($periodSelection === 'ref')
+    ? 'Huidig klimaat'
+    : ($periodSelection === '2100hoog')
+      ? 'Klimaat 2100'
+      : 'Klimaat 2050'
+)
 
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection],
