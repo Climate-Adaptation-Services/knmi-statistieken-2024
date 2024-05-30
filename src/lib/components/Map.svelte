@@ -142,6 +142,7 @@
     stroke:white;
     stroke-width:1.5;
     paint-order:stroke;
+    fill:black;
   }
 
 </style>
