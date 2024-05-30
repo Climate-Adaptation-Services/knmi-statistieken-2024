@@ -108,9 +108,10 @@
         <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
           <circle
             fill={'black'}
+            stroke='white'
             r='3'
           />
-          <text font-size='12' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
+          <text class='stad-text' font-size='9' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
             {NLstad.Stad}
           </text>
         </g>
@@ -133,6 +134,14 @@
 
   .rasterblokje{
     /* transition: all 2s; */
+  }
+
+  .stad-text{
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke:white;
+    stroke-width:1.5;
+    paint-order:stroke;
   }
 
 </style>
