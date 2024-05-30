@@ -135,7 +135,7 @@
   <g class='current-map-selection'>
     <g transform='translate({xScale($periodName)},{yScale(dataSelected[$periodSelection])})'>
       <circle r='5' fill='none' stroke='cyan' stroke-width='3'/>
-      <text text-anchor='middle' class='hidden-on-hover' style='fill:black' font-size='10' dy='1.8em'>Mediaan selectie</text>
+      <text text-anchor='middle' class='hidden-on-hover' style='fill:black' font-size='9' dy='1.8em'>Mediaan selectie</text>
     </g>
     {#if $gridHover}
       <circle cx={xScale($periodName)} cy={yScale($indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection])} r='5' fill='none' stroke='grey' stroke-width='3'/>
