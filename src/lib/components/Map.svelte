@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
 
@@ -51,8 +51,8 @@
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
-  <h3>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'}</h3>
-  <p>Pas locatie aan op kaart</p>
+  <h2>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} <strong style='font-size:16px'>bij scenario </strong>{$periodName}</h2>
+  <p style='font-style:italic'>Pas locatie aan op kaart</p>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
