@@ -10,13 +10,13 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:h/8, left:60, bottom:80, right:60}
+  const margin = {top:h/15, left:60, bottom:h/8, right:140}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
   $: xScale = d3.scalePoint()
     .domain(['Huidig klimaat', 'Klimaat 2050', 'Klimaat 2100'])
-    .range([0, innerWidth-margin.right])
+    .range([0, innerWidth])
 
   $: yScale = d3.scaleLinear()
     .domain([0,d3.max($indicatorData[$indicatorSelection].map(d => d['2100hoog_p95']))])

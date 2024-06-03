@@ -9,9 +9,9 @@
 
 </script>
 
-<g transform='translate({0},{0})' font-size='16'>
-  <rect width={w - margin.right} height='106' x='0' y='-20' fill='white' stroke='lightgrey'/>
-  <g transform='translate(60,0)'>
+<g transform='translate({20},{margin.top + 20})' font-size='16'>
+  <rect width={240} height='106' x='0' y='-20' fill='white' stroke='lightgrey'/>
+  <g transform='translate(25,0)'>
     <g class='otherscenario-hoog' transform='translate(0,10)' on:mouseover={() => areaHover('hoog')} on:mouseout={() => areaMouseOut('hoog')}>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>

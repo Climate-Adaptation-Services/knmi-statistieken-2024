@@ -69,7 +69,7 @@
 {/if}
 
 <div class='sidepanel-content'>
-  <h2>KNMI-statistieken 2024</h2>
+  <h3>Selecteer thema</h3>
   <div class='themas'>
     {#each ['hitte', 'droogte', 'wind' , 'zst'] as th}
       <div class='thema'>

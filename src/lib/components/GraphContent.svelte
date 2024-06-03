@@ -61,7 +61,7 @@
     d3.select('.whiterect')
       .raise()
       .transition('ease').duration(2000).ease(d3.easeQuadOut)
-      .attr('x', w*1.3)
+      .attr('x', w*1.8)
     
     d3.selectAll('.rough g g').style('opacity', '0.2')
   })
