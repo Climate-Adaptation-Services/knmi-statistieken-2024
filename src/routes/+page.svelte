@@ -66,6 +66,7 @@
   }
   .map{
     width:39%;
+    /* border-right: 2px solid lightgrey; */
   }
   .graph{
     width:38%;

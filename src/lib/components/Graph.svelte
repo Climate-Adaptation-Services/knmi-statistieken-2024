@@ -37,8 +37,10 @@
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
-  <h2>Statistieken voor locatie op kaart</h2>
-  <p style='font-style:italic'>Beweeg de muis over de grafiek of legenda voor meer info</p>
+  <div class='title-white-bg'>
+    <h2>Statistieken voor locatie op kaart</h2>
+    <p style='font-style:italic'>Beweeg de muis over de grafiek of legenda voor meer info</p>
+  </div>
 </div>
 <div class='graph-div' style='height:{graphHeight}px'>
   <svg class='graph-svg'>

@@ -31,3 +31,11 @@ svg{
 text{
   fill:#8E8883;
 }
+
+.title-white-bg{
+  background-color: white;
+  padding:20px 60px 20px 60px;
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  text-align: center;
+}

@@ -51,8 +51,10 @@
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
-  <h2>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} <strong style='font-size:16px'>bij scenario </strong>{$periodName}</h2>
-  <p style='font-style:italic'>Pas locatie aan op de kaart</p>
+  <div class='title-white-bg'>
+    <h2>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} <strong style='font-size:16px'>bij scenario </strong>{$periodSelection}</h2>
+    <p style='font-style:italic'>Pas locatie aan op de kaart</p>
+  </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
