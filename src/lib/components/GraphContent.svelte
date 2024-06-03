@@ -59,7 +59,7 @@
     createRoughArea(datalist_laag, -45, '#17A3D3', svgElementLaag)
 
     d3.select('.whiterect')
-      .raise()
+      // .raise()
       .transition('ease').duration(2000).ease(d3.easeQuadOut)
       .attr('x', w*1.8)
     
@@ -80,9 +80,6 @@
 </script>
 
 <g class='graph-content'>
-  <g>
-    <GraphLegend {xScale} {yScale} {w} h={innerHeight} {areaHover} {areaMouseOut} {margin} />
-  </g>
   <g class='rough' height={h} width={w}>
     <g class='otherscenario-laag' bind:this={svgElementLaag} on:mouseover={() => areaHover('laag')} on:mouseout={() => areaMouseOut('laag')}></g>
     <g class='otherscenario-hoog' bind:this={svgElementHoog} on:mouseover={() => areaHover('hoog')} on:mouseout={() => areaMouseOut('hoog')}></g>
@@ -110,8 +107,8 @@
               <text y='1em'>gemiddelde</text>  
               <text y='2em'>over 30 jaar</text>  
             </g>
-            <text y={yScale(datalist[1][2].p95)}>95%</text>  
-            <text y={yScale(datalist[1][2].p5)}>5%</text>  
+            <text font-size='14' y={yScale(datalist[1][2].p95)}>95%</text>  
+            <text font-size='14' y={yScale(datalist[1][2].p5)}>5%</text>  
         </g>
       </g>
     {/each}
@@ -143,7 +140,9 @@
   </g>
 </g>
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
-
+<g>
+  <GraphLegend {xScale} {yScale} {w} h={innerHeight} {areaHover} {areaMouseOut} {margin} />
+</g>
 
 <style>
   .visible-on-hover{

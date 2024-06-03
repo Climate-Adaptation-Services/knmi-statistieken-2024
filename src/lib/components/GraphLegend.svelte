@@ -22,7 +22,7 @@
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
     </g>
-    <text class='legend-text-ref' x='0' y='70' cursor='default'>Referentie</text>
+    <text class='legend-text-ref' x='0' y='70' cursor='default'>Huidig klimaat</text>
   </g>
   
 </g>

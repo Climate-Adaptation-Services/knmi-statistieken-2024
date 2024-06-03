@@ -32,13 +32,6 @@
     .range(['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000'])
   )
 
-  const period_options = [
-      { value: 'ref', label: 'Huidig klimaat'},
-      { value: '2050laag', label: 'Klimaat laag 2050/2100'},
-      { value: '2050hoog', label: 'Klimaat 2050 hoog'},
-      { value: '2100hoog', label: 'Klimaat 2100 hoog'}
-  ];
-
   afterUpdate(() => select('.id-' + $gridSelection).raise())
 
   function click(feature){
@@ -59,11 +52,6 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <h3>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'}</h3>
-  <select name="periods" id="periods" bind:value={$periodSelection}>
-    {#each period_options as option, i}
-      <option value={option.value} selected={(i === 0) ? true : false}>{option.label}</option>
-    {/each}
-  </select>
   <p>Pas locatie aan op kaart</p>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
