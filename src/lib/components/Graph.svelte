@@ -10,7 +10,7 @@
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
-  const margin = {top:h/15, left:60, bottom:h/8, right:140}
+  const margin = {top:50, left:60, bottom:h/5, right:70}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
