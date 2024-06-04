@@ -9,9 +9,9 @@
 
 </script>
 
-<g transform='translate({20},{margin.top + 20})' font-size='16'>
-  <rect width={240} height='80' x='0' y='-20' fill='white' stroke='lightgrey'/>
-  <g transform='translate(25,0)'>
+<g transform='translate({0},{h+margin.top+70})' font-size='16'>
+  <rect width={w} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
+  <g transform='translate(65,0)'>
     <g transform='translate(0,10)'>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>
@@ -21,6 +21,17 @@
       <text class='legend-text-laag' fill='#17A3D3' cursor='default'>Laagste scenario</text>
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
+    </g>
+    <g class='langjarig' style='fill:grey' transform='translate(5,66)'>
+      <circle r='4'/>
+      <line x2={50} stroke='grey'/>
+      <circle r='4' cx='50'/>
+      <text font-size='12' x='65' y='0.32em'>Langjarig gemiddelde</text>
+    </g>
+    <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
+      <rect width='50' height='30' fill='grey' x='0' y='-15' opacity='0.2'/>
+      <line x1='50' y1='-15' x2='50' y2='15' stroke='grey' stroke-dasharray='4 4' stroke-width='2'/>
+      <text font-size='12' x='65' y='0.32em'>Jaar op jaar variatie (90% band)</text>
     </g>
   </g>
   
