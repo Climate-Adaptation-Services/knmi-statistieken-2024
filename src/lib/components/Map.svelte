@@ -52,7 +52,11 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
-    <h2>{($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} <strong style='font-size:16px'>bij scenario </strong>{$periodSelection}</h2>
+    <h2>
+      {($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} 
+      <strong style='font-size:16px; color:black'>bij scenario </strong>
+      {$periodSelection}
+    </h2>
     <p style='font-style:italic'>Pas locatie aan op de kaart</p>
   </div>
 </div>
@@ -97,11 +101,11 @@
       {#each NLsteden as NLstad, i}
         <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
           <circle
-            fill={'black'}
+            fill={'#35575A'}
             stroke='white'
             r='3'
           />
-          <text class='stad-text' font-size='9' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
+          <text class='stad-text' fill='#35575A' font-size='10' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
             {NLstad.Stad}
           </text>
         </g>

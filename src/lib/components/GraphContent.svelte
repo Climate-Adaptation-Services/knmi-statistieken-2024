@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover } from '$lib/stores';
+  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, scenarioSelection } from '$lib/stores';
   import GraphLegend from './GraphLegend.svelte';
 
   export let xScale;
@@ -66,23 +66,13 @@
     d3.selectAll('.rough g g').style('opacity', '0.2')
   })
 
-  function areaHover(scenario){
-    d3.selectAll('.scenario-' + scenario).style('visibility', 'visible')
-    const otherScenario = (scenario === 'laag') ? 'hoog' : 'laag'
-    d3.selectAll('.otherscenario-' + otherScenario).style('opacity', '0.2')
-  }
-  function areaMouseOut(scenario){
-    d3.selectAll('.scenario-' + scenario).style('visibility', 'hidden')
-    const otherScenario = (scenario === 'laag') ? 'hoog' : 'laag'
-    d3.selectAll('.otherscenario-' + otherScenario).style('opacity', '1')
-  }
 
 </script>
 
 <g class='graph-content'>
   <g class='rough' height={h} width={w}>
-    <g class='otherscenario-laag' bind:this={svgElementLaag} on:mouseover={() => areaHover('laag')} on:mouseout={() => areaMouseOut('laag')}></g>
-    <g class='otherscenario-hoog' bind:this={svgElementHoog} on:mouseover={() => areaHover('hoog')} on:mouseout={() => areaMouseOut('hoog')}></g>
+    <g class='scenario-laag' bind:this={svgElementLaag}></g>
+    <g class='scenario-hoog' bind:this={svgElementHoog}></g>
     <defs>
       <linearGradient id="roughGradient" x1="0" x2="0" y1="0" y2="1">
         <stop offset="0%" stop-color={'grey'} />
@@ -92,16 +82,16 @@
   </g>
   <g class='circles' pointer-events='none'>
     <!-- Eerst alle dashed lines, dan alle circles -->
-    <line class='visible-on-hover' stroke={'black'} y2={yScale(datalist_laag[0].p5)} y1={yScale(datalist_hoog[0].p95)} x1={xScale('Huidig klimaat')} x2={xScale('Huidig klimaat')} stroke-dasharray="8 8" stroke-width='2.8'/>
+    <line stroke={'black'} y2={yScale(datalist_laag[0].p5)} y1={yScale(datalist_hoog[0].p95)} x1={xScale('Huidig klimaat')} x2={xScale('Huidig klimaat')} stroke-dasharray="8 8" stroke-width='2.8'/>
     {#each [['laag', datalist_laag], ['hoog', datalist_hoog]] as datalist}
-      <g class='scenario-{datalist[0]} dashed-lines'>
-        <line stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][1].p5)} y1={yScale(datalist[1][1].p95)} x1={xScale(datalist[1][1].period)} x2={xScale(datalist[1][1].period)} stroke-dasharray="8 8" stroke-dashoffset={(datalist[0] === 'laag') ? -strokeDif/2 : '0'} stroke-width='2.8'/>
-        <line stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][2].p5)} y1={yScale(datalist[1][2].p95)} x1={xScale(datalist[1][2].period)} x2={xScale(datalist[1][2].period)} stroke-dasharray="8 8" stroke-width='2.8'/>
+      <g class='dashed-lines'>
+        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][1].p5)} y1={yScale(datalist[1][1].p95)} x1={xScale(datalist[1][1].period)} x2={xScale(datalist[1][1].period)} stroke-dasharray="8 8" stroke-dashoffset={(datalist[0] === 'laag') ? -strokeDif/2 : '0'} stroke-width='2.8'/>
+        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][2].p5)} y1={yScale(datalist[1][2].p95)} x1={xScale(datalist[1][2].period)} x2={xScale(datalist[1][2].period)} stroke-dasharray="8 8" stroke-width='2.8'/>
       </g>
-      <g class='median-line' stroke='{(datalist[0] === 'laag') ? '#17A3D3' : 'red'}'>
-        <line class='otherscenario-{datalist[0]}' x1={xScale('Huidig klimaat')} x2={xScale('Klimaat 2050')} y1={yScale(datalist[1][0].median)} y2={yScale(datalist[1][1].median)}/>
-        <line class='otherscenario-{datalist[0]}' x1={xScale('Klimaat 2050')} x2={xScale('Klimaat 2100')} y1={yScale(datalist[1][1].median)} y2={yScale(datalist[1][2].median)}/>
-        <g class='scenario-{datalist[0]}' font-size='11px' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 15},{0})'>
+      <g class='median-line scenario-{datalist[0]}' stroke='{(datalist[0] === 'laag') ? '#17A3D3' : 'red'}'>
+        <line x1={xScale('Huidig klimaat')} x2={xScale('Klimaat 2050')} y1={yScale(datalist[1][0].median)} y2={yScale(datalist[1][1].median)}/>
+        <line x1={xScale('Klimaat 2050')} x2={xScale('Klimaat 2100')} y1={yScale(datalist[1][1].median)} y2={yScale(datalist[1][2].median)}/>
+        <!-- <g font-size='11px' font-weight='normal' transform='translate({xScale('Klimaat 2100') + 15},{0})'>
             <g transform='translate({0},{yScale(datalist[1][2].median) - 8})'>
               <text>Langjarig</text>  
               <text y='1em'>gemiddelde</text>  
@@ -109,21 +99,25 @@
             </g>
             <text font-size='14' y={yScale(datalist[1][2].p95)}>95%</text>  
             <text font-size='14' y={yScale(datalist[1][2].p5)}>5%</text>  
-        </g>
+        </g> -->
       </g>
     {/each}
-    <g class='visible-on-hover'>
+    <g>
       {#each [['laag', datalist_laag], ['hoog', datalist_hoog]] as datalist}
-        {#each [['Huidig klimaat', datalist[1][0].p5], ['Huidig klimaat', datalist[1][0].p95], ['Klimaat 2050', datalist[1][1].p5], ['Klimaat 2100', datalist[1][2].p5], ['Klimaat 2050', datalist[1][1].p95], ['Klimaat 2100', datalist[1][2].p95]] as circleData, i}
+        {#each [['Huidig klimaat', datalist[1][0].median], ['Klimaat 2050', datalist[1][1].median], ['Klimaat 2100', datalist[1][2].median], ['Huidig klimaat', datalist[1][0].p5], ['Huidig klimaat', datalist[1][0].p95], ['Klimaat 2050', datalist[1][1].p5], ['Klimaat 2100', datalist[1][2].p5], ['Klimaat 2050', datalist[1][1].p95], ['Klimaat 2100', datalist[1][2].p95]] as circleData, i}
           <g class='scenario-{datalist[0]}' transform='translate({xScale(circleData[0])},{yScale(circleData[1])})'>
-            <circle fill={(i < 2) 
+            {#if i < 3}
+            <circle fill={(i < 1) 
                 ? 'black' 
                 : (datalist[0] === 'laag')
                   ? '#17A3D3' 
                   : 'red'} 
               r='4' stroke='none'/>
-            <text style='fill:{(i < 2) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
-            text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
+            {/if}
+            {#if $scenarioSelection === datalist[0]}
+              <text style='fill:{(i<3) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
+              text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
+            {/if}
           </g>
         {/each}
       {/each}
@@ -132,7 +126,7 @@
   <g class='current-map-selection'>
     <g transform='translate({xScale($periodName)},{yScale(dataSelected[$periodSelection])})'>
       <circle r='5' fill='none' stroke='cyan' stroke-width='3'/>
-      <text text-anchor='middle' class='hidden-on-hover' style='fill:black' font-size='9' dy='1.8em'>Mediaan selectie</text>
+      <!-- <text text-anchor='middle' class='hidden-on-hover' style='fill:black' font-size='9' dy='1.8em'>Mediaan selectie</text> -->
     </g>
     {#if $gridHover}
       <circle cx={xScale($periodName)} cy={yScale($indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection])} r='5' fill='none' stroke='grey' stroke-width='3'/>
@@ -141,15 +135,11 @@
 </g>
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
 <g>
-  <GraphLegend {xScale} {yScale} {w} h={innerHeight} {areaHover} {areaMouseOut} {margin} />
+  <GraphLegend {xScale} {yScale} {w} h={innerHeight} {margin} />
 </g>
 
 <style>
   .visible-on-hover{
-    visibility: hidden;
-  }
-
-  .scenario-laag, .scenario-hoog{
     visibility: hidden;
   }
 

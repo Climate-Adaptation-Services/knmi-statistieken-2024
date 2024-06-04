@@ -29,13 +29,17 @@ svg{
 }
 
 text{
-  fill:#8E8883;
+  fill:#35575A;
 }
 
 .title-white-bg{
   background-color: white;
-  padding:20px 60px 20px 60px;
+  padding:0% 30px 0% 30px;
   border: 2px solid lightgrey;
   border-radius: 10px;
   text-align: center;
+}
+
+h2,h3,p{
+  color: #35575A;
 }

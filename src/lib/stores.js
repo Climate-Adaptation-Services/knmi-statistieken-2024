@@ -6,6 +6,7 @@ export const gridSelection = writable(689)
 export const colorScale = writable(null)
 export const gridHover = writable(null)
 export const periodSelection = writable('ref')
+export const scenarioSelection = writable('beide')
 
 export const periodName = derived(
   [periodSelection],
