@@ -115,7 +115,7 @@
               r='4' stroke='none'/>
             {/if}
             {#if $scenarioSelection === datalist[0]}
-              <text style='fill:{(i<3) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
+              <text style='fill:{([0,3,4].includes(i)) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
               text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
             {/if}
           </g>
