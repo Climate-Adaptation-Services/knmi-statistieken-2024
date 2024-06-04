@@ -11,7 +11,7 @@
 
 <g transform='translate({0},{h+margin.top+70})' font-size='16'>
   <rect width={w} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
-  <g transform='translate(65,0)'>
+  <g transform='translate({w/2 - 90},0)'>
     <g transform='translate(0,10)'>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>

@@ -52,12 +52,12 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
-    <h2>
+    <h3>
       {($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} 
-      <strong style='font-size:16px; color:black'>bij scenario </strong>
+      <strong style='font-size:14px; color:black'>bij scenario </strong>
       {$periodSelection}
-    </h2>
-    <p style='font-style:italic'>Pas locatie aan op de kaart</p>
+    </h3>
+    <p style='font-style:italic; font-size:14px'>Pas locatie aan op de kaart</p>
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>

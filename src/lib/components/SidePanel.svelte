@@ -103,7 +103,7 @@
   </div>
   <h3>Toon scenario grafiek</h3>
   <div class='switch-div'>
-    <ThreeSwitch />
+    <ThreeSwitch {w}/>
   </div>
 </div>
 

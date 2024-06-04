@@ -1,9 +1,11 @@
 <script>
   import { scenarioSelection } from "$lib/stores";
-    import { selectAll } from "d3";
+  import { selectAll } from "d3";
+
+  export let w
 
   const rectWidth = 100
-  const rectHeight = 7
+  const rectHeight = 5
   const rectOffset = rectWidth/2
 
   function changeScenario(scenario, otherscenario){
@@ -16,9 +18,24 @@
 </script>
 
 <svg>
-  <g class='three-switch' style='fill:white' transform='translate(33,0)'>
+  <defs>
+    <linearGradient id="laag-gradient">
+      <stop offset="0%" stop-color="#17A3D3" />
+      <stop offset="35%" stop-color="white" />
+    </linearGradient>
+    <linearGradient id="hoog-gradient">
+      <stop offset="65%" stop-color="white" />
+      <stop offset="100%" stop-color="red" />
+    </linearGradient>
+    <linearGradient id="beide-gradient">
+      <stop offset="30%" stop-color="white" />
+      <stop offset="50%" stop-color="grey" />
+      <stop offset="70%" stop-color="white" />
+    </linearGradient>
+  </defs>
+  <g class='three-switch' style='fill:white' transform='translate({w/2 - 100},0)'>
     <text text-anchor='end' y='0.96em' x={rectOffset-15}>Laagste</text>
-    <rect width={rectWidth} x={rectOffset} y='5' height={rectHeight} rx='3'></rect>
+    <rect fill='url(#{$scenarioSelection}-gradient)' width={rectWidth} x={rectOffset} y='5' height={rectHeight} rx='3'></rect>
     <circle class='' r={8} on:click={() => changeScenario('laag', 'hoog')} fill={($scenarioSelection === 'laag') ? '#17A3D3' : 'white'} cx={rectOffset} cy={rectHeight/2 + 5}/>
     <circle class='' r={8} on:click={() => changeScenario('beide', 'beide')} fill={($scenarioSelection === 'beide') ? 'grey' : 'white'} cx={rectOffset+rectWidth/2} cy={rectHeight/2 + 5}/>
     <circle class='' r={8} on:click={() => changeScenario('hoog', 'laag')} fill={($scenarioSelection === 'hoog') ? 'red' : 'white'} cx={rectOffset+rectWidth} cy={rectHeight/2 + 5}/>
@@ -38,8 +55,13 @@
     width:100%;
   }
 
-  circle{
+  circle, rect{
     transition: all 1s;
+  }
+
+  circle{
+    /* -webkit-filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .3)); */
+    filter: drop-shadow( 0px 0px 10px rgba(0, 0, 0, 1));
   }
 
 </style>
