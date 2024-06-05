@@ -2,11 +2,12 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { colorScale, indicatorData } from '$lib/stores.js';
+  import { colorScale, indicatorData, indicatorMetaData } from '$lib/stores.js';
 
   export let data
   $: console.log(data)
-  indicatorData.set(data)
+  indicatorData.set(data.indicator_data)
+  indicatorMetaData.set(data.indicator_metadata)
 
   const getData = (async () => {
 		const response = await Promise.all([
@@ -28,9 +29,11 @@
 </script>
 
 <div class='container'>
-  <div class='side-panel' bind:clientWidth={sidepanelWidth} bind:clientHeight={sidepanelHeight}>
-    <SidePanel w={sidepanelWidth} h={sidepanelHeight}/>
-  </div>
+  {#if data}
+    <div class='side-panel' bind:clientWidth={sidepanelWidth} bind:clientHeight={sidepanelHeight}>
+      <SidePanel w={sidepanelWidth} h={sidepanelHeight}/>
+    </div>
+  {/if}
   {#await getData}
     <pre style='color:white'>Loading...</pre>
   {:then res}

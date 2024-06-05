@@ -1,12 +1,14 @@
 import { writable, derived } from "svelte/store"
 
-export const indicatorSelection = writable('tropischedagen');
+export const indicatorSelection = writable('Tropische dagen');
 export const indicatorData = writable(null)
+export const indicatorMetaData = writable(null)
 export const gridSelection = writable(689)
 export const colorScale = writable(null)
 export const gridHover = writable(null)
 export const periodSelection = writable('ref')
 export const scenarioSelection = writable('beide')
+export const themeSelection = writable('Hitte')
 
 export const periodName = derived(
   [periodSelection],

@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
 
@@ -26,10 +26,12 @@
   
   $: path = geoPath(projection);
 
+  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Tropische dagen')[0]
+
   colorScale.set(
     scaleLinear()
-    .domain([0,10,20,30,40,50,60])
-    .range(['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000'])
+    .domain(firstIndicator['y-as domein'].split(','))
+    .range(firstIndicator['Kleuren'].split(','))
   )
 
   afterUpdate(() => select('.id-' + $gridSelection).raise())
@@ -53,7 +55,7 @@
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
     <h3>
-      {($indicatorSelection === 'tropischedagen') ? 'Tropische dagen' : 'Reeks droge dagen'} 
+      {$indicatorSelection} 
       <strong style='font-size:14px; color:black'>bij scenario </strong>
       {$periodSelection}
     </h3>

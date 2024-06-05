@@ -1,28 +1,23 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData } from '$lib/stores';
   import { select, scaleLinear } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
   import Select from 'svelte-select'
-    import ThreeSwitch from './ThreeSwitch.svelte';
+  import ThreeSwitch from './ThreeSwitch.svelte';
 
   export let w;
   export let h;
 
-  const indicatoren = [
-    {label:'Tropische dagen', value:'tropischedagen'},
-    {label:'Reeks droge dagen', value:'reeksdrogedagen'}
-  ]
+  const indicatorOptions = $indicatorMetaData.map((ind) => {return {label:ind['Indicator'], value:ind['Indicator']}})
 
   function onChangeIndicator(e){
     indicatorSelection.set(e.detail.value)
 
-    const domain = ($indicatorSelection === 'tropischedagen')
-      ? [0,10,20,30,40,50,60]
-      : [14,15,16,17,18,19,20]
-    const range = ($indicatorSelection === 'tropischedagen')
-      ? ['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']
-      : ['#F5F908', '#F5AC05', '#F55E05', '#FA2804', '#F00004', '#780103', '#000000']
+    const metadata = $indicatorMetaData.filter((ind) => ind['Indicator'] === e.detail.value)[0]
+    const domain = metadata['y-as domein'].split(',')
+    const range = metadata['Kleuren'].split(',')
+    
     colorScale.set(
       scaleLinear()
       .domain(domain)
@@ -83,16 +78,18 @@
 <div class='sidepanel-content'>
   <h3>Selecteer thema</h3>
   <div class='themas'>
-    {#each ['hitte', 'droogte', 'wind' , 'zst'] as th}
+    {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Overstroming'] as th}
       <div class='thema'>
-        <img src={'https://raw.githubusercontent.com/sophievanderhorst/data/main/' + th + '_carib.png'} />
-        <p>{th}</p>
+        <img src={'/images/' + th + '.png'} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => themeSelection.set(th)}/>
+        {#if $themeSelection === th}
+          <p>{th}</p>
+        {/if}
       </div>
     {/each}
   </div>
   <h3>Selecteer indicator</h3>
   <div class='selection-div'>
-    <Select items={indicatoren} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChangeIndicator}/>
+    <Select items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChangeIndicator}/>
   </div>
   <!-- {#if $indicatorSelection === 'tropischedagen'}
     <p style='color:white; padding:20px; font-size:11.5px'>De grafieken tonen het gemiddelde aantal tropische dagen per jaar in huidige klimaat (1990-2020) en voor het klimaat rond 2050 en 2100 (waarden voor het laagste (Ln) en hoogste (Hd) KNMI’23 klimaatscenario). We spreken in Nederland van een tropische dag als de maximumtemperatuur 30 °C of hoger is. Door de temperende werking van de zee komen tropische dagen aan de kust minder vaak voor dan in het binnenland. Het hoogste aantal tropische dagen worden in het zuidoosten van ons land behaald. In de toekomst zal het aantal tropische dagen overal in Nederland stijgen. Tropische dagen zorgen vaak voor hittestress, met name bij ouderen en zieken. Ook bij anderen kan hittestress optreden wanneer men lang buiten in de zon is (bijv. bij openlucht muziek festivals) en/of bij grote fysieke inspanningen (bijv. tijdens de Nijmeegse vierdaagse).</p>
