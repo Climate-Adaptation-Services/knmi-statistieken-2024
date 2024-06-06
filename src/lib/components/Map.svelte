@@ -107,7 +107,7 @@
             stroke='white'
             r='3'
           />
-          <text class='stad-text' fill='#35575A' font-size='10' x={(NLstad.Stad === 'Haarlem') ? '-30' : '0'} y='1.32em' text-anchor='middle'>
+          <text class='stad-text' style='fill:#35575A' font-size='9' y='1.32em' text-anchor='middle'>
             {NLstad.Stad}
           </text>
         </g>

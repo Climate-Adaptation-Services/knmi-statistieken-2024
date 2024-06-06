@@ -62,6 +62,7 @@
   circle{
     /* -webkit-filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .3)); */
     filter: drop-shadow( 0px 0px 10px rgba(0, 0, 0, 1));
+    cursor:pointer;
   }
 
 </style>

@@ -23,6 +23,27 @@ body{
   src: url('/fonts/Roboto-Light.ttf');
 }
 
+@font-face {
+  font-family: 'SangBleuKingdom-Regular';
+  src: url('/fonts/SangBleuKingdom-Regular.ttf');
+}
+@font-face {
+  font-family: 'SangBleuKingdom-Medium';
+  src: url('/fonts/SangBleuKingdom-Medium.ttf');
+}
+@font-face {
+  font-family: 'SangBleuKingdom-Light';
+  src: url('/fonts/SangBleuKingdom-Light.ttf');
+}
+@font-face {
+  font-family: 'SangBleuKingdom-LightItalic';
+  src: url('/fonts/SangBleuKingdom-LightItalic.ttf');
+}
+@font-face {
+  font-family: 'SangBleuEmpire-Black';
+  src: url('/fonts/SangBleuEmpire-Black.ttf');
+}
+
 svg{
   width:100%;
   height:100%;
@@ -42,4 +63,8 @@ text{
 
 h2,h3,p{
   color: #35575A;
+}
+
+.stad-text{
+  font-family: 'SangBleuKingdom-Regular';
 }
