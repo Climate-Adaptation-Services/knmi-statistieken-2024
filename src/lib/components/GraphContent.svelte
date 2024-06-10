@@ -26,7 +26,8 @@
     {'period':'Klimaat 2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
 
-  $: strokeDif = yScale(datalist_hoog[1].p5) - yScale(datalist_hoog[1].p95) - (yScale(datalist_laag[1].p5) - yScale(datalist_laag[1].p95))
+  $: strokeDif2050 = yScale(datalist_laag[1].p95) - yScale(datalist_hoog[1].p95)
+  $: strokeDif2100 = yScale(datalist_laag[2].p95) - yScale(datalist_hoog[2].p95)
 
   const areaPath = d3.area()
     .x(d => xScale(d.period))
@@ -66,7 +67,6 @@
     d3.selectAll('.rough g g').style('opacity', '0.2')
   })
 
-
 </script>
 
 <g class='graph-content'>
@@ -85,8 +85,8 @@
     <line stroke={'black'} y2={yScale(datalist_laag[0].p5)} y1={yScale(datalist_hoog[0].p95)} x1={xScale('Huidig klimaat')} x2={xScale('Huidig klimaat')} stroke-dasharray="8 8" stroke-width='2.8'/>
     {#each [['laag', datalist_laag], ['hoog', datalist_hoog]] as datalist}
       <g class='dashed-lines'>
-        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][1].p5)} y1={yScale(datalist[1][1].p95)} x1={xScale(datalist[1][1].period)} x2={xScale(datalist[1][1].period)} stroke-dasharray="8 8" stroke-dashoffset={(datalist[0] === 'laag') ? -strokeDif/2 : '0'} stroke-width='2.8'/>
-        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][2].p5)} y1={yScale(datalist[1][2].p95)} x1={xScale(datalist[1][2].period)} x2={xScale(datalist[1][2].period)} stroke-dasharray="8 8" stroke-width='2.8'/>
+        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][1].p5)} y1={yScale(datalist[1][1].p95)} x1={xScale(datalist[1][1].period)} x2={xScale(datalist[1][1].period)} stroke-dasharray="8 8" stroke-width='2.8' stroke-dashoffset={(datalist[0] === 'laag') ? strokeDif2050+8 : "0"} />
+        <line class='scenario-{datalist[0]}' stroke={(datalist[0] === 'laag') ? '#17A3D3' : 'red'} y2={yScale(datalist[1][2].p5)} y1={yScale(datalist[1][2].p95)} x1={xScale(datalist[1][2].period)} x2={xScale(datalist[1][2].period)} stroke-dasharray="8 8" stroke-width='2.8' stroke-dashoffset={(datalist[0] === 'laag') ? strokeDif2100+8 : "0"} />
       </g>
       <g class='median-line scenario-{datalist[0]}' stroke='{(datalist[0] === 'laag') ? '#17A3D3' : 'red'}'>
         <line x1={xScale('Huidig klimaat')} x2={xScale('Klimaat 2050')} y1={yScale(datalist[1][0].median)} y2={yScale(datalist[1][1].median)}/>
