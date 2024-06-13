@@ -16,6 +16,8 @@
 
   console.log('datajson', datajson)
 
+  const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
+
   const legendMargin = 50
 
   $: titleHeight = 0.2*h
@@ -38,11 +40,11 @@
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
-    gridSelection.set(feature.properties.gridcode)
+    gridSelection.set(feature.properties[gridcode])
   }
 
   function mouseOver(feature){
-    gridHover.set(feature.properties.gridcode)
+    gridHover.set(feature.properties[gridcode])
     select('.id-' + $gridHover).raise()
   }
 
@@ -75,7 +77,7 @@
           <path
             d={path(feature)}
             class='shape'
-            fill='#fcfbf2'
+            fill='none'
             stroke='grey'
           />
         {/each}
@@ -84,16 +86,18 @@
         {#each cellen.features as feature, i}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <path
-            d={'M' + path(feature).split('M')[1]}
-            class={'rasterblokje ' + 'id-' + feature.properties.gridcode}
-            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties.gridcode)[0][$periodSelection])}
-            stroke={(feature.properties.gridcode == $gridSelection)
+          <circle
+            cx={projection(feature.geometry.coordinates)[0]}
+            cy={projection(feature.geometry.coordinates)[1]}
+            r={w/110}
+            class={'rasterblokje ' + 'id-' + feature.properties[gridcode]}
+            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection])}
+            stroke={(feature.properties[gridcode] == $gridSelection)
               ? 'cyan' 
-              : (feature.properties.gridcode == $gridHover)
+              : (feature.properties[gridcode] == $gridHover)
                 ? 'grey'
                 : 'white'}
-            stroke-width={(feature.properties.gridcode == $gridSelection) ? '3' : '1'}
+            stroke-width={(feature.properties[gridcode] == $gridSelection) ? '3' : '1'}
             on:click={() => click(feature)}
             on:mouseover={() => mouseOver(feature)}
             on:mouseout={() => mouseOut()}
@@ -107,7 +111,7 @@
             stroke='white'
             r='3'
           />
-          <text class='stad-text' style='fill:#35575A' font-size='9' y='1.32em' text-anchor='middle'>
+          <text class='stad-text' style='fill:#35575A' font-size={w/80} y='1.32em' text-anchor='middle'>
             {NLstad.Stad}
           </text>
         </g>

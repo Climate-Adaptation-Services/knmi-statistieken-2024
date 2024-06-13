@@ -12,7 +12,7 @@
   const getData = (async () => {
 		const response = await Promise.all([
       fetch('https://cartomap.github.io/nl/wgs84/provincie_2024.geojson'),
-      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/tropdagen_ref_cellen.geojson'),
+      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Punten_KNMImasker.geojson'),
       // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_laag_2050_2100.geojson'),
       // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2050HD.geojson'),
       // fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagtekort_2100HD.geojson')
