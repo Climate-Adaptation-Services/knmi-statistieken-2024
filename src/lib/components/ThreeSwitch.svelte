@@ -38,7 +38,13 @@
     <text text-anchor='end' y='0.96em' x={rectOffset-15}>Laagste</text>
     <rect fill='url(#{$scenarioSelection}-gradient)' width={rectWidth} x={rectOffset} y='5' height={rectHeight} rx='3'></rect>
     <circle class='' r={8} on:click={() => changeScenario('laag', 'hoog')} fill={($scenarioSelection === 'laag') ? '#17A3D3' : 'white'} cx={rectOffset} cy={rectHeight/2 + 5}/>
-    <circle class='' r={8} on:click={() => changeScenario('beide', 'beide')} fill={($scenarioSelection === 'beide') ? 'grey' : 'white'} cx={rectOffset+rectWidth/2} cy={rectHeight/2 + 5}/>
+    
+    <!-- <circle class='' r={8} on:click={() => changeScenario('beide', 'beide')} fill={($scenarioSelection === 'beide') ? 'grey' : 'white'} cx={rectOffset+rectWidth/2} cy={rectHeight/2 + 5}/> -->
+    <g transform='translate({rectOffset+rectWidth/2 - 12},{7}) scale(0.9)' on:click={() => changeScenario('beide', 'beide')} >
+      <path fill={($scenarioSelection === 'beide') ? 'red' : 'white'} d='M0,0, a10,10 0 1,1 20,0'/>
+      <path fill={($scenarioSelection === 'beide') ? '#17A3D3' : 'white'} d='M0,0 a10,10 0 1,0 20,0'/>
+    </g>
+
     <circle class='' r={8} on:click={() => changeScenario('hoog', 'laag')} fill={($scenarioSelection === 'hoog') ? 'red' : 'white'} cx={rectOffset+rectWidth} cy={rectHeight/2 + 5}/>
     <circle class='switchSelection' />
     <text text-anchor='middle' x={rectOffset+rectWidth/2} y='2.3em'>Beide</text>
@@ -60,7 +66,7 @@
     transition: all 1s;
   }
 
-  circle{
+  circle, path{
     /* -webkit-filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .3)); */
     filter: drop-shadow( 0px 0px 10px rgba(0, 0, 0, 1));
     cursor:pointer;
