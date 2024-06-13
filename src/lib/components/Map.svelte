@@ -61,7 +61,7 @@
       <strong style='font-size:14px; color:black'>bij scenario </strong>
       {$periodSelection}
     </h3>
-    <p style='font-style:italic; font-size:14px'>Pas locatie aan op de kaart</p>
+    <!-- <p style='font-style:italic; font-size:14px'>Pas locatie aan op de kaart</p> -->
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>

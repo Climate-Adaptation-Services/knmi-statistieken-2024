@@ -1,4 +1,6 @@
 <script>
+  import ThreeSwitch from "./ThreeSwitch.svelte";
+  
   export let yScale;
   export let xScale;
   export let h
@@ -7,10 +9,11 @@
   export let areaMouseOut
   export let margin
 
+
 </script>
 
 <g transform='translate({0},{h+margin.top+70})' font-size='16'>
-  <rect width={300} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
+  <rect width={600} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
   <g transform='translate({58},0)'>
     <g transform='translate(0,10)'>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>
@@ -34,7 +37,10 @@
       <text font-size='12' x='65' y='0.32em'>Jaar op jaar variatie (90% band)</text>
     </g>
   </g>
-  
+  <!-- <h3>Toon scenario grafiek</h3>
+  <div class='switch-div'> -->
+    <ThreeSwitch {w}/>
+  <!-- </div> -->
 </g>
 
 
@@ -48,6 +54,10 @@
 
   .legend-text-ref{
     fill:black;
+  }
+
+  .switch-div{
+    width:100%;
   }
 
 </style>

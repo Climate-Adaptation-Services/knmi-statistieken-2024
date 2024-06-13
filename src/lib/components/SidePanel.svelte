@@ -4,7 +4,6 @@
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
   import Select from 'svelte-select'
-  import ThreeSwitch from './ThreeSwitch.svelte';
 
   export let w;
   export let h;
@@ -98,10 +97,7 @@
   <div class='selection-div'>
     <Select items={period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
   </div>
-  <h3>Toon scenario grafiek</h3>
-  <div class='switch-div'>
-    <ThreeSwitch {w}/>
-  </div>
+  <h3><strong class='step'>4</strong> Pas locatie aan op kaart</h3>
 </div>
 
 
@@ -128,7 +124,7 @@
     color:white;
     width:100%;
     text-align:center;
-    margin-bottom:10px;
+    margin:30px 0px 10px 0px;
   }
 
   .themas{
@@ -155,10 +151,6 @@
 
   .selection-div{
     width:200px
-  }
-
-  .switch-div{
-    width:100%;
   }
 
   .step{

@@ -21,19 +21,20 @@
   <defs>
     <linearGradient id="laag-gradient">
       <stop offset="0%" stop-color="#17A3D3" />
-      <stop offset="35%" stop-color="white" />
+      <stop offset="35%" stop-color="lightgrey" />
     </linearGradient>
     <linearGradient id="hoog-gradient">
-      <stop offset="65%" stop-color="white" />
+      <stop offset="65%" stop-color="lightgrey" />
       <stop offset="100%" stop-color="red" />
     </linearGradient>
     <linearGradient id="beide-gradient">
-      <stop offset="30%" stop-color="white" />
+      <stop offset="30%" stop-color="lightgrey" />
       <stop offset="50%" stop-color="grey" />
-      <stop offset="70%" stop-color="white" />
+      <stop offset="70%" stop-color="lightgrey" />
     </linearGradient>
   </defs>
-  <g class='three-switch' style='fill:white' transform='translate({w/2 - 100},0)'>
+  <g class='three-switch' style='fill:#35575A' transform='translate({w/2 - 100},50)'>
+    <text x={33} y={-20} style='font-size:16px'>Highlight scenario</text>
     <text text-anchor='end' y='0.96em' x={rectOffset-15}>Laagste</text>
     <rect fill='url(#{$scenarioSelection}-gradient)' width={rectWidth} x={rectOffset} y='5' height={rectHeight} rx='3'></rect>
     <circle class='' r={8} on:click={() => changeScenario('laag', 'hoog')} fill={($scenarioSelection === 'laag') ? '#17A3D3' : 'white'} cx={rectOffset} cy={rectHeight/2 + 5}/>
@@ -47,7 +48,7 @@
 
 <style>
   .three-switch text{
-    fill:white;
+    fill:#35575A;
     font-size: 14px;
   }
 
