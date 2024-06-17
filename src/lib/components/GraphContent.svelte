@@ -3,8 +3,9 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, scenarioSelection } from '$lib/stores';
+  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, scenarioSelection, graphHover } from '$lib/stores';
   import GraphLegend from './GraphLegend.svelte';
+  import ThreeSwitch from './ThreeSwitch.svelte';
 
   export let xScale;
   export let yScale;
@@ -67,6 +68,9 @@
     d3.selectAll('.rough g g').style('opacity', '0.2')
   })
 
+  function mouseOverGraph(period){graphHover.set(period)}
+  function mouseOutGraph(){graphHover.set(null)}
+
 </script>
 
 <g class='graph-content'>
@@ -114,9 +118,9 @@
                   : 'red'} 
               r='4' stroke='none'/>
             {/if}
-            {#if $scenarioSelection === datalist[0]}
+            {#if $scenarioSelection === datalist[0] || $graphHover === circleData[0]}
               <text style='fill:{([0,3,4].includes(i)) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
-              text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={(circleData[0] === 'Huidig klimaat') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
+              text-anchor={(circleData[0] === 'Huidig klimaat') ? '' : 'end'} dx={([0,3,4].includes(i)) ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
             {/if}
           </g>
         {/each}
@@ -132,6 +136,11 @@
       <circle cx={xScale($periodName)} cy={yScale($indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection])} r='5' fill='none' stroke='grey' stroke-width='3'/>
     {/if}
   </g>
+</g>
+<g class='hover-rects'>
+  {#each xScale.domain() as period}
+    <rect fill='black' x={xScale(period)-25} y={0} height={h} width='50' fill-opacity='0' on:mouseover={() => mouseOverGraph(period)}  on:mouseout={() => mouseOutGraph()}/>
+  {/each}
 </g>
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
 <g>

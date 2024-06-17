@@ -8,6 +8,7 @@ export const colorScale = writable(null)
 export const gridHover = writable(null)
 export const periodSelection = writable('ref')
 export const scenarioSelection = writable('beide')
+export const graphHover = writable('null')
 export const themeSelection = writable('Hitte')
 
 export const periodName = derived(
