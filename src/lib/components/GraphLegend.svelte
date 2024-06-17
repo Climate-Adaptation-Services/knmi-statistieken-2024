@@ -1,5 +1,7 @@
 <script>
   import ThreeSwitch from "./ThreeSwitch.svelte";
+  import { scenarioSelection } from "$lib/stores";
+  import { selectAll } from "d3";
   
   export let yScale;
   export let xScale;
@@ -9,18 +11,30 @@
   export let areaMouseOut
   export let margin
 
+  function mouseOverScenario(scenario, otherscenario){
+    scenarioSelection.set(scenario)
+    selectAll('.scenario-laag, .scenario-hoog').style('opacity', 1)
+    // selectAll('.scenario-' + scenario).raise()
+    selectAll('.scenario-' + otherscenario).style('opacity', 0.2)
+  }
+
+  function mouseOutScenario(){
+    scenarioSelection.set('beide')
+    selectAll('.scenario-laag, .scenario-hoog').style('opacity', 1)
+  }
+
 
 </script>
 
 <g transform='translate({0},{h+margin.top+70})' font-size='16'>
-  <rect width={600} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
+  <rect width={300} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
   <g transform='translate({58},0)'>
-    <g transform='translate(0,10)'>
+    <g transform='translate(0,10)' on:mouseover={() => mouseOverScenario('hoog', 'laag')} on:mouseout={() => mouseOutScenario()}>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='red'/>
     </g>
-    <g transform='translate(0,40)'>
+    <g transform='translate(0,40)' on:mouseover={() => mouseOverScenario('laag', 'hoog')} on:mouseout={() => mouseOutScenario()}>
       <text class='legend-text-laag' fill='#17A3D3' cursor='default'>Laagste scenario</text>
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
@@ -39,7 +53,7 @@
   </g>
   <!-- <h3>Toon scenario grafiek</h3>
   <div class='switch-div'> -->
-    <ThreeSwitch {w}/>
+    <!-- <ThreeSwitch {w}/> -->
   <!-- </div> -->
 </g>
 

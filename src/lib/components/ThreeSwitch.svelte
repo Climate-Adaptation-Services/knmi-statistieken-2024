@@ -40,7 +40,7 @@
     <circle class='' r={8} on:click={() => changeScenario('laag', 'hoog')} fill={($scenarioSelection === 'laag') ? '#17A3D3' : 'white'} cx={rectOffset} cy={rectHeight/2 + 5}/>
     
     <!-- <circle class='' r={8} on:click={() => changeScenario('beide', 'beide')} fill={($scenarioSelection === 'beide') ? 'grey' : 'white'} cx={rectOffset+rectWidth/2} cy={rectHeight/2 + 5}/> -->
-    <g transform='translate({rectOffset+rectWidth/2 - 12},{7}) scale(0.9)' on:click={() => changeScenario('beide', 'beide')} >
+    <g transform='translate({rectOffset+rectWidth/2 - 10},{7}) scale(0.9)' on:click={() => changeScenario('beide', 'beide')} >
       <path fill={($scenarioSelection === 'beide') ? 'red' : 'white'} d='M0,0, a10,10 0 1,1 20,0'/>
       <path fill={($scenarioSelection === 'beide') ? '#17A3D3' : 'white'} d='M0,0 a10,10 0 1,0 20,0'/>
     </g>
