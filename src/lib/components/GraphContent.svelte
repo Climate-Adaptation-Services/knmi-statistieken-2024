@@ -118,7 +118,7 @@
                   : 'red'} 
               r='4' stroke='none'/>
             {/if}
-            {#if ($scenarioSelection === datalist[0] || $graphHover === circleData[0]) && !([0,3,4].includes(i) && datalist[0] === 'laag') }
+            {#if ($scenarioSelection === datalist[0] || $graphHover === circleData[0]) && (!([0,3,4].includes(i) && datalist[0] === 'laag') || $scenarioSelection === 'laag') }
               <text style='fill:{([0,3,4].includes(i)) ? 'black' : (datalist[0] === 'laag') ? '#17A3D3' : 'red'}'
               text-anchor={(datalist[0] === 'hoog') ? '' : 'end'} dx={(datalist[0] === 'hoog') ? '0.5em' : '-0.5em'} dy={'-0.4em'}>{Math.round(circleData[1])}</text>
             {/if}
