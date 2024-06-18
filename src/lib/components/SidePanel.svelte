@@ -58,10 +58,13 @@
       { value: '2050hoog', label: 'Klimaat 2050 hoog'},
       { value: '2100hoog', label: 'Klimaat 2100 hoog'}
   ];
+
+  const themeImageOffset = 10
+  $: themeImageSize = (w - 5*themeImageOffset)/4
 </script>
 
 {#if w}
-  <svg>
+  <svg class='roughsvg'>
     <g class='rough-sidepanel' bind:this={svgElement}></g>
       <rect width={w} height={h} fill='#35575A'/>
 
@@ -77,18 +80,24 @@
 <div class='sidepanel-content'>
   <h3><strong class='step'>1</strong> Selecteer thema</h3>
   <div class='themas'>
-    {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th}
-      <div class='thema'>
-        <img src={'/images/' + th + '.png'} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => themeSelection.set(th)}/>
-        {#if $themeSelection === th}
-          <p>{th}</p>
-        {/if}
-      </div>
-    {/each}
+    <svg>
+      {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
+        <g class='thema' transform='translate({themeImageOffset+(themeImageOffset+themeImageSize)*i},{0})'>
+          <circle r={themeImageSize/2} cx={themeImageSize/2} cy={themeImageSize/2} fill='white'/>
+          <image href={'/images/' + th + '.png'} width={themeImageSize} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => themeSelection.set(th)}/>
+          {#if $themeSelection === th}
+            <text>{th}</text>
+          {/if}
+          </g>
+      {/each}
+    </svg>
+
+
   </div>
   <h3><strong class='step'>2</strong> Selecteer indicator</h3>
   <div class='selection-div'>
     <Select items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChangeIndicator}/>
+
   </div>
   <!-- {#if $indicatorSelection === 'tropischedagen'}
     <p style='color:white; padding:20px; font-size:11.5px'>De grafieken tonen het gemiddelde aantal tropische dagen per jaar in huidige klimaat (1990-2020) en voor het klimaat rond 2050 en 2100 (waarden voor het laagste (Ln) en hoogste (Hd) KNMI’23 klimaatscenario). We spreken in Nederland van een tropische dag als de maximumtemperatuur 30 °C of hoger is. Door de temperende werking van de zee komen tropische dagen aan de kust minder vaak voor dan in het binnenland. Het hoogste aantal tropische dagen worden in het zuidoosten van ons land behaald. In de toekomst zal het aantal tropische dagen overal in Nederland stijgen. Tropische dagen zorgen vaak voor hittestress, met name bij ouderen en zieken. Ook bij anderen kan hittestress optreden wanneer men lang buiten in de zon is (bijv. bij openlucht muziek festivals) en/of bij grote fysieke inspanningen (bijv. tijdens de Nijmeegse vierdaagse).</p>
@@ -103,14 +112,17 @@
 
 <style>
 
-  svg{
-    width:100%;
-    height:100%;
+  .roughsvg{
     position: fixed;
     left:0;
     top:0;
     filter: drop-shadow(rgb(0,0,0,0.4) 1rem 0.5rem 10px);
     z-index: -1000;
+  }
+
+  svg{
+    width:100%;
+    height:100%;
   }
 
   .sidepanel-content{
@@ -128,8 +140,8 @@
   }
 
   .themas{
-    width:90%;
-    margin: 0px 5% 0px 5%;
+    width:100%;
+    /* margin: 0px 5% 0px 5%; */
   }
 
   .thema{
@@ -141,12 +153,6 @@
   .thema p{
     text-align:center;
     color:white;
-  }
-
-  img{
-    width:100%;
-    background-color: #fcfbf2;
-    border-radius: 100%;
   }
 
   .selection-div{

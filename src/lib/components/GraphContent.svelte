@@ -3,7 +3,7 @@
   import * as d3 from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, graphHover } from '$lib/stores';
+  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, graphHover, scenarioSelection } from '$lib/stores';
   import GraphLegend from './GraphLegend.svelte';
   // import ThreeSwitch from './ThreeSwitch.svelte';
   import GradientDefs from './GradientDefs.svelte';
@@ -102,6 +102,7 @@
 </g>
 
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
+
 
 <GraphLegend {xScale} {yScale} {w} h={innerHeight} {margin} />
 
