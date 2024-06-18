@@ -28,29 +28,22 @@
     periodSelection.set(e.detail.value)
   }
   
-  let svgElement;
-  // afterUpdate(() => {
-  //   select('.rough-sidepanel g').remove()
-  //   const rc = rough.svg(svgElement);
-
-  //   // a 3 10 0 0 1 ${w*0.25} ${h*0.5}
-  //   // a 3 10 0 0 0 ${w*0.25} ${h*0.5}
-  //   const path = rc.path(
-  //     `M0 0 l${w} 0 l0 ${h}
-
-  //     l${-2*w} 0 z`,
-  //     { 
-  //       roughness: 0.3, 
-  //       fill: '#35575A', 
-  //       stroke: 'none',
-  //       fillStyle:'cross-hatch',
-  //       fillWeight: 1,
-  //       hachureGap: 2.2,
-  //       hachureAngle: 45,
-  //       strokeWidth: 4
-  //     });
-  //   svgElement.appendChild(path);
-  // })
+  afterUpdate(() => {
+    // ik weet niet waarom deze timeout nodig is
+    setTimeout(() => {
+      const el_sel = document.getElementsByClassName('selection-div')[0]
+      const box_sel = el_sel.getBoundingClientRect()
+      select('.more-info')
+        .style('left', box_sel.right-35 + 'px')
+        .style('top', box_sel.top-12 + 'px')
+        .style('visibility', 'visible')
+      const el_moreinfo = document.getElementsByClassName('more-info')[0]
+      const box_moreinfo = el_moreinfo.getBoundingClientRect()
+      select('.indicator-info')
+        .style('left', box_moreinfo.right+15 + 'px')
+        .style('top', box_moreinfo.top-50 + 'px')
+    }, 30);
+  })
 
   const period_options = [
       { value: 'ref', label: 'Huidig klimaat'},
@@ -67,19 +60,18 @@
 
 {#if w}
   <svg class='roughsvg'>
-    <g class='rough-sidepanel' bind:this={svgElement}></g>
-      <rect width={w} height={h} fill='#35575A'/>
-
-    <!-- <path fill='#35575A' style='filter: drop-shadow(rgb(0,0,0,0.4) 1rem 0.5rem 10px)'
-      d="M0 0 l{w-50} 0
-      a 4 10 0 0 1 {w*0.25} {h*0.5}
-      a 4 10 0 0 0 {w*0.25} {h*0.5}
-      l{-2*w} 0 z"
-    /> -->
+    <g class='rough-sidepanel'></g>
+    <rect width={w} height={h} fill='#35575A'/>
   </svg>
 {/if}
 
 <div class='sidepanel-content'>
+  <p class='more-info' style='cursor:default'>?</p>
+  <div class='indicator-info'>
+    <p style='padding:3px 10px 3px 10px; border-radius:50px; color:white;background-color:#36575B; float:left'><strong>{$indicatorMetaData.Indicator}</strong></p>
+    <hr width='100%'>
+    <p>{$indicatorMetaData.Omschrijving}</p>
+  </div>
   <h3><strong class='step'>1</strong> Selecteer thema</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
@@ -93,13 +85,10 @@
           </g>
       {/each}
     </svg>
-
-
   </div>
   <h3><strong class='step'>2</strong> Selecteer indicator</h3>
   <div class='selection-div'>
     <Select items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={onChangeIndicator}/>
-    
   </div>
   <!-- {#if $indicatorSelection === 'Tropische dagen'}
     <p style='color:white; padding:20px; font-size:11.5px'>{tropdagtekst.slice(0,200) + '...'}</p>
@@ -166,6 +155,32 @@
     border-radius:50px;
     color:#35575A;
     font-size:20px;
+  }
+
+  .more-info{
+    position:fixed;
+    background-color: #35575A;
+    padding:1px 8px 1px 8px;
+    border-radius:50px;
+    color:white;
+    font-size:20px;
+    z-index: 1000;
+    visibility: hidden;
+  }
+
+  .indicator-info{
+    visibility:hidden;
+    position: fixed;
+    width:300px;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    padding:10px 20px 10px 20px;
+  }
+
+  .more-info:hover ~ .indicator-info{
+    visibility:visible;
   }
   
 </style>
