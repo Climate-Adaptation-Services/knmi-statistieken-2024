@@ -60,7 +60,7 @@
   ];
 
   const themeImageOffset = 10
-  $: themeImageSize = (w - 5*themeImageOffset)/4
+  $: themeImageSize = (w - 7*themeImageOffset)/4
 </script>
 
 {#if w}
@@ -80,13 +80,13 @@
 <div class='sidepanel-content'>
   <h3><strong class='step'>1</strong> Selecteer thema</h3>
   <div class='themas'>
-    <svg>
+    <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
-        <g class='thema' transform='translate({themeImageOffset+(themeImageOffset+themeImageSize)*i},{0})'>
+        <g class='thema' transform='translate({themeImageOffset*2+(themeImageOffset+themeImageSize)*i},{0})' opacity={($themeSelection !== th) ? '0.4' : '1'}>
           <circle r={themeImageSize/2} cx={themeImageSize/2} cy={themeImageSize/2} fill='white'/>
           <image href={'/images/' + th + '.png'} width={themeImageSize} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => themeSelection.set(th)}/>
           {#if $themeSelection === th}
-            <text>{th}</text>
+            <text text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='fill:white; font-size:14px'>{th}</text>
           {/if}
           </g>
       {/each}
@@ -122,7 +122,6 @@
 
   svg{
     width:100%;
-    height:100%;
   }
 
   .sidepanel-content{
