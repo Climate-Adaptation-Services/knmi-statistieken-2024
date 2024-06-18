@@ -111,7 +111,7 @@
             stroke='white'
             r='3'
           />
-          <text class='stad-text' style='fill:#35575A' font-size={w/80} y='1.32em' text-anchor='middle'>
+          <text class='stad-text' style='fill:#35575A' font-size={w/60} y='1.32em' text-anchor='middle'>
             {NLstad.Stad}
           </text>
         </g>
