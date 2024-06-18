@@ -11,6 +11,13 @@ export const scenarioSelection = writable('beide')
 export const graphHover = writable('null')
 export const themeSelection = writable('Hitte')
 
+export const indicatorSelectionMetaData = derived(
+  [indicatorMetaData, indicatorSelection],
+  ([$indicatorMetaData, $indicatorSelection]) =>{
+    return $indicatorMetaData.filter((ind) => ind['Indicator'] === $indicatorSelection)[0]
+  }
+)
+
 export const periodName = derived(
   [periodSelection],
   ([$periodSelection]) => ($periodSelection === 'ref')

@@ -1,5 +1,5 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData } from '$lib/stores';
   import { select, scaleLinear } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
@@ -13,9 +13,8 @@
   function onChangeIndicator(e){
     indicatorSelection.set(e.detail.value)
 
-    const metadata = $indicatorMetaData.filter((ind) => ind['Indicator'] === e.detail.value)[0]
-    const domain = metadata['y-as domein'].split(',')
-    const range = metadata['Kleuren'].split(',')
+    const domain = $indicatorSelectionMetaData['y-as domein'].split(',')
+    const range = $indicatorSelectionMetaData['Kleuren'].split(',')
     
     colorScale.set(
       scaleLinear()
@@ -27,6 +26,8 @@
   function onChangePeriod(e){
     periodSelection.set(e.detail.value)
   }
+
+  $: console.log($indicatorSelectionMetaData)
   
   afterUpdate(() => {
     // ik weet niet waarom deze timeout nodig is
@@ -37,11 +38,12 @@
         .style('left', box_sel.right-35 + 'px')
         .style('top', box_sel.top-12 + 'px')
         .style('visibility', 'visible')
+      
       const el_moreinfo = document.getElementsByClassName('more-info')[0]
       const box_moreinfo = el_moreinfo.getBoundingClientRect()
       select('.indicator-info')
         .style('left', box_moreinfo.right+15 + 'px')
-        .style('top', box_moreinfo.top-50 + 'px')
+        .style('top', box_moreinfo.top-80 + 'px')
     }, 30);
   })
 
@@ -68,9 +70,9 @@
 <div class='sidepanel-content'>
   <p class='more-info' style='cursor:default'>?</p>
   <div class='indicator-info'>
-    <p style='padding:3px 10px 3px 10px; border-radius:50px; color:white;background-color:#36575B; float:left'><strong>{$indicatorMetaData.Indicator}</strong></p>
+    <p style='padding:3px 10px 3px 10px; border-radius:50px; color:white;background-color:#36575B; float:left'><strong>{$indicatorSelectionMetaData.Indicator}</strong></p>
     <hr width='100%'>
-    <p>{$indicatorMetaData.Omschrijving}</p>
+    <p>{$indicatorSelectionMetaData.Omschrijving}</p>
   </div>
   <h3><strong class='step'>1</strong> Selecteer thema</h3>
   <div class='themas'>
@@ -171,7 +173,7 @@
   .indicator-info{
     visibility:hidden;
     position: fixed;
-    width:300px;
+    width:450px;
     background-color: white;
     z-index: 1000;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
