@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
 
@@ -58,8 +58,8 @@
   <div class='title-white-bg'>
     <h3>
       {$indicatorSelection} 
-      <strong style='font-size:14px; color:black'>bij scenario </strong>
-      {$periodSelection}
+      <strong style='font-size:14px; color:black'>bij </strong>
+      {$period_options.filter(po => po.value === $periodSelection)[0].label}
     </h3>
     <!-- <p style='font-style:italic; font-size:14px'>Pas locatie aan op de kaart</p> -->
   </div>

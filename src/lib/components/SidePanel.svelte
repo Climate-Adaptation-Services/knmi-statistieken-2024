@@ -1,5 +1,5 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options } from '$lib/stores';
   import { select, scaleLinear } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
@@ -53,13 +53,6 @@
     }, 350);
   })
 
-  const period_options = [
-      { value: 'ref', label: 'Huidig klimaat'},
-      { value: '2050laag', label: '2050/2100 laag'},
-      { value: '2050hoog', label: '2050 hoog'},
-      { value: '2100hoog', label: '2100 hoog'}
-  ];
-
   const themeImageOffset = 10
   $: themeImageSize = (w - 7*themeImageOffset)/4
 
@@ -99,7 +92,7 @@
   </div>
   <h3><strong class='step'>3</strong> Selecteer scenario</h3>
   <div class='selection-div'>
-    <Select items={period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
+    <Select items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
   </div>
   <h3><strong class='step'>4</strong> Pas locatie aan op kaart</h3>
 </div>

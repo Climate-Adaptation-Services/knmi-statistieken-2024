@@ -1,4 +1,4 @@
-import { writable, derived } from "svelte/store"
+import { writable, derived, readable } from "svelte/store"
 
 export const indicatorSelection = writable('Tropische dagen');
 export const indicatorData = writable(null)
@@ -10,6 +10,12 @@ export const periodSelection = writable('ref')
 export const scenarioSelection = writable('beide')
 export const graphHover = writable('null')
 export const themeSelection = writable('Hitte')
+export const period_options = readable([
+  { value: 'ref', label: 'Huidig klimaat'},
+  { value: '2050laag', label: '2050/2100 laag'},
+  { value: '2050hoog', label: '2050 hoog'},
+  { value: '2100hoog', label: '2100 hoog'}
+]);
 
 export const indicatorSelectionMetaData = derived(
   [indicatorMetaData, indicatorSelection],
