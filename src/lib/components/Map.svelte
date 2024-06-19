@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-  import { color, geoMercator, geoPath, scaleLinear, select } from 'd3';
+  import { color, geoMercator, geoPath, scaleLinear, select, selectAll } from 'd3';
   import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
@@ -50,6 +50,14 @@
 
   function mouseOut(){
     gridHover.set(null)
+  }
+
+  $: if($indicatorSelection){
+    
+    selectAll('.rasterblokje')
+      .style('opacity', 0)
+      .transition('trans2').duration(1500).delay((d,i) => 30+Math.random()*i*5)
+      .style('opacity', 1)
   }
 
 </script>
