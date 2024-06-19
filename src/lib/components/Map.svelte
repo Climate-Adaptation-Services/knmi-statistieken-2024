@@ -1,6 +1,5 @@
 <script>
 // @ts-nocheck
-
   import { color, geoMercator, geoPath, scaleLinear, select, selectAll } from 'd3';
   import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options, circleFeatures } from '$lib/stores';
   import { afterUpdate, onMount } from 'svelte';
@@ -14,11 +13,11 @@
   const provincies = datajson[0]
   const cellen = datajson[1];
 
-  circleFeatures.set(cellen.features)
 
   console.log('datajson', datajson)
 
   const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
+  circleFeatures.set(cellen.features)
 
   const legendMargin = 50
 
@@ -48,22 +47,69 @@
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
     gridSelection.set(feature.properties[gridcode])
+
+    selectAll('.rasterblokje').attr('stroke', 'white').attr('stroke-width', '1')
+    select('.id-' + feature.properties[gridcode]).attr('stroke', 'cyan').attr('stroke-width', '3')
   }
 
   function mouseOver(feature){
     gridHover.set(feature.properties[gridcode])
     select('.id-' + $gridHover).raise()
+    if(feature.properties[gridcode] !== $gridSelection){
+      select('.id-' + feature.properties[gridcode]).attr('stroke', 'grey')
+    }
   }
 
-  function mouseOut(){
+  function mouseOut(feature){
     gridHover.set(null)
+    if(feature.properties[gridcode] !== $gridSelection){
+      select('.id-' + feature.properties[gridcode]).attr('stroke', 'white')
+    }
   }
 
+  let circles
   onMount(() => {
-    selectAll('.rasterblokje')
-      .data(cellen.features)
-      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+    const circlesAndRects = select(".rasterdata")
+
+    circles = circlesAndRects.selectAll('circle')
+      .data($circleFeatures)
+      .enter()
+      .append("circle")
+        .attr("class", feature => 'rasterblokje ' + 'id-' + feature.properties[gridcode])
+        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+        .attr('cx', feature => projection(feature.geometry.coordinates)[0])
+        .attr('cy', feature => projection(feature.geometry.coordinates)[1])
+        .attr('r', w/110)
+        .attr('stroke', 'white')
+        .attr('stroke-width', '1')
+        .style('pointer-events', 'none')
+    
+    circlesAndRects.selectAll('rect')
+    .data($circleFeatures)
+      .enter()
+      .append("rect")
+        .attr("class", 'hoverRect')
+        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+        .attr('x', feature => projection(feature.geometry.coordinates)[0] - circleDistanceX/2 - 2)
+        .attr('y', feature => projection(feature.geometry.coordinates)[1] - circleDistanceY/2 - 2)
+        .attr('width', circleDistanceX+4)
+        .attr('height', circleDistanceY+4)
+        .attr('stroke', 'black')
+        .attr('stroke-opacity', '0')
+        .attr('fill-opacity', '0')
+        .on('click', (e, feature) => click(feature))
+        .on('mouseover', (e,feature) => mouseOver(feature))
+        .on('mouseout', (e, feature) => mouseOut(feature))
   })
+
+  $: if($indicatorSelection && circles){
+    circles
+      .transition('1').duration(500).delay((d,i) => Math.random()*i*2)
+      .style('opacity', 0.1)
+      .transition('trans2').duration(1000).delay((d,i) => Math.random()*i*5)
+      .style('opacity', 1)
+      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+  }
 
 </script>
 
@@ -95,40 +141,7 @@
           />
         {/each}
       </g>
-      <g class='rasterdata'>
-        {#each cellen.features as feature, i}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <circle
-            cx={projection(feature.geometry.coordinates)[0]}
-            cy={projection(feature.geometry.coordinates)[1]}
-            r={w/110}
-            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection])}
-            class={'rasterblokje ' + 'id-' + feature.properties[gridcode]}
-            stroke={(feature.properties[gridcode] == $gridSelection)
-              ? 'cyan' 
-              : (feature.properties[gridcode] == $gridHover)
-                ? 'grey'
-                : 'white'}
-            stroke-width={(feature.properties[gridcode] == $gridSelection) ? '3' : '1'}
-            pointer-events='none'
-          />  
-          <rect 
-            class='hoverRect' 
-            x={projection(feature.geometry.coordinates)[0] - circleDistanceX/2 - 2}
-            y={projection(feature.geometry.coordinates)[1] - circleDistanceY/2 - 2}
-            width={circleDistanceX+4}
-            height={circleDistanceY+4}
-            fill-opacity='0'
-            stroke='black'
-            stroke-opacity='0'
-            on:click={() => click(feature)}
-            on:mouseover={() => mouseOver(feature)}
-            on:mouseout={() => mouseOut()}
-          />
-
-        {/each}
-      </g>
+      <g class='rasterdata'></g>
       {#each NLsteden as NLstad, i}
         <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
           <circle
@@ -155,10 +168,6 @@
 
   .NLstad{
     pointer-events: none;
-  }
-
-  .rasterblokje{
-    /* transition: all 2s; */
   }
 
   .stad-text{

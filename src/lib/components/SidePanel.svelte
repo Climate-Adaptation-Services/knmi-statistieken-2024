@@ -24,32 +24,17 @@
       .domain(domain)
       .range(range)
     )
-    changeCircleFill()
   }
 
-  function changeCircleFill(){
-    console.log($indicatorSelection, $periodSelection)
-
-
-    // selectAll('.rasterblokje')
-    //   .data($circleFeatures)
-      // .transition('1').duration(500)
-      // .style('opacity', 0.1)
-      // .transition('trans2').duration(1000).delay((d,i) => Math.random()*i*5)
-      // .style('opacity', 1)
-      // .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
-  }
 
   function onChangePeriod(e){
     periodSelection.set(e.detail.value)
-    changeCircleFill()
   }
 
   function onChangeTheme(th){
     themeSelection.set(th)
     indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {return {label:ind['Indicator'], value:ind['Indicator']}})
     onChangeIndicator(indicatorOptions[0].label)
-    changeCircleFill()
   }
 
   $: console.log($indicatorSelectionMetaData)

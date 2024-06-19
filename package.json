@@ -24,6 +24,7 @@
 		"@turf/rewind": "^6.5.0",
 		"@turf/transform-rotate": "^6.5.0",
 		"d3": "^7.8.5",
+		"lodash": "^4.17.21",
 		"roughjs": "^4.6.6",
 		"svelte-select": "^5.8.3"
 	}
