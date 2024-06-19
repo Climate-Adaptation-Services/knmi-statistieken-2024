@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { color, geoMercator, geoPath, scaleLinear, select, selectAll } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options, circleFeatures } from '$lib/stores';
   import { afterUpdate, onMount } from 'svelte';
   import Legend from './Legend.svelte';
 
@@ -13,6 +13,8 @@
 
   const provincies = datajson[0]
   const cellen = datajson[1];
+
+  circleFeatures.set(cellen.features)
 
   console.log('datajson', datajson)
 
@@ -63,16 +65,6 @@
       .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
   })
 
-  $: if($indicatorSelection){
-    selectAll('.rasterblokje')
-      .data(cellen.features)
-      .transition('trans1').duration(500).delay((d,i) => 30+Math.random()*i*2)
-      .style('opacity', 0)
-      .transition('trans2').duration(1000).delay((d,i) => 30+Math.random()*i*3)
-      .style('opacity', 1)
-      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
-  }
-
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
@@ -111,6 +103,7 @@
             cx={projection(feature.geometry.coordinates)[0]}
             cy={projection(feature.geometry.coordinates)[1]}
             r={w/110}
+            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection])}
             class={'rasterblokje ' + 'id-' + feature.properties[gridcode]}
             stroke={(feature.properties[gridcode] == $gridSelection)
               ? 'cyan' 

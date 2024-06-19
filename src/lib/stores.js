@@ -1,5 +1,6 @@
 import { writable, derived, readable } from "svelte/store"
 
+export const circleFeatures = writable(null)
 export const indicatorSelection = writable('Tropische dagen');
 export const indicatorData = writable(null)
 export const indicatorMetaData = writable(null)
