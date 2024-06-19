@@ -3,7 +3,7 @@
 
   import { color, geoMercator, geoPath, scaleLinear, select, selectAll } from 'd3';
   import { colorScale, gridSelection, periodSelection, indicatorData, gridHover, indicatorSelection, periodName, indicatorMetaData, period_options } from '$lib/stores';
-  import { afterUpdate } from 'svelte';
+  import { afterUpdate, onMount } from 'svelte';
   import Legend from './Legend.svelte';
 
   export let datajson
@@ -52,12 +52,20 @@
     gridHover.set(null)
   }
 
-  $: if($indicatorSelection){
-    
+  onMount(() => {
     selectAll('.rasterblokje')
+      .data(cellen.features)
+      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+  })
+
+  $: if($indicatorSelection){
+    selectAll('.rasterblokje')
+      .data(cellen.features)
+      .transition('trans1').duration(500).delay((d,i) => 30+Math.random()*i*2)
       .style('opacity', 0)
-      .transition('trans2').duration(1500).delay((d,i) => 30+Math.random()*i*5)
+      .transition('trans2').duration(1000).delay((d,i) => 30+Math.random()*i*3)
       .style('opacity', 1)
+      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
   }
 
 </script>
@@ -99,7 +107,6 @@
             cy={projection(feature.geometry.coordinates)[1]}
             r={w/110}
             class={'rasterblokje ' + 'id-' + feature.properties[gridcode]}
-            fill={$colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection])}
             stroke={(feature.properties[gridcode] == $gridSelection)
               ? 'cyan' 
               : (feature.properties[gridcode] == $gridHover)
