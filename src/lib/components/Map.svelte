@@ -28,6 +28,11 @@
   
   $: path = geoPath(projection);
 
+  $: circleDistanceX = projection(cellen.features[1].geometry.coordinates)[0] - projection(cellen.features[0].geometry.coordinates)[0]
+  $: circleDistanceY = projection(cellen.features[1].geometry.coordinates)[1] - projection(cellen.features[2].geometry.coordinates)[1]
+
+  $: console.log(circleDistanceX, circleDistanceY)
+
   const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Tropische dagen')[0]
 
   colorScale.set(
@@ -113,10 +118,22 @@
                 ? 'grey'
                 : 'white'}
             stroke-width={(feature.properties[gridcode] == $gridSelection) ? '3' : '1'}
+            pointer-events='none'
+          />  
+          <rect 
+            class='hoverRect' 
+            x={projection(feature.geometry.coordinates)[0] - circleDistanceX/2 - 2}
+            y={projection(feature.geometry.coordinates)[1] - circleDistanceY/2 - 2}
+            width={circleDistanceX+4}
+            height={circleDistanceY+4}
+            fill-opacity='0'
+            stroke='black'
+            stroke-opacity='0'
             on:click={() => click(feature)}
             on:mouseover={() => mouseOver(feature)}
             on:mouseout={() => mouseOut()}
-          />      
+          />
+
         {/each}
       </g>
       {#each NLsteden as NLstad, i}
