@@ -59,6 +59,10 @@
         .on('click', (e, feature) => click(feature))
         .on('mouseover', (e,feature) => mouseOver(feature))
         .on('mouseout', (e, feature) => mouseOut(feature))
+    
+    
+    select('.id-' + $gridSelection).attr('stroke', 'cyan').attr('stroke-width', '3')
+
   })
 
   // dit is om responsive te zijn bij screen resize

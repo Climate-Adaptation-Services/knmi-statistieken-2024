@@ -146,7 +146,7 @@
   }
 
   .selection-div{
-    width:200px
+    width:250px
   }
 
   .step{
