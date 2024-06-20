@@ -10,7 +10,6 @@
 
   const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
 
-
   let indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {return {label:ind['Indicator'], value:ind['Indicator']}})
 
   function onChangeIndicator(indicatorName){
@@ -54,7 +53,7 @@
       select('.indicator-info')
         .style('left', box_moreinfo.right+15 + 'px')
         .style('top', box_moreinfo.top-80 + 'px')
-    }, 350);
+    }, 600);
   })
 
   const themeImageOffset = 10
@@ -86,7 +85,7 @@
           {#if $themeSelection === th}
             <text text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='fill:white; font-size:14px'>{th}</text>
           {/if}
-          </g>
+        </g>
       {/each}
     </svg>
   </div>
