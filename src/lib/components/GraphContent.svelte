@@ -1,6 +1,6 @@
 
 <script>
-  import * as d3 from 'd3';
+  import { select, selectAll, area, easeQuadOut } from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
   import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, graphHover, scenarioSelection } from '$lib/stores';
@@ -30,7 +30,7 @@
     {'period':'Klimaat 2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
 
-  const areaPath = d3.area()
+  const areaPath = area()
     .x(d => xScale(d.period))
     .y0(d => yScale(d.p5))
     .y1(d => yScale(d.p95))
@@ -55,17 +55,17 @@
   let svgElementLaag;
   let svgElementHoog;
   afterUpdate(() => {
-    d3.selectAll('.rough g g').remove()
+    selectAll('.rough g g').remove()
 
     createRoughArea(datalist_hoog, 45, 'red', svgElementHoog)
     createRoughArea(datalist_laag, -45, '#17A3D3', svgElementLaag)
 
-    d3.select('.whiterect')
+    select('.whiterect')
       // .raise()
-      .transition('ease').duration(2000).ease(d3.easeQuadOut)
+      .transition('ease').duration(2000).ease(easeQuadOut)
       .attr('x', w*1.8)
     
-    d3.selectAll('.rough g g').style('opacity', '0.2')
+    selectAll('.rough g g').style('opacity', '0.2')
   })
 
   function mouseOverGraph(period){graphHover.set(period)}

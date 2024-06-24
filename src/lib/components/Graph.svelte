@@ -1,5 +1,5 @@
 <script>
-  import * as d3 from 'd3';
+  import { scalePoint, scaleLinear, select, selectAll, axisBottom, axisLeft, max } from 'd3';
   import { afterUpdate } from 'svelte';
   import GraphContent from './GraphContent.svelte';
   import { indicatorData, indicatorSelection, indicatorSelectionMetaData } from '$lib/stores';
@@ -14,24 +14,24 @@
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
-  $: xScale = d3.scalePoint()
+  $: xScale = scalePoint()
     .domain(['Huidig klimaat', 'Klimaat 2050', 'Klimaat 2100'])
     .range([0, innerWidth])
 
-  $: yScale = d3.scaleLinear()
-    .domain([0,d3.max($indicatorData[$indicatorSelection].map(d => d['2100hoog_p95']))])
+  $: yScale = scaleLinear()
+    .domain([0,max($indicatorData[$indicatorSelection].map(d => d['2100hoog_p95']))])
     .range([innerHeight, margin.top])
     .nice()
 
-  $: xAxis = d3.axisBottom(xScale).ticks(3)
-  $: yAxis = d3.axisLeft(yScale)
+  $: xAxis = axisBottom(xScale).ticks(3)
+  $: yAxis = axisLeft(yScale)
 
-  afterUpdate(() => d3.select('.xAxis').call(xAxis), [xAxis]);
+  afterUpdate(() => select('.xAxis').call(xAxis), [xAxis]);
 
   afterUpdate(() => {
-    d3.select('.yAxis').call(yAxis)
-    d3.selectAll('.domain').attr('stroke', 'lightgrey')
-    d3.selectAll('.tick line').attr('stroke', 'lightgrey')
+    select('.yAxis').call(yAxis)
+    selectAll('.domain').attr('stroke', 'lightgrey')
+    selectAll('.tick line').attr('stroke', 'lightgrey')
   });
 
 </script>
