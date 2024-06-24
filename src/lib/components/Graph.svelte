@@ -1,8 +1,8 @@
 <script>
   import * as d3 from 'd3';
-  import { afterUpdate, onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
   import GraphContent from './GraphContent.svelte';
-  import { indicatorData, indicatorSelection } from '$lib/stores';
+  import { indicatorData, indicatorSelection, indicatorSelectionMetaData } from '$lib/stores';
 
   export let w
   export let h
@@ -49,7 +49,7 @@
       <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
       <g class='yAxis' transform='translate({0},{0})'></g>
       <g class='yAxisLabel' transform='translate({-40},{margin.top + innerHeight/2}) rotate(-90)'>
-        <text text-anchor='start'>Aantal dagen</text>
+        <text text-anchor='start'>{$indicatorSelectionMetaData['y-as titel']}</text>
       </g>
       <GraphContent {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight} {margin}/>

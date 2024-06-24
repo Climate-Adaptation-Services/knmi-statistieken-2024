@@ -1,5 +1,5 @@
 <script>
-  import { colorScale, gridHoverValue, gridSelectionValue } from "$lib/stores";
+  import { colorScale, gridHoverValue, gridSelectionValue, indicatorSelectionMetaData } from "$lib/stores";
   import { axisLeft, select, selectAll, scaleLinear, extent } from "d3";
   import { afterUpdate } from "svelte";
 
@@ -35,7 +35,7 @@
     </linearGradient>
   </defs>
   <g transform='translate({margin.left},{margin.top})'>
-    <text font-size='18' y='-15'>Aantal dagen</text>
+    <text font-size='18' y='-15'>{$indicatorSelectionMetaData['y-as titel']}</text>
     <rect x='0' y='0' width='20' stroke='black' stroke-width='0.2' height={innerHeight} fill='url(#legend-gradient)'/>
     <g class='legendAxis' transform='translate({0},{0})' style='font-size:13px'></g>
     <line y1={legendScale($gridSelectionValue)} x1='0' x2='28' y2={legendScale($gridSelectionValue)} stroke='cyan' stroke-width='4'/>

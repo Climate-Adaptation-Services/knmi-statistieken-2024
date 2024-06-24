@@ -75,7 +75,7 @@
     <hr width='100%'>
     <p>{$indicatorSelectionMetaData.Omschrijving}</p>
   </div>
-  <h3><strong class='step'>1</strong> Selecteer thema</h3>
+  <h3><strong class='step'>1</strong> Selecteer een thema</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
@@ -89,15 +89,15 @@
       {/each}
     </svg>
   </div>
-  <h3><strong class='step'>2</strong> Selecteer indicator</h3>
+  <h3><strong class='step'>2</strong> Selecteer een indicator</h3>
   <div class='selection-div'>
     <Select items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
   </div>
-  <h3><strong class='step'>3</strong> Selecteer scenario</h3>
+  <h3><strong class='step'>3</strong> Selecteer een scenario</h3>
   <div class='selection-div'>
     <Select items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
   </div>
-  <h3><strong class='step'>4</strong> Pas locatie aan op kaart</h3>
+  <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
 </div>
 
 

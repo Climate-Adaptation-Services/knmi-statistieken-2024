@@ -1,5 +1,4 @@
 <script>
-  import ThreeSwitch from "./ThreeSwitch.svelte";
   import { scenarioSelection } from "$lib/stores";
   import { selectAll } from "d3";
   
@@ -39,11 +38,11 @@
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
     </g>
-    <g class='langjarig' style='fill:grey' transform='translate(5,66)'>
+    <g class='langjarig' style='fill:grey' transform='translate(-20,66)'>
       <circle r='4'/>
       <line x2={50} stroke='grey'/>
       <circle r='4' cx='50'/>
-      <text font-size='12' x='65' y='0.32em'>Langjarig gemiddelde</text>
+      <text font-size='12' x='65' y='0.32em'>Langjarig gemiddelde (30 jaar)</text>
     </g>
     <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
       <rect width='50' height='30' fill='grey' x='0' y='-15' opacity='0.2'/>
