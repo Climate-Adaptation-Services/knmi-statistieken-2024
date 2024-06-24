@@ -17,9 +17,9 @@
   $: xScale = scalePoint()
     .domain(['Huidig klimaat', 'Klimaat 2050', 'Klimaat 2100'])
     .range([0, innerWidth])
-
+  
   $: yScale = scaleLinear()
-    .domain([0,max($indicatorData[$indicatorSelection].map(d => d['2100hoog_p95']))])
+    .domain([0,max($indicatorData[$indicatorSelection].map(d => +d['2100hoog_p95']))])
     .range([innerHeight, margin.top])
     .nice()
 

@@ -40,7 +40,7 @@ export async function load(){
     'Vorstdagen': response[4],
     'Warme dagen': response[5],
     'Zomerdagen': response[6],
-    'Aantal dagen met max temp. <= 0':response[7],
+    'Ijsdagen':response[7],
     'Aantal dagen met neerslagsom >= 15 mm':response[8],
     'Aantal dagen met neerslagsom >= 25 mm':response[9],
     'Neerslagsom jaar':response[10],
