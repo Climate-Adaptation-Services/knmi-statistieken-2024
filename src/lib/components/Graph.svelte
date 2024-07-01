@@ -50,10 +50,10 @@
   <svg class='graph-svg'>
 
     <g class='graph-g' transform='translate({margin.left},{margin.top})'>
-      <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:16px'></g>
+      <g class='xAxis' transform='translate({0},{innerHeight})' style='font-size:14px'></g>
       <g class='yAxis' transform='translate({0},{0})'></g>
-      <g class='yAxisLabel' transform='translate({-40},{margin.top + innerHeight/2}) rotate(-90)'>
-        <text text-anchor='start'>{$indicatorSelectionMetaData['y-as titel']}</text>
+      <g class='yAxisLabel' transform='translate({-35},{margin.top + innerHeight/2}) rotate(-90)'>
+        <text text-anchor='start' style='font-size:14px'>{$indicatorSelectionMetaData['y-as titel']}</text>
       </g>
       <GraphContent {xScale} {yScale} {innerHeight}
         w={innerWidth} h={innerHeight} {margin}/>

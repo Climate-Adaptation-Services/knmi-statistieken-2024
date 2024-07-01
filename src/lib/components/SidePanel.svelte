@@ -91,11 +91,11 @@
   </div>
   <h3><strong class='step'>2</strong> Selecteer een indicator</h3>
   <div class='selection-div'>
-    <Select items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
+    <Select --font-size="12px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
   </div>
   <h3><strong class='step'>3</strong> Selecteer een scenario</h3>
   <div class='selection-div'>
-    <Select items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
+    <Select --font-size="12px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
   </div>
   <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
 </div>
@@ -146,7 +146,7 @@
   }
 
   .selection-div{
-    width:250px
+    width:250px;
   }
 
   .step{
