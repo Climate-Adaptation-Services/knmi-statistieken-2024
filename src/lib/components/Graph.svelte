@@ -15,7 +15,7 @@
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
   $: xScale = scalePoint()
-    .domain(['Huidig klimaat', 'Klimaat 2050', 'Klimaat 2100'])
+    .domain(['Huidig klimaat', '2050', '2100'])
     .range([0, innerWidth])
   
   $: yScale = scaleLinear()

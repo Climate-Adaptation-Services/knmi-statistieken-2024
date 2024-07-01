@@ -21,13 +21,13 @@
 
   $: datalist_laag = [
     {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
-    {'period':'Klimaat 2050', 'median':dataSelected['2050laag'], 'p5':dataSelected['2050laag_p5'], 'p95':dataSelected['2050laag_p95']},
-    {'period':'Klimaat 2100', 'median':dataSelected['2100laag'], 'p5':dataSelected['2100laag_p5'], 'p95':dataSelected['2100laag_p95']}
+    {'period':'2050', 'median':dataSelected['2050laag'], 'p5':dataSelected['2050laag_p5'], 'p95':dataSelected['2050laag_p95']},
+    {'period':'2100', 'median':dataSelected['2100laag'], 'p5':dataSelected['2100laag_p5'], 'p95':dataSelected['2100laag_p95']}
   ]
   $: datalist_hoog = [
     {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
-    {'period':'Klimaat 2050', 'median':dataSelected['2050hoog'], 'p5':dataSelected['2050hoog_p5'], 'p95':dataSelected['2050hoog_p95']},
-    {'period':'Klimaat 2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
+    {'period':'2050', 'median':dataSelected['2050hoog'], 'p5':dataSelected['2050hoog_p5'], 'p95':dataSelected['2050hoog_p95']},
+    {'period':'2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
 
   const areaPath = area()
@@ -106,9 +106,9 @@
 <rect class='gradientrect' pointer-events='none' x={-5} y={margin.top} width={w+10} height={innerHeight-margin.top} 
   fill={($graphHover === 'Huidig klimaat') 
           ? 'url(#huidigGradient)' 
-          : ($graphHover === 'Klimaat 2050') 
+          : ($graphHover === '2050') 
             ? 'url(#2050Gradient)' 
-            : ($graphHover === 'Klimaat 2100') 
+            : ($graphHover === '2100') 
               ? 'url(#2100Gradient)' 
               : 'none'} />
 

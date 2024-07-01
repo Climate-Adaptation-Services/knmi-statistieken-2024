@@ -24,7 +24,7 @@
 
 <g class='graph-content-texts'>
   <g class='texts-laag scenario-laag'>
-    {#each ['Klimaat 2050', 'Klimaat 2100'] as periodName, i}
+    {#each ['2050', '2100'] as periodName, i}
       {#each ['p5', 'median', 'p95'] as perc}
         {#if ($scenarioSelection === 'laag' || $graphHover === periodName) }
           <text x={xScale(datalist_laag[i+1].period)} y={yScale(datalist_laag[i+1][perc])} style='fill:#17A3D3' text-anchor='end' dx='-0.5em'>{Math.round(datalist_laag[i+1][perc])}</text>     
@@ -33,7 +33,7 @@
     {/each}
   </g>
   <g class='texts-hoog scenario-hoog'>
-    {#each ['Klimaat 2050', 'Klimaat 2100'] as periodName, i}
+    {#each ['2050', '2100'] as periodName, i}
       {#each ['p5', 'median', 'p95'] as perc}
         {#if ($scenarioSelection === 'hoog' || $graphHover === periodName) }
           <text x={xScale(datalist_hoog[i+1].period)} y={yScale(datalist_hoog[i+1][perc])} style='fill:red' dx='0.5em'>{Math.round(datalist_hoog[i+1][perc])}</text>     

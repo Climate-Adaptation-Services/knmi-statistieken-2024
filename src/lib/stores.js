@@ -30,8 +30,8 @@ export const periodName = derived(
   ([$periodSelection]) => ($periodSelection === 'ref')
     ? 'Huidig klimaat'
     : ($periodSelection === '2100hoog')
-      ? 'Klimaat 2100'
-      : 'Klimaat 2050'
+      ? '2100'
+      : '2050'
 )
 
 export const gridSelectionValue = derived(
