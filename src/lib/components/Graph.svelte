@@ -7,6 +7,10 @@
   export let w
   export let h
 
+  $: hoogsteWaarde = (['Vorstdagen', 'Ijsdagen', 'Heating degree days', 'Neerslagsom zomer'].includes($indicatorSelection))
+    ? 'ref_p95'
+    : '2100hoog_p95'
+
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h
 
@@ -19,7 +23,7 @@
     .range([0, innerWidth])
   
   $: yScale = scaleLinear()
-    .domain([0,max($indicatorData[$indicatorSelection].map(d => +d['2100hoog_p95']))])
+    .domain([0,max($indicatorData[$indicatorSelection].map(d => +d[hoogsteWaarde]))])
     .range([innerHeight, margin.top])
     .nice()
 
