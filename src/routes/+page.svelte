@@ -3,7 +3,6 @@
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
   import { colorScale, indicatorData, indicatorMetaData } from '$lib/stores.js';
-  import KNMIlogo from '$lib/components/KNMIlogo.svelte';
 
   export let data
   $: console.log(data)
@@ -48,7 +47,6 @@
   {:catch error}
     <p>An error occurred!</p>
   {/await}
-  <KNMIlogo />
 
 </div>
 

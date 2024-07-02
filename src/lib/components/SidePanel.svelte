@@ -111,6 +111,7 @@
   </div>
   <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
   <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>Klik op een bolletje op de kaart</p>
+  <img class='knmilogo' src='/images/logo.svg'/>
 </div>
 
 
@@ -194,6 +195,11 @@
 
   .more-info:hover ~ .indicator-info{
     visibility:visible;
+  }
+
+  .knmilogo{
+    position: absolute;
+    bottom:0px;
   }
   
 </style>
