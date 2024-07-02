@@ -13,9 +13,10 @@ export const graphHover = writable('null')
 export const themeSelection = writable('Hitte')
 export const period_options = readable([
   { value: 'ref', label: 'Huidig klimaat'},
-  { value: '2050laag', label: '2050/2100 laag'},
-  { value: '2050hoog', label: '2050 hoog'},
-  { value: '2100hoog', label: '2100 hoog'}
+  { value: '2050hoog', label: '2050 hoogste scenario'},
+  { value: '2050laag', label: '2050 laagste scenario'},
+  { value: '2100hoog', label: '2100 hoogste scenario'},
+  { value: '2100laag', label: '2100 laagste scenario'}
 ]);
 
 export const indicatorSelectionMetaData = derived(
@@ -29,7 +30,7 @@ export const periodName = derived(
   [periodSelection],
   ([$periodSelection]) => ($periodSelection === 'ref')
     ? 'Huidig klimaat'
-    : ($periodSelection === '2100hoog')
+    : ($periodSelection === '2100hoog' || $periodSelection === '2100laag')
       ? '2100'
       : '2050'
 )

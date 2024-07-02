@@ -1,7 +1,7 @@
 import { dsv } from 'd3'
 
 export async function load(){
-  const NLsteden = await dsv(';', "https://gist.githubusercontent.com/stichtingcas/6e8f37f4fc7a47a093c2414d948e106c/raw/2bb9a0b03e34528e97a580c8b4f7b278bfaf7938/NLstedenCoordinaten")
+  const NLsteden = await dsv(';', "https://gist.githubusercontent.com/stichtingcas/6e8f37f4fc7a47a093c2414d948e106c/raw/2a1ea5252d9baa76dd392a657235e128f01325e3/NLstedenCoordinaten")
   const indicator_metadata = await dsv(';', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/metadata.csv")
 
   const response = await Promise.all([
@@ -40,7 +40,7 @@ export async function load(){
     'Vorstdagen': response[4],
     'Warme dagen': response[5],
     'Zomerdagen': response[6],
-    'Ijsdagen':response[7],
+    'IJsdagen':response[7],
     'Aantal dagen met neerslagsom >= 15 mm':response[8],
     'Aantal dagen met neerslagsom >= 25 mm':response[9],
     'Neerslagsom jaar':response[10],
