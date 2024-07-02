@@ -10,7 +10,20 @@
 
   const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
 
-  let indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {return {label:ind['Indicator'], value:ind['Indicator']}})
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  let indicatorOptions
+  function upDateIndicatorOptions(){
+    indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {
+      let label = (['Aantal dagen met neerslagsom >= 15 mm', 'Aantal dagen met neerslagsom >= 25 mm','Aantal dagen met max temp >= 35'].includes(ind['Indicator'] )) ? capitalizeFirstLetter(ind['Indicator'].slice(7).replace('som','')) : ind['Indicator'] 
+      label = (ind['Indicator'] == 'Maximaal neerslagtekort tussen 1 april en 30 september') ? 'Neerslagtekort april/september' : label
+        return {label:label, value:ind['Indicator']}
+    })
+  }
+  upDateIndicatorOptions()
+
 
   function onChangeIndicator(indicatorName){
     indicatorSelection.set(indicatorName)
@@ -32,11 +45,9 @@
 
   function onChangeTheme(th){
     themeSelection.set(th)
-    indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {return {label:ind['Indicator'], value:ind['Indicator']}})
-    onChangeIndicator(indicatorOptions[0].label)
+    upDateIndicatorOptions()
+    onChangeIndicator(indicatorOptions[0].value)
   }
-
-  $: console.log($indicatorSelectionMetaData)
   
   afterUpdate(() => {
     // ik weet niet waarom deze timeout nodig is
@@ -58,6 +69,7 @@
 
   const themeImageOffset = 10
   $: themeImageSize = (w - 7*themeImageOffset)/4
+
 
 </script>
 
