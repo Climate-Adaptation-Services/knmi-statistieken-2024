@@ -4,7 +4,6 @@
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
   import Select from 'svelte-select'
-  import KNMIlogo from './KNMIlogo.svelte';
 
   export let w;
   export let h;
@@ -50,23 +49,23 @@
     onChangeIndicator(indicatorOptions[0].value)
   }
   
-  afterUpdate(() => {
-    // ik weet niet waarom deze timeout nodig is
-    setTimeout(() => {
-      const el_sel = document.getElementsByClassName('selection-div')[0]
-      const box_sel = el_sel.getBoundingClientRect()
-      select('.more-info')
-        .style('left', box_sel.right-35 + 'px')
-        .style('top', box_sel.top-12 + 'px')
-        .style('visibility', 'visible')
+  // afterUpdate(() => {
+  //   // ik weet niet waarom deze timeout nodig is
+  //   setTimeout(() => {
+  //     const el_sel = document.getElementsByClassName('selection-div')[0]
+  //     const box_sel = el_sel.getBoundingClientRect()
+  //     select('.more-info')
+  //       .style('left', box_sel.right-35 + 'px')
+  //       .style('top', box_sel.top-12 + 'px')
+  //       .style('visibility', 'visible')
       
-      const el_moreinfo = document.getElementsByClassName('more-info')[0]
-      const box_moreinfo = el_moreinfo.getBoundingClientRect()
-      select('.indicator-info')
-        .style('left', box_moreinfo.right+15 + 'px')
-        .style('top', box_moreinfo.top-80 + 'px')
-    }, 600);
-  })
+  //     const el_moreinfo = document.getElementsByClassName('more-info')[0]
+  //     const box_moreinfo = el_moreinfo.getBoundingClientRect()
+  //     select('.indicator-info')
+  //       .style('left', box_moreinfo.right+15 + 'px')
+  //       .style('top', box_moreinfo.top-80 + 'px')
+  //   }, 600);
+  // })
 
   const themeImageOffset = 10
   $: themeImageSize = (w - 7*themeImageOffset)/4
@@ -83,11 +82,11 @@
 
 <div class='sidepanel-content'>
   <p class='more-info' style='cursor:default'>?</p>
-  <div class='indicator-info'>
+  <!-- <div class='indicator-info'>
     <p style='padding:3px 10px 3px 10px; border-radius:50px; color:white;background-color:#36575B; float:left'><strong>{$indicatorSelectionMetaData.Indicator}</strong></p>
     <hr width='100%'>
     <p>{$indicatorSelectionMetaData.Omschrijving}</p>
-  </div>
+  </div> -->
   <h3><strong class='step'>1</strong> Selecteer een thema</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
@@ -111,8 +110,7 @@
     <Select --font-size="14px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
   </div>
   <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
-  <p>Klik op een bolletje op de kaart</p>
-  <KNMIlogo />
+  <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>Klik op een bolletje op de kaart</p>
 </div>
 
 
