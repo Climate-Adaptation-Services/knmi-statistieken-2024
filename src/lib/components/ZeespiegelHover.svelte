@@ -51,19 +51,19 @@
         {#each linesData as d, i}
           <g font-size='16'>
             <text
-              fill={d.color}
+              style='fill:{d.color}'
               class='legendCircles'
               x='-26'
               y={35 + (linesData.length - i) * 20}
             >{d.legendText}</text>
             <text
-              fill={d.color}
+              style='fill:{d.color}'
               class='legendCircles'
               x='64'
               y={35 + (linesData.length - i) * 20}
             >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.median]) + ' cm'}</text>
             <text
-              fill={d.color}
+              style='fill:{d.color}'
               class='legendCircles'
               x='135'
               y={35 + (linesData.length - i) * 20}
