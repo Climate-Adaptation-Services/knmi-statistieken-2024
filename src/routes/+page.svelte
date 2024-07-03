@@ -21,7 +21,6 @@
   let mapHeight;
   let sidepanelWidth;
   let sidepanelHeight;
-  let legendWidth;
 
 </script>
 
@@ -56,15 +55,18 @@
     height: 100%;
   }
 
-  .side-panel, .map, .graph, .legend{
+  .side-panel{
     float:left;
     height:100%;
-  }
-
-  .side-panel{
     width:22%;
     /* border-right: 2px solid grey; */
   }
+
+  .map, .graph{
+    height:85%;
+    float:left;
+  }
+
   .map{
     width:39%;
     /* border-right: 2px solid lightgrey; */
