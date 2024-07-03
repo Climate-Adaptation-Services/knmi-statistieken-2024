@@ -105,12 +105,14 @@
   <div class='selection-div'>
     <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
   </div>
-  <h3><strong class='step'>3</strong> Selecteer een scenario</h3>
-  <div class='selection-div'>
-    <Select --font-size="14px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
-  </div>
-  <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
-  <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>Klik op een bolletje op de kaart</p>
+  {#if $indicatorSelection !== 'Zeespiegelstijging'}
+    <h3><strong class='step'>3</strong> Selecteer een scenario</h3>
+    <div class='selection-div'>
+      <Select --font-size="14px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
+    </div>
+    <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
+    <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>Klik op een bolletje op de kaart</p>
+  {/if}
   <img class='knmilogo' src='/images/logo.svg'/>
 </div>
 
