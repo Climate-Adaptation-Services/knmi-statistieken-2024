@@ -12,7 +12,7 @@
 
   import { hoveredYear } from '$lib/stores';
 
-  const hoverBarWidth = xScale(dataProjection[1].year) - xScale(dataProjection[0].year);
+  const hoverBarWidth = xScale(dataProjection[1].Jaar) - xScale(dataProjection[0].Jaar);
 
 </script>
 
@@ -22,7 +22,7 @@
   <g>
     <!-- {/* Group to show hovered year and value ranges */} -->
     <g
-      transform={`translate(${margin.left+50},${margin.top+40})`}
+      transform={`translate(${margin.left},${margin.top+20})`}
       opacity='1'
     >
       <!-- {/* Hovered year */} -->
@@ -38,13 +38,13 @@
         y='30'
         class='legendYear'
         font-size='14'
-      >Mediano</text>
+      >Mediaan</text>
       <text
         x='135'
         y='30'
         class='legendYear'
         font-size='14'
-      >Rango</text>
+      >Range</text>
 
       <!-- {/* Value ranges */} -->
       {#each linesData as d, i}
@@ -60,18 +60,18 @@
             class='legendCircles'
             x='64'
             y={35 + (linesData.length - i) * 20}
-          >{Math.round(dataProjection.filter(d2 => d2.year === $hoveredYear)[0][d.median]) + ' cm'}</text>
+          >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.median]) + ' cm'}</text>
           <text
             fill={d.color}
             class='legendCircles'
             x='135'
             y={35 + (linesData.length - i) * 20}
-          >{Math.round(dataProjection.filter(d2 => d2.year === $hoveredYear)[0][d.variableLow]) + ' - ' + Math.round(dataProjection.filter(d => d.year === $hoveredYear)[0][d.variableHigh]) + ' cm'}</text>
+          >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.variableLow]) + ' - ' + Math.round(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableHigh]) + ' cm'}</text>
         </g>
       {/each}
 
       <!-- {/* Show the historic value if present, mean for a year */} -->
-      <!-- {#if $hoveredYear < d3.max(dataHistoric.map(d => d.year))}
+      <!-- {#if $hoveredYear < d3.max(dataHistoric.map(d => d.Jaar))}
         <g font-size='13'>
           <text
             fill='black'
@@ -105,9 +105,9 @@
           fill={d.color}
           opacity={areaOpacity}
           x={xScale($hoveredYear) - 1.5}
-          y={yScale(dataProjection.filter(d2 => d2.year === $hoveredYear)[0][d.variableHigh])}
-          height={yScale(dataProjection.filter(d2 => d2.year === $hoveredYear)[0][d.variableLow])-
-            yScale(dataProjection.filter(d2 => d2.year === $hoveredYear)[0][d.variableHigh])}
+          y={yScale(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.variableHigh])}
+          height={yScale(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.variableLow])-
+            yScale(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d.variableHigh])}
           width='2'
         />
       {/each}
@@ -121,7 +121,7 @@
             stroke-width='2'
             fill={d.color}
             cx={xScale($hoveredYear)}
-            cy={yScale(dataProjection.filter(d => d.year === $hoveredYear)[0][d.variableLow])}
+            cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableLow])}
           />
           <circle
             r='4'
@@ -129,7 +129,7 @@
             stroke-width='2'
             fill={d.color}
             cx={xScale($hoveredYear)}
-            cy={yScale(dataProjection.filter(d => d.year === $hoveredYear)[0][d.variableHigh])}
+            cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableHigh])}
           />
         </g>
       {/each}
@@ -150,10 +150,10 @@
       width={hoverBarWidth}
       height={height+40}
       fill='steelblue'
-      x={xScale(dataProjection[i].year) - hoverBarWidth/2}
+      x={xScale(dataProjection[i].Jaar) - hoverBarWidth/2}
       y='0'
       fill-opacity='0'
-      on:mouseover={() => hoveredYear.set(dataProjection[i].year)}
+      on:mouseover={() => hoveredYear.set(dataProjection[i].Jaar)}
       on:mouseout={() => hoveredYear.set(null)}
     />
   {/each}

@@ -72,7 +72,7 @@
       'color': colorGematigd,
       'legendText': 'Moderá',
       'hachureAngle': '140',
-      'legendText2': 'met gematigde',
+      'legendText2': 'Met gematigde',
       'y_offset_text': ['48', '62']
     }, {
       'median':'Hoge uitstootscenario',
@@ -81,7 +81,7 @@
       'color': colorSterk,
       'legendText': 'Fuerte',
       'hachureAngle': '60',
-      'legendText2': 'met sterke',
+      'legendText2': 'Met sterke',
       'y_offset_text': ['53', '67']
     }
   ]
@@ -106,12 +106,12 @@
         width={innerWidth} height={innerHeight} hachureAngle={median_line.hachureAngle} fillStyle='hachure' 
         hachureGap='4'/>
       
-      <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 62} className='legendText' fill={median_line.color} opacity={areaOpacity + 0.2}>
+      <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48} className='legendText' fill={median_line.color} opacity={areaOpacity + 0.2}>
         {median_line.legendText2}
       </text>
       <text 
         x={innerWidth + 9} 
-        y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48}
+        y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 62}
         class='legendText' 
         fill={median_line.color} 
         opacity={areaOpacity + 0.2}>
