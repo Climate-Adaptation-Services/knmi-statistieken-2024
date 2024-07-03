@@ -101,11 +101,11 @@
       {/each}
     </svg>
   </div>
-  <h3><strong class='step'>2</strong> Selecteer een indicator</h3>
-  <div class='selection-div'>
-    <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
-  </div>
   {#if $indicatorSelection !== 'Zeespiegelstijging'}
+    <h3><strong class='step'>2</strong> Selecteer een indicator</h3>
+    <div class='selection-div'>
+      <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
+    </div>
     <h3><strong class='step'>3</strong> Selecteer een scenario</h3>
     <div class='selection-div'>
       <Select --font-size="14px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
