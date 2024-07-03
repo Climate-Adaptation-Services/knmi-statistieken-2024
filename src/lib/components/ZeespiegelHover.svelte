@@ -135,10 +135,10 @@
       {/each}
     </g>
   {:else}
-    <g transform={`translate(${margin.left+120},${margin.top+40})`}>
+    <g transform={`translate(${margin.left+90},${margin.top+40})`}>
       <text font-style='italic' text-anchor='middle' fill='#808080'>
-        <tspan>Pasa e kursor riba e gráfiko</tspan>
-        <tspan x=0 y='1em'>pa mira mas detaye </tspan>
+        <tspan>Beweeg de muis over de grafiek</tspan>
+        <tspan x=0 y='1em'>om meer detail de tonen </tspan>
       </text>
       
     </g>

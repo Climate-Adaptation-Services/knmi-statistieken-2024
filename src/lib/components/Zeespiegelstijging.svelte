@@ -27,7 +27,7 @@
       1900,
       dataProjection[dataProjection.length - 1].Jaar
     ])
-    .range([0, innerWidth])
+    .range([50, innerWidth])
   // .nice()
 
   $: yScale = d3
@@ -72,7 +72,7 @@
       'color': colorGematigd,
       'legendText': 'Moderá',
       'hachureAngle': '140',
-      'legendText2': 'moderá',
+      'legendText2': 'met gematigde',
       'y_offset_text': ['48', '62']
     }, {
       'median':'Hoge uitstootscenario',
@@ -81,7 +81,7 @@
       'color': colorSterk,
       'legendText': 'Fuerte',
       'hachureAngle': '60',
-      'legendText2': 'fuerte',
+      'legendText2': 'met sterke',
       'y_offset_text': ['53', '67']
     }
   ]
@@ -92,8 +92,8 @@
 <svg id="svg_zeespiegel_chart">
 
   <XAxis scale={xScale} xTransform={0} yTransform={innerHeight} className="lineChart__xAxis" axis={xAxis}/>
-  <YAxis xTransform={0} yTransform={0} scale={yScale} className="lineChart__yAxis" axis={yAxis}/>
-  <text text-anchor='middle' transform='translate(50, {yScale(70)}) rotate(-90)'>Subida den cm</text>
+  <YAxis xTransform={50} yTransform={0} scale={yScale} className="lineChart__yAxis" axis={yAxis}/>
+  <text text-anchor='middle' transform='translate(15, {yScale(70)}) rotate(-90)'>Stijging in cm</text>
   <!-- <LLHI data={dataLLHI} color={'#5b5b5b'} variable={'sej_high'} legendText='LLHI' xScale={xScale} yScale={yScale} className={'llhi'+$country} {margin} /> -->
   
   {#each median_lines as median_line}
@@ -115,7 +115,7 @@
         class='legendText' 
         fill={median_line.color} 
         opacity={areaOpacity + 0.2}>
-        Ku kambio di klima 
+        klimaatverandering 
       </text>
     </g>
   {/each}
