@@ -147,10 +147,10 @@
   <!-- {/* rects for hovering */} -->
   {#each dataProjection as d,i}
     <rect
-      width={hoverBarWidth}
+      width={hoverBarWidth+0.5}
       height={height+40}
       fill='steelblue'
-      x={xScale(dataProjection[i].Jaar) - hoverBarWidth/2}
+      x={xScale(dataProjection[i].Jaar) - hoverBarWidth/2 - 0.25}
       y='0'
       fill-opacity='0'
       on:mouseover={() => hoveredYear.set(dataProjection[i].Jaar)}

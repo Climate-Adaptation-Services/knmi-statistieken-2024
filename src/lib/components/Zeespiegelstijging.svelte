@@ -70,7 +70,7 @@
       'variableLow': 'Lage uitstootscenario-range (low)',
       'variableHigh': 'Lage uitstootscenario-range (high)',
       'color': colorGematigd,
-      'legendText': 'Moderá',
+      'legendText': 'Gematigd',
       'hachureAngle': '140',
       'legendText2': 'Met gematigde',
       'y_offset_text': ['48', '62']
@@ -79,7 +79,7 @@
       'variableLow': 'Hoge uitstootscenario-range (low)',
       'variableHigh': 'Hoge uitstootscenario-range (high)',
       'color': colorSterk,
-      'legendText': 'Fuerte',
+      'legendText': 'Sterk',
       'hachureAngle': '60',
       'legendText2': 'Met sterke',
       'y_offset_text': ['53', '67']
