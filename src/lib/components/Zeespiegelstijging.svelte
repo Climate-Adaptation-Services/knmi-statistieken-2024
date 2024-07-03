@@ -96,6 +96,9 @@
   <text text-anchor='middle' transform='translate(15, {yScale(70)}) rotate(-90)'>Stijging in cm</text>
   <!-- <LLHI data={dataLLHI} color={'#5b5b5b'} variable={'sej_high'} legendText='LLHI' xScale={xScale} yScale={yScale} className={'llhi'+$country} {margin} /> -->
   
+  <Line data={dataProjection.slice(0,100)} color={'black'} variable='Trend metingen' legendText='Median' xScale={xScale} yScale={yScale} className={'trend'} {margin} />
+  <Line data={dataProjection.slice(0,120)} color={'grey'} variable='Jaargemiddelde' legendText='Median' xScale={xScale} yScale={yScale} className={'jaargemiddelde'} {margin}/>
+
   {#each median_lines as median_line}
     <g>
       <Line data={dataProjection.slice(95)} color={median_line.color} variable={median_line.median} legendText='Median' xScale={xScale} yScale={yScale} className={'median' + median_line.legendText} {margin} />

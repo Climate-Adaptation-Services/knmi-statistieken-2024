@@ -29,7 +29,7 @@
   <path
     class={className + 'path'}
     stroke={color}
-    stroke-width='2.2'
+    stroke-width={(variable === 'Jaargemiddelde') ? '1' : '2.2'}
     fill="none"
   />
 </g>
