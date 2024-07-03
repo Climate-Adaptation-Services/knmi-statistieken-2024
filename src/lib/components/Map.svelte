@@ -28,7 +28,7 @@
   
   $: path = geoPath(projection);
 
-  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Tropische dagen')[0]
+  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Aantal tropische dagen')[0]
 
   colorScale.set(
     scaleLinear()
