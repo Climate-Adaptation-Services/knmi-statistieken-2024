@@ -7,7 +7,7 @@
   export let w
   export let h
 
-  $: hoogsteWaarde = (['Vorstdagen', 'Ijsdagen', 'Heating degree days', 'Neerslagsom zomer'].includes($indicatorSelection))
+  $: hoogsteWaarde = (['Aantal vorstdagen', 'Aantal ijsdagen', 'Verwarmingsgraaddagen', 'Zomerneerslag'].includes($indicatorSelection))
     ? 'ref_p95'
     : '2100hoog_p95'
 
