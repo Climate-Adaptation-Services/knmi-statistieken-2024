@@ -42,11 +42,9 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
-    <h3>
-      {$indicatorSelection} 
-      <strong style='font-size:14px; color:black'>bij </strong>
-      {$period_options.filter(po => po.value === $periodSelection)[0].label}
-    </h3>
+    <h3 class='indicator-title' style='margin-bottom:10px'>{$indicatorSelection}</h3>
+    <h3 style='margin-top:0px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
+      
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
