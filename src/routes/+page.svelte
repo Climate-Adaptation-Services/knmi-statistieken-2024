@@ -3,6 +3,7 @@
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
   import { colorScale, indicatorData, indicatorMetaData } from '$lib/stores.js';
+  import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
 
   export let data
   $: console.log(data)
@@ -46,7 +47,9 @@
   {:catch error}
     <p>An error occurred!</p>
   {/await}
-
+  <div class='indicator-explanation'>
+    <IndicatorExplanation />
+  </div>
 </div>
 
 
@@ -59,20 +62,26 @@
     float:left;
     height:100%;
     width:22%;
-    /* border-right: 2px solid grey; */
   }
 
   .map, .graph{
-    height:85%;
+    height:82%;
     float:left;
   }
 
   .map{
     width:39%;
-    /* border-right: 2px solid lightgrey; */
   }
   .graph{
     width:38%;
+  }
+
+  .indicator-explanation{
+    width:77%;
+    height:18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 </style>
