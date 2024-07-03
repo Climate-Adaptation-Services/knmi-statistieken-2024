@@ -13,6 +13,7 @@
 
   const provincies = datajson[0]
   const cellen = datajson[1];
+  const grenzen = datajson[2];
 
   console.log('datajson', datajson)
 
@@ -44,41 +45,55 @@
   <div class='title-white-bg'>
     <h3 class='indicator-title' style='margin-bottom:10px'>{$indicatorSelection}</h3>
     <h3 style='margin-top:0px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
-      
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    {#if $colorScale}
-      <Legend w={w*0.2} h={mapHeight}/>
-    {/if}
-    <g transform='translate({legendMargin},0)'>
-      <g class='provincies'>
-        {#each provincies.features as feature}
-          <path
-            d={path(feature)}
-            class='shape'
-            fill='none'
-            stroke='grey'
-          />
+    {#if $indicatorSelection !== 'Zeespiegelstijging'}
+      {#if $colorScale}
+        <Legend w={w*0.2} h={mapHeight}/>
+      {/if}
+
+      <g transform='translate({legendMargin},0)'>
+        <g class='provincies'>
+          {#each provincies.features as feature}
+            <path
+              d={path(feature)}
+              class='shape'
+              fill='none'
+              stroke='grey'
+            />
+          {/each}
+        </g>
+
+        <MapShapes {projection} {w} />
+
+        {#each NLsteden as NLstad, i}
+          <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
+            <circle
+              fill={'#35575A'}
+              stroke='white'
+              r='3'
+            />
+            <text class='stad-text' style='fill:#35575A' font-size={w/60} y='1.32em' text-anchor='middle'>
+              {NLstad.Stad}
+            </text>
+          </g>
         {/each}
       </g>
-
-      <MapShapes {projection} {w} />
-
-      {#each NLsteden as NLstad, i}
-        <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
-          <circle
-            fill={'#35575A'}
-            stroke='white'
-            r='3'
-          />
-          <text class='stad-text' style='fill:#35575A' font-size={w/60} y='1.32em' text-anchor='middle'>
-            {NLstad.Stad}
-          </text>
-        </g>
-      {/each}
+    {:else}
+    <!-- if zeespiegelstijging show country borders -->
+    <g transform='translate({legendMargin},0)'>
+      <g class='borders'>
+        <path
+          d={path(grenzen.features[0])}
+          class='shape'
+          fill='none'
+          stroke='grey'
+        />
+      </g>
     </g>
+    {/if}
   </svg>
 </div>
 

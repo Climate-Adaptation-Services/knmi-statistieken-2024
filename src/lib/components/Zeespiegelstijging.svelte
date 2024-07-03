@@ -8,34 +8,33 @@
   import Area from './Area.svelte'
   import ZeespiegelHover from './ZeespiegelHover.svelte';
 
-  import { w, h, country } from '$lib/stores';
-
   export let dataProjection;
-  export let dataLLHI
+  export let w;
+  export let h;
+  // export let dataLLHI
 
-  $: console.log(dataLLHI)
-
+  console.log(dataProjection)
 
   // const dataHistoric = data.zeespiegel_historisch;
   
-  $: margin = {bottom:$h*0.05, top:$h*0.1, left:100, right:$w*0.1}
-  $: innerWidth = $w - margin.left - margin.right
-  $: innerHeight = $h - margin.top - margin.bottom
+  $: margin = {bottom:h*0.05, top:h*0.2, left:100, right:w*0.1}
+  $: innerWidth = w - margin.left - margin.right
+  $: innerHeight = h - margin.top - margin.bottom
 
   $: xScale = d3
     .scaleLinear()
     .domain([
-      1995,
-      dataProjection[dataProjection.length - 1].year
+      1900,
+      dataProjection[dataProjection.length - 1].Jaar
     ])
-    .range([margin.left, innerWidth])
+    .range([0, innerWidth])
   // .nice()
 
   $: yScale = d3
     .scaleLinear()
     .domain([
-      0,
-      140
+      -20,
+      150
     ])
     .range([innerHeight, margin.top])
     .nice()
@@ -62,26 +61,23 @@
     .ticks(5)
     .tickFormat(yAxisTickFormat);
 
-  // const colorGematigd = '#009fd1';
-  // const colorSterk = 'red';
-
-  const colorGematigd = '#017676'
-  const colorSterk = '#f44f01'
+  const colorGematigd = '#17A3D3'
+  const colorSterk = 'red'
 
   const median_lines = [
     {
-      'median':'ssp126_50pc',
-      'variableLow': 'ssp126_5pc',
-      'variableHigh': 'ssp126_95pc',
+      'median':'Lage uitstootscenario',
+      'variableLow': 'Lage uitstootscenario-range (low)',
+      'variableHigh': 'Lage uitstootscenario-range (high)',
       'color': colorGematigd,
       'legendText': 'Moderá',
       'hachureAngle': '140',
       'legendText2': 'moderá',
       'y_offset_text': ['48', '62']
     }, {
-      'median':'ssp585_50pc',
-      'variableLow': 'ssp585_5pc',
-      'variableHigh': 'ssp585_95pc',
+      'median':'Hoge uitstootscenario',
+      'variableLow': 'Hoge uitstootscenario-range (low)',
+      'variableHigh': 'Hoge uitstootscenario-range (high)',
       'color': colorSterk,
       'legendText': 'Fuerte',
       'hachureAngle': '60',
@@ -89,7 +85,6 @@
       'y_offset_text': ['53', '67']
     }
   ]
-  $:console.log($country)
   const areaOpacity = '0.6';
 
 </script>
@@ -97,15 +92,13 @@
 <svg id="svg_zeespiegel_chart">
 
   <XAxis scale={xScale} xTransform={0} yTransform={innerHeight} className="lineChart__xAxis" axis={xAxis}/>
-  <YAxis xTransform={margin.left} yTransform={0} scale={yScale} className="lineChart__yAxis" axis={yAxis}/>
+  <YAxis xTransform={0} yTransform={0} scale={yScale} className="lineChart__yAxis" axis={yAxis}/>
   <text text-anchor='middle' transform='translate(50, {yScale(70)}) rotate(-90)'>Subida den cm</text>
-  {#if $country === 'Bonaire'}
-    <LLHI data={dataLLHI} color={'#5b5b5b'} variable={'sej_high'} legendText='LLHI' xScale={xScale} yScale={yScale} className={'llhi'+$country} {margin} />
-  {/if}
+  <!-- <LLHI data={dataLLHI} color={'#5b5b5b'} variable={'sej_high'} legendText='LLHI' xScale={xScale} yScale={yScale} className={'llhi'+$country} {margin} /> -->
   
   {#each median_lines as median_line}
     <g>
-      <Line data={dataProjection} color={median_line.color} variable={median_line.median} legendText='Median' xScale={xScale} yScale={yScale} className={'median' + median_line.legendText} {margin} />
+      <Line data={dataProjection.slice(95)} color={median_line.color} variable={median_line.median} legendText='Median' xScale={xScale} yScale={yScale} className={'median' + median_line.legendText} {margin} />
 
       <Area className={'areaChart' + median_line.legendText} data={dataProjection} 
         variable1={median_line.variableLow} variable2={median_line.variableHigh} 

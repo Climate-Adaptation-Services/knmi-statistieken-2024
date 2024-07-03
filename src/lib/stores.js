@@ -1,8 +1,12 @@
 import { writable, derived, readable } from "svelte/store"
 
+// circle shapes
 export const circleFeatures = writable(null)
+// only the indicator name
 export const indicatorSelection = writable('Aantal tropische dagen');
+// all indicator data
 export const indicatorData = writable(null)
+// indicator metadata
 export const indicatorMetaData = writable(null)
 export const gridSelection = writable(689)
 export const colorScale = writable(null)
@@ -10,6 +14,8 @@ export const gridHover = writable(null)
 export const periodSelection = writable('ref')
 export const scenarioSelection = writable('beide')
 export const graphHover = writable('null')
+// Hovered year for zeespiegelstijging
+export const hoveredYear = writable(null)
 export const themeSelection = writable('Hitte')
 export const period_options = readable([
   { value: 'ref', label: 'Huidig klimaat'},
@@ -38,7 +44,11 @@ export const periodName = derived(
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection]) => {
-    return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]
+    if($indicatorSelection === 'Zeespiegelstijging'){
+      return null
+    }else{
+      return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]
+    }
   }
 )
 

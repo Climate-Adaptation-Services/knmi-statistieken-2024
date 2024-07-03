@@ -17,12 +17,12 @@
   export let hachureAngle;
   export let fillStyle;
   export let hachureGap;
-
+ 
   const areaPath = d3
     .area()
-    .x(d => xScale(d.year))
-    .y0(d => yScale(d[variable1]))
-    .y1(d => yScale(d[variable2]))
+    .x(d => +xScale(d.Jaar))
+    .y0(d => +yScale(d[variable1]))
+    .y1(d => +yScale(d[variable2]))
 
   let svgElement;
 
@@ -32,16 +32,19 @@
 
     const path = rc.path(areaPath(data),
       { 
-        roughness: 0.3, 
+        roughness: 0, 
         fill: color, 
-        stroke:'none',
-        fillStyle:fillStyle,
-        fillWeight:1,
-        hachureGap: hachureGap,
-        hachureAngle: hachureAngle,
-        strokeWidth:2
+        stroke: 'none',
+        fillStyle:'solid',
+        fillWeight: 3,
+        hachureGap: 6,
+        hachureAngle: 0,
+        strokeWidth: 2,
       });
     svgElement.appendChild(path);
+    
+    d3.selectAll('.rough'+className).style('opacity', '0.2')
+  
   })
 
 </script>

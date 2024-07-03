@@ -2,8 +2,9 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { colorScale, indicatorData, indicatorMetaData } from '$lib/stores.js';
+  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection } from '$lib/stores.js';
   import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
+  import Zeespiegelstijging from '$lib/components/Zeespiegelstijging.svelte';
 
   export let data
   $: console.log(data)
@@ -14,8 +15,9 @@
 		const response = await Promise.all([
       fetch('https://cartomap.github.io/nl/wgs84/provincie_2024.geojson'),
       fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Punten_KNMImasker.geojson'),
+      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/NLgrenzen.json'),
     ])
-    return [await response[0].json(), await response[1].json()]
+    return [await response[0].json(), await response[1].json(), await response[2].json()]
 	})()
 
   let mapWidth;
@@ -41,7 +43,11 @@
     </div>
     <div class='graph'>
       {#if mapWidth}
-        <Graph w={mapWidth} h={mapHeight}/>
+        {#if $indicatorSelection !== 'Zeespiegelstijging'}
+          <Graph w={mapWidth} h={mapHeight}/>
+        {:else}
+          <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData['Zeespiegelstijging']}/>
+        {/if}
       {/if}
     </div>
   {:catch error}

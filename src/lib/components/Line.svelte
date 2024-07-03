@@ -14,7 +14,7 @@
     d3.select('.' + className + 'path')
       .datum(data)
       .attr('d', d3.line()
-        .x(d => xScale(d.year))
+        .x(d => xScale(d.Jaar))
         .y(function(d) {
           if(legendText === 'LLHI'){
             return yScale(d[variable]*100)

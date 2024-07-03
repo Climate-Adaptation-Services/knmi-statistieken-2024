@@ -30,6 +30,7 @@ export async function load(){
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-35gradendagen-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-pet_sum-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-neerslagtekort-ANN_racmo_interp_variabiliteit.csv"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/zeespiegelstijging.csv"),
 ])
 
   const indicator_data = {
@@ -57,6 +58,8 @@ export async function load(){
     'Aantal extreem hete dagen':response[21],
     'Jaarlijkse referentieverdamping':response[22],
     'Maximaal neerslagtekort':response[23],
+    'Zeespiegelstijging':response[24],
+
   }
   
   return { NLsteden, indicator_data, indicator_metadata };
