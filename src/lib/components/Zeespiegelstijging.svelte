@@ -7,6 +7,7 @@
   // import LLHI from './LLHI.svelte';
   import Area from './Area.svelte'
   import ZeespiegelHover from './ZeespiegelHover.svelte';
+  import GraphLegend from './GraphLegend.svelte';
 
   export let dataProjection;
   export let w;
@@ -17,7 +18,7 @@
 
   // const dataHistoric = data.zeespiegel_historisch;
   
-  $: margin = {bottom:h*0.05, top:h*0.2, left:100, right:w*0.1}
+  $: margin = {bottom:h*0.25, top:70, left:100, right:w*0.1}
   $: innerWidth = w - margin.left - margin.right
   $: innerHeight = h - margin.top - margin.bottom
 
@@ -128,6 +129,9 @@
 
   <ZeespiegelHover dataProjection={dataProjection} linesData={median_lines} xScale={xScale} yScale={yScale} height={innerHeight} areaOpacity={areaOpacity} {margin}/>
 
+  <g transform='translate(50)'>
+    <GraphLegend {xScale} {yScale} {w} h={innerHeight} {margin} />
+  </g>
 </svg>
 
 <style>

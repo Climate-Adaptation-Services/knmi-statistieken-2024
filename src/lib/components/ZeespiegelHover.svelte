@@ -32,7 +32,6 @@
         class='legendYear'
         font-size='24'
       >{$hoveredYear}</text>
-
       {#if $hoveredYear > 1995}
         <text
           x='64'
@@ -46,7 +45,6 @@
           class='legendYear'
           font-size='14'
         >Range</text>
-
         <!-- {/* Value ranges */} -->
         {#each linesData as d, i}
           <g font-size='16'>
@@ -71,23 +69,23 @@
           </g>
         {/each}
       {/if}
-
-      <!-- {/* Show the historic value if present, mean for a year */} -->
-      <!-- {#if $hoveredYear < d3.max(dataHistoric.map(d => d.Jaar))}
-        <g font-size='13'>
-          <text
-            fill='black'
-            class='legendCircles'
-            x='-26'
-            y={9 + (linesData.length + 1) * 15}
-          >Gemeten</text>
-          <text
-            fill='black'
-            class='legendCircles'
-            x='44'
-            y={9 + (linesData.length + 1) * 15}
-          >{Math.round(meanHistoric[0] / meanHistoric[1] * 100) / 100 + ' cm'}</text>
-        </g>
+      <!-- {#if $hoveredYear < 2024}
+        {#each ['Trend metingen', 'Jaargemiddelde'] as d, i}
+          <g font-size='16' transform='translate(0,80)'>
+            <text
+              style='fill:black'
+              class='legendCircles'
+              x='-26'
+              y={35 + (2 - i) * 20}
+            >{d}</text>
+            <text
+              style='fill:black'
+              class='legendCircles'
+              x='100'
+              y={35 + (2 - i) * 20}
+            >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d]) + ' cm'}</text>
+          </g>
+        {/each}
       {/if} -->
     </g>
 
@@ -115,26 +113,28 @@
       {/each}
 
     <!-- { /* circles to indicate the low and high bounds per area */ } { -->
-      {#each linesData as d,i}
-        <g>
-          <circle
-            r='4'
-            stroke='white'
-            stroke-width='2'
-            fill={d.color}
-            cx={xScale($hoveredYear)}
-            cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableLow])}
-          />
-          <circle
-            r='4'
-            stroke='white'
-            stroke-width='2'
-            fill={d.color}
-            cx={xScale($hoveredYear)}
-            cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableHigh])}
-          />
-        </g>
-      {/each}
+      {#if $hoveredYear > 1995}
+        {#each linesData as d,i}
+          <g>
+            <circle
+              r='4'
+              stroke='white'
+              stroke-width='2'
+              fill={d.color}
+              cx={xScale($hoveredYear)}
+              cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableLow])}
+            />
+            <circle
+              r='4'
+              stroke='white'
+              stroke-width='2'
+              fill={d.color}
+              cx={xScale($hoveredYear)}
+              cy={yScale(dataProjection.filter(d => d.Jaar === $hoveredYear)[0][d.variableHigh])}
+            />
+          </g>
+        {/each}
+      {/if}
     </g>
   {:else}
     <g transform={`translate(${margin.left+90},${margin.top+40})`}>
