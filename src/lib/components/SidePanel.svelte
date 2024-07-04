@@ -1,5 +1,5 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection } from '$lib/stores';
   import { select, scaleLinear, selectAll } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
@@ -26,6 +26,9 @@
 
 
   function onChangeIndicator(indicatorName){
+    // als wissel van winter naar jaar regimes
+    if($indicatorSelection.slice(0,18) === '10-daagse neerslag' && indicatorName.slice(0,18) !== '10-daagse neerslag'){regimeSelection.set('L')}
+
     indicatorSelection.set(indicatorName)
 
     const domain = $indicatorSelectionMetaData['y-as domein'].split(',')
