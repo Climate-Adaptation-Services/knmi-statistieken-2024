@@ -19,10 +19,10 @@ export const hoveredYear = writable(null)
 export const themeSelection = writable('Hitte')
 export const period_options = readable([
   { value: 'ref', label: 'Huidig klimaat'},
-  { value: '2050hoog', label: '2050 hoogste scenario'},
   { value: '2050laag', label: '2050 laagste scenario'},
-  { value: '2100hoog', label: '2100 hoogste scenario'},
-  { value: '2100laag', label: '2100 laagste scenario'}
+  { value: '2050hoog', label: '2050 hoogste scenario'},
+  { value: '2100laag', label: '2100 laagste scenario'},
+  { value: '2100hoog', label: '2100 hoogste scenario'}
 ]);
 
 export const indicatorSelectionMetaData = derived(

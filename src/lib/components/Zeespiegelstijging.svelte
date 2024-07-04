@@ -98,11 +98,11 @@
   <Line data={dataProjection.slice(0,100)} color={'black'} variable='Trend metingen' legendText='Median' xScale={xScale} yScale={yScale} className={'trend'} {margin} />
   <Line data={dataProjection.slice(0,123)} color={'grey'} variable='Jaargemiddelde' legendText='Median' xScale={xScale} yScale={yScale} className={'jaargemiddelde'} {margin}/>
 
-  <g class='trendlijn' transform='translate({0},{yScale(18)})'>
+  <g class='trendlijn' transform='translate({10},{yScale(18)})'>
     <line x1={xScale(1912)} x2={xScale(1920)} stroke='black' stroke-width='2.2'/>
     <text x={xScale(1924)} font-size='12' dy='0.36em'>Trend metingen</text>
   </g>
-  <g class='jaargemiddeldelijn' transform='translate({0},{yScale(26)})'>
+  <g class='jaargemiddeldelijn' transform='translate({10},{yScale(26)})'>
     <line x1={xScale(1912)} x2={xScale(1915)} y1={2} y2={8} stroke='grey' stroke-width='1'/>
     <line x1={xScale(1915)} x2={xScale(1918)} y1={8} y2={-8} stroke='grey' stroke-width='1'/>
     <line x1={xScale(1918)} x2={xScale(1921)} y1={-8} y2={2} stroke='grey' stroke-width='1'/>
