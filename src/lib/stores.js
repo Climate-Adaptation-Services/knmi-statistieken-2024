@@ -13,10 +13,12 @@ export const colorScale = writable(null)
 export const gridHover = writable(null)
 export const periodSelection = writable('ref')
 export const scenarioSelection = writable('beide')
+export const regimeSelection = writable('R')
 export const graphHover = writable('null')
 // Hovered year for zeespiegelstijging
 export const hoveredYear = writable(null)
 export const themeSelection = writable('Hitte')
+export const neerslagIndicatoren = readable(['Uurneerslag - eens per jaar','Uurneerslag - eens per 10 jaar','Uurneerslag - eens per 100 jaar','Uurneerslag - eens per 1000 jaar ','Dagneerslag - eens per jaar','Dagneerslag - eens per 10 jaar','Dagneerslag - eens per 100 jaar','Dagneerslag - eens per 1000 jaar','10-daagse neerslag - eens per jaar','10-daagse neerslag - eens per 10 jaar','10-daagse neerslag - eens per 100 jaar','10-daagse neerslag - eens per 1000 jaar'])
 export const period_options = readable([
   { value: 'ref', label: 'Huidig klimaat'},
   { value: '2050laag', label: '2050 laagste scenario'},
@@ -42,9 +44,9 @@ export const periodName = derived(
 )
 
 export const gridSelectionValue = derived(
-  [indicatorData, gridSelection, periodSelection, indicatorSelection],
-  ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection]) => {
-    if($indicatorSelection === 'Zeespiegelstijging'){
+  [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
+  ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
+    if($indicatorSelection === 'Zeespiegelstijging' || $neerslagIndicatoren.includes($indicatorSelection)){
       return null
     }else{
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]

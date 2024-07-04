@@ -3,7 +3,7 @@
   import { select, selectAll, area, easeQuadOut } from 'd3';
   import { afterUpdate } from 'svelte';
   import rough from 'roughjs';
-  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, graphHover, scenarioSelection } from '$lib/stores';
+  import { gridSelection, indicatorData, indicatorSelection, periodName, periodSelection, gridHover, graphHover, scenarioSelection, neerslagIndicatoren, regimeSelection } from '$lib/stores';
   import GraphLegend from './GraphLegend.svelte';
   // import ThreeSwitch from './ThreeSwitch.svelte';
   import GradientDefs from './GradientDefs.svelte';
@@ -17,7 +17,9 @@
   export let innerHeight;
   export let margin
 
-  $: dataSelected = $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0]
+  $: dataSelected = ($neerslagIndicatoren.includes($indicatorSelection))
+    ? $indicatorData[$indicatorSelection].filter(d => d.regime === $regimeSelection)[0] 
+    : $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0] 
 
   $: datalist_laag = [
     {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},

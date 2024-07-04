@@ -2,14 +2,16 @@
   import { scalePoint, scaleLinear, select, selectAll, axisBottom, axisLeft, max } from 'd3';
   import { afterUpdate } from 'svelte';
   import GraphContent from './GraphContent.svelte';
-  import { indicatorData, indicatorSelection, indicatorSelectionMetaData } from '$lib/stores';
+  import { indicatorData, indicatorSelection, indicatorSelectionMetaData, neerslagIndicatoren } from '$lib/stores';
 
   export let w
   export let h
 
-  $: hoogsteWaarde = (['Aantal vorstdagen', 'Aantal ijsdagen', 'Verwarmingsgraaddagen', 'Zomerneerslag'].includes($indicatorSelection))
-    ? 'ref_p95'
-    : '2100hoog_p95'
+  $: hoogsteWaarde = ($neerslagIndicatoren.includes($indicatorSelection))
+    ? '2100hoog'
+    : (['Aantal vorstdagen', 'Aantal ijsdagen', 'Verwarmingsgraaddagen', 'Zomerneerslag'].includes($indicatorSelection))
+      ? 'ref_p95'
+      : '2100hoog_p95'
 
   $: titleHeight = 0.2*h
   $: graphHeight = 0.8*h

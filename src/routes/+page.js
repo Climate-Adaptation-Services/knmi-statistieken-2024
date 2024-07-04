@@ -12,7 +12,6 @@ export async function load(){
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-vorstdagen-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-warmedagen-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-zomerdagen-ANN_racmo_interp_variabiliteit.csv"),
-    
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-ijsdagen-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-pr_days15.0mm-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-pr_days25.0mm-ANN_racmo_interp_variabiliteit.csv"),
@@ -32,7 +31,21 @@ export async function load(){
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-neerslagtekort-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/zeespiegelstijging.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-neerslagtekort-t10-ANN_racmo_interp_variabiliteit.csv"),
-])
+
+    // neerslagstatistieken
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%201000%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%201000%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%201000%20jaar%20wordt%20overschreden"),
+  ])
 
   const indicator_data = {
     'Aantal tropische dagen': response[0],
@@ -62,6 +75,20 @@ export async function load(){
     'Zeespiegelstijging':response[24],
     'Maximaal neerslagtekort 1:10 jaar':response[25],
 
+    // Neerslagstatistieken
+    '10-daagse neerslag - eens per jaar':response[26],
+    '10-daagse neerslag - eens per 10 jaar':response[27],
+    '10-daagse neerslag - eens per 100 jaar':response[28],
+    '10-daagse neerslag - eens per 1000 jaar':response[29],    
+    'Dagneerslag - eens per jaar':response[30],
+    'Dagneerslag - eens per 10 jaar':response[31],
+    'Dagneerslag - eens per 100 jaar':response[32],
+    'Dagneerslag - eens per 1000 jaar':response[33],
+    'Uurneerslag - eens per jaar':response[34],
+    'Uurneerslag - eens per 10 jaar':response[35],
+    'Uurneerslag - eens per 100 jaar':response[36],
+    'Uurneerslag - eens per 1000 jaar':response[37],
+    
   }
   
   return { NLsteden, indicator_data, indicator_metadata };

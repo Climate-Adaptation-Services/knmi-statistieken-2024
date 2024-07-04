@@ -1,10 +1,12 @@
 <script>
 // @ts-nocheck
   import { geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures, neerslagIndicatoren, regimeSelection } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
   import MapShapes from './MapShapes.svelte';
+  import rewind from '@turf/rewind'
+  import flip from '@turf/flip'
 
   export let datajson
   export let w
@@ -14,7 +16,8 @@
   const provincies = datajson[0]
   const cellen = datajson[1];
   const grenzen = datajson[2];
-  const neerslagregime_zomer = datajson[3];
+  const neerslagregimes_winter = datajson[3];
+  const neerslagregimes_jaar = datajson[4];
 
   console.log('datajson', datajson)
 
@@ -40,6 +43,12 @@
 
   afterUpdate(() => select('.id-' + $gridSelection).raise())
 
+  // $: neerslagRegimesFeatures = ($neerslagIndicatoren.includes($indicatorSelection))
+  //   ? ($indicatorSelection === ) 
+  //     ? 
+  //     :
+  //   : null
+
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
@@ -52,7 +61,38 @@
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    {#if $indicatorSelection !== 'Zeespiegelstijging'}
+    {#if $indicatorSelection === 'Zeespiegelstijging'}
+      <!-- if zeespiegelstijging show country borders -->
+      <g class='borders' transform='translate({legendMargin},0)'>
+        <path
+          d={path(grenzen.features[0])}
+          class='shape'
+          fill='none'
+          stroke='grey'
+        />
+      </g>
+    {:else if $neerslagIndicatoren.includes($indicatorSelection)}
+      <!-- if neerslagstatistieken show 4 delen -->
+      <g transform='translate({legendMargin},0)'>
+        {#each neerslagregimes_jaar.features as regime, i}
+          <path
+            d={path(rewind(regime,{reverse:true}))}
+            class='shape'
+            fill='{(regime.properties.Regio === 'R') 
+              ? '#84C76E' 
+              : (regime.properties.Regio === 'L') 
+                ? '#F4815A' 
+                : (regime.properties.Regio === 'H') 
+                ? '#24BEC6' 
+                : 'purple'}'
+            stroke='grey'
+            opacity={(regime.properties.Regio === $regimeSelection) ? 1 : 0.2}
+            on:click={() => regimeSelection.set(regime.properties.Regio)}
+            cursor='pointer'
+          />
+        {/each}
+      </g>
+    {:else}
       {#if $colorScale}
         <Legend w={w*0.2} h={mapHeight}/>
       {/if}
@@ -82,28 +122,6 @@
               {NLstad.Stad}
             </text>
           </g>
-        {/each}
-      </g>
-    {:else if $indicatorSelection === 'Zeespiegelstijging'}
-      <!-- if zeespiegelstijging show country borders -->
-      <g class='borders' transform='translate({legendMargin},0)'>
-        <path
-          d={path(grenzen.features[0])}
-          class='shape'
-          fill='none'
-          stroke='grey'
-        />
-      </g>
-    {:else}
-      <!-- if neerslagstatistieken show 4 delen -->
-      <g transform='translate({legendMargin},0)'>
-        {#each neerslagregime_zomer.features as regime, i}
-          <path
-            d={path(regime)}
-            class='shape'
-            fill='none'
-            stroke='grey'
-          />
         {/each}
       </g>
     {/if}
