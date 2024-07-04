@@ -31,6 +31,7 @@ export async function load(){
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-pet_sum-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-neerslagtekort-ANN_racmo_interp_variabiliteit.csv"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/zeespiegelstijging.csv"),
+    dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/csvdata-11juni/langjarig-neerslagtekort-t10-ANN_racmo_interp_variabiliteit.csv"),
 ])
 
   const indicator_data = {
@@ -59,6 +60,7 @@ export async function load(){
     'Jaarlijkse referentieverdamping':response[22],
     'Maximaal neerslagtekort':response[23],
     'Zeespiegelstijging':response[24],
+    'Maximaal neerslagtekort 1:10 jaar':response[25],
 
   }
   

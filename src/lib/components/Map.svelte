@@ -14,6 +14,7 @@
   const provincies = datajson[0]
   const cellen = datajson[1];
   const grenzen = datajson[2];
+  const neerslagregime_zomer = datajson[3];
 
   console.log('datajson', datajson)
 
@@ -83,10 +84,9 @@
           </g>
         {/each}
       </g>
-    {:else}
-    <!-- if zeespiegelstijging show country borders -->
-    <g transform='translate({legendMargin},0)'>
-      <g class='borders'>
+    {:else if $indicatorSelection === 'Zeespiegelstijging'}
+      <!-- if zeespiegelstijging show country borders -->
+      <g class='borders' transform='translate({legendMargin},0)'>
         <path
           d={path(grenzen.features[0])}
           class='shape'
@@ -94,7 +94,18 @@
           stroke='grey'
         />
       </g>
-    </g>
+    {:else}
+      <!-- if neerslagstatistieken show 4 delen -->
+      <g transform='translate({legendMargin},0)'>
+        {#each neerslagregime_zomer.features as regime, i}
+          <path
+            d={path(regime)}
+            class='shape'
+            fill='none'
+            stroke='grey'
+          />
+        {/each}
+      </g>
     {/if}
   </svg>
 </div>

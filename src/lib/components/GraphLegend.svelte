@@ -26,7 +26,7 @@
 </script>
 
 <g transform='translate({0},{h+80})' font-size='16'>
-  <rect width={300} height='150' x='0' y='-20' fill='white' stroke='lightgrey'/>
+  <rect width={300} height='150' x='0' y='-20' fill='white' stroke='lightgrey' rx='15'/>
   <g transform='translate({58},0)'>
     <g transform='translate(0,10)' on:mouseover={() => mouseOverScenario('hoog', 'laag')} on:mouseout={() => mouseOutScenario()}>
       <text class='legend-text-hoog' fill='red' cursor='default' >Hoogste scenario</text>

@@ -13,7 +13,7 @@
   $: legendScale = scaleLinear()
     .domain(extent($colorScale.domain()))
     .range([innerHeight, 0])
-    .nice()
+    // .nice()
 
   $: yAxis = axisLeft(legendScale).ticks(6)
 
