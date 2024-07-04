@@ -6,7 +6,6 @@
   import Line from './Line.svelte';
   import Area from './Area.svelte'
   import ZeespiegelHover from './ZeespiegelHover.svelte';
-  import GraphLegend from './GraphLegend.svelte';
 
   export let dataProjection;
   export let w;
@@ -70,7 +69,7 @@
       'variableLow': 'Lage uitstootscenario-range (low)',
       'variableHigh': 'Lage uitstootscenario-range (high)',
       'color': colorGematigd,
-      'legendText': 'Gematigd',
+      'legendText': 'Laag',
       'hachureAngle': '140',
       'legendText2': 'Met gematigde',
       'y_offset_text': ['48', '62']
@@ -79,7 +78,7 @@
       'variableLow': 'Hoge uitstootscenario-range (low)',
       'variableHigh': 'Hoge uitstootscenario-range (high)',
       'color': colorSterk,
-      'legendText': 'Sterk',
+      'legendText': 'Hoog',
       'hachureAngle': '60',
       'legendText2': 'Met sterke',
       'y_offset_text': ['53', '67']
@@ -119,7 +118,7 @@
         width={innerWidth} height={innerHeight} hachureAngle={median_line.hachureAngle} fillStyle='hachure' 
         hachureGap='4'/>
       
-      <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48} className='legendText' style='fill:{median_line.color}' opacity={areaOpacity + 0.2}>
+      <!-- <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48} className='legendText' style='fill:{median_line.color}' opacity={areaOpacity + 0.2}>
         {median_line.legendText2}
       </text>
       <text 
@@ -129,7 +128,7 @@
         style='fill:{median_line.color}'
         opacity={areaOpacity + 0.2}>
         klimaatverandering 
-      </text>
+      </text> -->
     </g>
   {/each}
 
@@ -138,9 +137,6 @@
 
   <ZeespiegelHover dataProjection={dataProjection} linesData={median_lines} xScale={xScale} yScale={yScale} height={innerHeight} areaOpacity={areaOpacity} {margin}/>
 
-  <g transform='translate(50)'>
-    <GraphLegend {xScale} {yScale} {w} h={innerHeight} {margin} />
-  </g>
 </svg>
 
 <style>

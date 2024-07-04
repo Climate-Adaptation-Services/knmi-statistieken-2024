@@ -51,7 +51,7 @@
             <text
               style='fill:{d.color}'
               class='legendCircles'
-              x='-26'
+              x='-5'
               y={35 + (linesData.length - i) * 20}
             >{d.legendText}</text>
             <text
