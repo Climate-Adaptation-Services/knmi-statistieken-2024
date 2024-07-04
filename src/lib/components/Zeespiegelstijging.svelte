@@ -110,14 +110,14 @@
         width={innerWidth} height={innerHeight} hachureAngle={median_line.hachureAngle} fillStyle='hachure' 
         hachureGap='4'/>
       
-      <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48} className='legendText' fill={median_line.color} opacity={areaOpacity + 0.2}>
+      <text x={innerWidth + 9} y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 48} className='legendText' style='fill:{median_line.color}' opacity={areaOpacity + 0.2}>
         {median_line.legendText2}
       </text>
       <text 
         x={innerWidth + 9} 
         y={yScale(dataProjection[dataProjection.length - 1][median_line.variableHigh]) + 62}
         class='legendText' 
-        fill={median_line.color} 
+        style='fill:{median_line.color}'
         opacity={areaOpacity + 0.2}>
         klimaatverandering 
       </text>
