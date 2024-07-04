@@ -37,10 +37,12 @@ export async function load(){
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/10-daagse%20neerslag%20die%20eens%20per%201000%20jaar%20wordt%20overschreden"),
+    
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Dagelijkse%20hoeveelheid%20die%20eens%20per%201000%20jaar%20wordt%20overschreden"),
+    
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%2010%20jaar%20wordt%20overschreden"),
     dsv(',', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/neerslagstatistieken/Uurneerslag%20die%20eens%20per%20100%20jaar%20wordt%20overschreden"),
@@ -73,8 +75,9 @@ export async function load(){
     'Jaarlijkse referentieverdamping':response[22],
     'Maximaal neerslagtekort':response[23],
     'Zeespiegelstijging':response[24],
-    'Maximaal neerslagtekort 1:10 jaar':response[25],
+    // 'Maximaal neerslagtekort 1:10 jaar':response[25],
 
+    
     // Neerslagstatistieken
     '10-daagse neerslag - eens per jaar':response[26],
     '10-daagse neerslag - eens per 10 jaar':response[27],
