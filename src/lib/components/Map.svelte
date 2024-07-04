@@ -43,12 +43,12 @@
 
   afterUpdate(() => select('.id-' + $gridSelection).raise())
 
-  // $: neerslagRegimesFeatures = ($neerslagIndicatoren.includes($indicatorSelection))
-  //   ? ($indicatorSelection === ) 
-  //     ? 
-  //     :
-  //   : null
-
+  $: neerslagRegimesFeatures = ($neerslagIndicatoren.includes($indicatorSelection))
+    ? ($indicatorSelection.slice(0,18) === '10-daagse neerslag') 
+      ? neerslagregimes_winter.features
+      : neerslagregimes_jaar.features
+    : null
+  
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
@@ -74,7 +74,7 @@
     {:else if $neerslagIndicatoren.includes($indicatorSelection)}
       <!-- if neerslagstatistieken show 4 delen -->
       <g transform='translate({legendMargin},0)'>
-        {#each neerslagregimes_jaar.features as regime, i}
+        {#each neerslagRegimesFeatures as regime, i}
           <path
             d={path(rewind(regime,{reverse:true}))}
             class='shape'
