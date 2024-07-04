@@ -4,7 +4,6 @@
   import XAxis from './axes/XAxis.svelte';
   import YAxis from './axes/YAxis.svelte';
   import Line from './Line.svelte';
-  // import LLHI from './LLHI.svelte';
   import Area from './Area.svelte'
   import ZeespiegelHover from './ZeespiegelHover.svelte';
   import GraphLegend from './GraphLegend.svelte';
@@ -95,10 +94,20 @@
   <XAxis scale={xScale} xTransform={0} yTransform={innerHeight} className="lineChart__xAxis" axis={xAxis}/>
   <YAxis xTransform={50} yTransform={0} scale={yScale} className="lineChart__yAxis" axis={yAxis}/>
   <text text-anchor='middle' transform='translate(15, {yScale(70)}) rotate(-90)'>Stijging in cm</text>
-  <!-- <LLHI data={dataLLHI} color={'#5b5b5b'} variable={'sej_high'} legendText='LLHI' xScale={xScale} yScale={yScale} className={'llhi'+$country} {margin} /> -->
   
   <Line data={dataProjection.slice(0,100)} color={'black'} variable='Trend metingen' legendText='Median' xScale={xScale} yScale={yScale} className={'trend'} {margin} />
   <Line data={dataProjection.slice(0,123)} color={'grey'} variable='Jaargemiddelde' legendText='Median' xScale={xScale} yScale={yScale} className={'jaargemiddelde'} {margin}/>
+
+  <g class='trendlijn' transform='translate({0},{yScale(18)})'>
+    <line x1={xScale(1912)} x2={xScale(1920)} stroke='black' stroke-width='2.2'/>
+    <text x={xScale(1924)} font-size='12' dy='0.36em'>Trend metingen</text>
+  </g>
+  <g class='jaargemiddeldelijn' transform='translate({0},{yScale(26)})'>
+    <line x1={xScale(1912)} x2={xScale(1915)} y1={2} y2={8} stroke='grey' stroke-width='1'/>
+    <line x1={xScale(1915)} x2={xScale(1918)} y1={8} y2={-8} stroke='grey' stroke-width='1'/>
+    <line x1={xScale(1918)} x2={xScale(1921)} y1={-8} y2={2} stroke='grey' stroke-width='1'/>
+    <text x={xScale(1924)} font-size='12' dy='0.36em'>Jaargemiddelde</text>
+  </g>
 
   {#each median_lines as median_line}
     <g>
