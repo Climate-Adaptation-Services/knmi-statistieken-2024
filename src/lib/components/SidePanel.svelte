@@ -1,9 +1,11 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection, neerslagIndicatoren } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection, neerslagIndicatoren, modal } from '$lib/stores';
   import { select, scaleLinear, selectAll } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
   import Select from 'svelte-select'
+  import { bind } from 'svelte-simple-modal';
+  import Info from './Info.svelte';
 
   export let w;
   export let h;
@@ -73,6 +75,9 @@
   const themeImageOffset = 10
   $: themeImageSize = (w - 7*themeImageOffset)/4
 
+  const showModal = (type) => {
+    modal.set(bind(Info, { type : type}))
+  };
 
 </script>
 
@@ -84,13 +89,8 @@
 {/if}
 
 <div class='sidepanel-content'>
-  <p class='more-info' style='cursor:default'>?</p>
-  <!-- <div class='indicator-info'>
-    <p style='padding:3px 10px 3px 10px; border-radius:50px; color:white;background-color:#36575B; float:left'><strong>{$indicatorSelectionMetaData.Indicator}</strong></p>
-    <hr width='100%'>
-    <p>{$indicatorSelectionMetaData.Omschrijving}</p>
-  </div> -->
-  <h3><strong class='step'>1</strong> Selecteer een thema</h3>
+  <img src='/images/about.png' width='30px' style='margin-top:20px;cursor:pointer' on:click={() => showModal('intro')}/>
+  <h3 style='margin-top:25px'><strong class='step'>1</strong> Selecteer een thema</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}

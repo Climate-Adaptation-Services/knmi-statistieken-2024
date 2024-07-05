@@ -2,10 +2,11 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection } from '$lib/stores.js';
+  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal } from '$lib/stores.js';
   import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
   import Zeespiegelstijging from '$lib/components/Zeespiegelstijging.svelte';
-    import Tooltip from '$lib/components/Tooltip.svelte';
+  import Tooltip from '$lib/components/Tooltip.svelte';
+  import Modal from 'svelte-simple-modal';
 
   export let data
   $: console.log(data)
@@ -61,6 +62,9 @@
   </div>
 
   <Tooltip />
+  
+  <Modal show={$modal} style='position:absolute; left:0'></Modal>
+
 </div>
 
 
