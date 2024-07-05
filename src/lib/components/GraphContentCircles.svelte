@@ -37,7 +37,7 @@
     {#each ['2050', '2100'] as periodName, i}
       {#each textLocations as perc}
         {#if ($scenarioSelection === 'laag' || $graphHover === periodName) }
-          <text x={xScale(datalist_laag[i+1].period)} y={yScale(datalist_laag[i+1][perc])} style='fill:#17A3D3' text-anchor='end' dx='-0.5em'>{rounding(datalist_laag[i+1][perc])}</text>     
+          <text x={xScale(datalist_laag[i+1].period)} y={yScale(datalist_laag[i+1][perc])} style='fill:#17A3D3; font-size:13px;' text-anchor='end' dx='-0.5em'>{rounding(datalist_laag[i+1][perc])}</text>     
         {/if}
       {/each}
     {/each}
@@ -46,7 +46,7 @@
     {#each ['2050', '2100'] as periodName, i}
       {#each textLocations as perc}
         {#if ($scenarioSelection === 'hoog' || $graphHover === periodName) }
-          <text x={xScale(datalist_hoog[i+1].period)} y={yScale(datalist_hoog[i+1][perc])} style='fill:red' dx='0.5em'>{rounding(datalist_hoog[i+1][perc])}</text>     
+          <text x={xScale(datalist_hoog[i+1].period)} y={yScale(datalist_hoog[i+1][perc])} style='fill:red; font-size:13px;' dx='0.5em'>{rounding(datalist_hoog[i+1][perc])}</text>     
         {/if}
       {/each}
     {/each}
@@ -54,7 +54,7 @@
   <g class='texts-huidig'>
     {#each textLocations as perc}
       {#if ($scenarioSelection !== 'beide' || $graphHover === 'Huidig klimaat') }
-        <text x={xScale(datalist_hoog[0].period)} y={yScale(datalist_hoog[0][perc])} style='fill:black' dx='0.5em'>{rounding(datalist_hoog[0][perc])}</text>     
+        <text x={xScale(datalist_hoog[0].period)} y={yScale(datalist_hoog[0][perc])} style='fill:black; font-size:13px;' dx='0.5em'>{rounding(datalist_hoog[0][perc])}</text>     
       {/if}
     {/each}
   </g>
