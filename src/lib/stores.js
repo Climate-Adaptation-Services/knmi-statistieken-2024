@@ -8,6 +8,11 @@ export const indicatorSelection = writable('Aantal tropische dagen');
 export const indicatorData = writable(null)
 // indicator metadata
 export const indicatorMetaData = writable(null)
+
+// Tooltip info
+export const hoveredInfo = writable(null)
+export const mousePosition = writable(null)
+
 export const gridSelection = writable(689)
 export const colorScale = writable(null)
 export const gridHover = writable(null)

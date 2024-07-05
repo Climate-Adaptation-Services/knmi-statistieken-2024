@@ -5,6 +5,7 @@
   import { colorScale, indicatorData, indicatorMetaData, indicatorSelection } from '$lib/stores.js';
   import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
   import Zeespiegelstijging from '$lib/components/Zeespiegelstijging.svelte';
+    import Tooltip from '$lib/components/Tooltip.svelte';
 
   export let data
   $: console.log(data)
@@ -58,6 +59,8 @@
   <div class='indicator-explanation'>
     <IndicatorExplanation />
   </div>
+
+  <Tooltip />
 </div>
 
 
