@@ -1,5 +1,5 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection } from '$lib/stores';
+  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection, neerslagIndicatoren } from '$lib/stores';
   import { select, scaleLinear, selectAll } from 'd3';
   import rough from 'roughjs';
   import { afterUpdate } from 'svelte';
@@ -114,7 +114,7 @@
       <Select --font-size="14px" items={$period_options} placeholder="Selecteer periode..." value={$periodSelection} clearable={false} on:change={onChangePeriod}/>
     </div>
     <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
-    <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>Klik op een bolletje op de kaart</p>
+    <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>{`Klik op een ${($neerslagIndicatoren.includes($indicatorSelection)) ? 'gebied' : 'bolletje'} op de kaart`}</p>
   {/if}
   <img class='knmilogo' src='/images/logo.svg'/>
 </div>
