@@ -1,5 +1,5 @@
 <script>
-  import { scenarioSelection, graphHover, neerslagIndicatoren, indicatorSelection } from "$lib/stores";
+  import { scenarioSelection, graphHover, temperatuurIndicatoren, neerslagIndicatoren, indicatorSelection } from "$lib/stores";
   
   export let xScale
   export let yScale
@@ -11,7 +11,7 @@
     : ['p5', 'median', 'p95']
 
   function rounding(value){
-    return ($neerslagIndicatoren.includes($indicatorSelection))
+    return ($neerslagIndicatoren.includes($indicatorSelection) || $temperatuurIndicatoren.includes($indicatorSelection) )
       ? Math.round(value*10)/10
       : Math.round(value)
   }

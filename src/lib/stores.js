@@ -25,6 +25,7 @@ export const graphHover = writable('null')
 // Hovered year for zeespiegelstijging
 export const hoveredYear = writable(null)
 export const themeSelection = writable('Hitte')
+export const temperatuurIndicatoren = readable(['Gemiddelde jaartemperatuur', 'Gemiddelde zomertemperatuur','Gemiddelde wintertemperatuur'])
 export const neerslagIndicatoren = readable(['Uurneerslag - eens per jaar','Uurneerslag - eens per 10 jaar','Uurneerslag - eens per 100 jaar','Uurneerslag - eens per 1000 jaar ','Dagneerslag - eens per jaar','Dagneerslag - eens per 10 jaar','Dagneerslag - eens per 100 jaar','Dagneerslag - eens per 1000 jaar','10-daagse neerslag - eens per jaar','10-daagse neerslag - eens per 10 jaar','10-daagse neerslag - eens per 100 jaar','10-daagse neerslag - eens per 1000 jaar'])
 export const period_options = readable([
   { value: 'ref', label: 'Huidig klimaat'},
