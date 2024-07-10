@@ -42,26 +42,26 @@
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='red'/>
     </g>
-    <image href='/images/info.png' width='16' y='-3' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het hoogste scenario presenteert de waarde voor het scenario dat de grootste verandering laat zien. Dit kan Ln, Ld, Hn, of Hd zijn en hangt af van de gekozen indicator. Onder de figuren staat weergegeven welk scenario voor het hoogste scenario is genomen.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='-3' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het hoogste scenario presenteert de waarde voor het scenario dat de grootste verandering laat zien. Dit is het Hn- of Hd-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.')} on:mouseout={infoMouseOut}/>
     <g transform='translate(0,40)' on:mouseover={() => mouseOverScenario('laag', 'hoog')} on:mouseout={() => mouseOutScenario()}>
       <text class='legend-text-laag' fill='#17A3D3' cursor='default'>Laagste scenario</text>
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
     </g>
-    <image href='/images/info.png' width='16' y='27' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het laagste scenario presenteert de waarde voor het scenario dat de kleinste verandering laat zien. Dit kan Ln, Ld, Hn, of Hd zijn en hangt af van de gekozen indicator. Onder de figuren staat weergegeven welk scenario voor het laagste scenario is genomen.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='27' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het laagste scenario presenteert de waarde voor het scenario dat de kleinste verandering laat zien. Dit is het Ln- of Ld-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.')} on:mouseout={infoMouseOut}/>
     <g class='langjarig' style='fill:grey' transform='translate(-20,66)'>
       <circle r='4'/>
       <line x2={50} stroke='grey'/>
       <circle r='4' cx='50'/>
       <text font-size='12' x='65' y='0.32em'>Gemiddelde</text>
     </g>
-    <image href='/images/info.png' width='16' y='57' x='214' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, 2050 en 2100 gemiddelde waarden over perioden van 30 jaar. ')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='57' x='214' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.')} on:mouseout={infoMouseOut}/>
     <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
       <rect width='50' height='30' fill='grey' x='0' y='-15' opacity='0.2'/>
       <line x1='50' y1='-15' x2='50' y2='15' stroke='grey' stroke-dasharray='4 4' stroke-width='2'/>
       <text font-size='12' x='65' y='0.32em'>Jaar op jaar variatie (90% band)</text>
     </g>
-    <image href='/images/info.png' width='16' y='91.5' x='219' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Door natuurlijke variatie zullen de waarden het ene jaar hoger en het andere jaar lager zijn dan de gemiddelde waarden  weergegeven met de punten. De figuur geeft daarom met lichtgekleurde blauwe en rode banden weer waarbinnen 90% van de afzonderlijke jaarwaarden valt. ')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='91.5' x='219' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Door natuurlijke variatie zullen de waarden het ene jaar hoger en het andere jaar lager zijn dan de gemiddelde waarden weergeven met de punten. De figuur geeft daarom met lichtgekleurde blauwe en rode banden weer waarbinnen de 90% van de afzonderlijke jaarwaarden valt.')} on:mouseout={infoMouseOut}/>
   </g>
   <!-- <h3>Toon scenario grafiek</h3>
   <div class='switch-div'> -->
