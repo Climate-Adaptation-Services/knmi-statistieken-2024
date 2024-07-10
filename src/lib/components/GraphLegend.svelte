@@ -53,7 +53,7 @@
       <circle r='4'/>
       <line x2={50} stroke='grey'/>
       <circle r='4' cx='50'/>
-      <text font-size='12' x='65' y='0.32em'>Langjarig gemiddelde (30 jaar)</text>
+      <text font-size='12' x='65' y='0.32em'>Gemiddelde</text>
     </g>
     <image href='/images/info.png' width='16' y='57' x='214' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, 2050 en 2100 gemiddelde waarden over perioden van 30 jaar. ')} on:mouseout={infoMouseOut}/>
     <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
