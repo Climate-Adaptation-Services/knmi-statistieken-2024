@@ -44,7 +44,7 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
-    <h3 style='color:grey'>Statistieken voor locatie op kaart</h3>
+    <h3 style='color:grey'>Statistieken locatie op kaart</h3>
     <!-- <p style='font-style:italic; font-size:14px'>Beweeg de muis over de grafiek of legenda voor meer info</p> -->
   </div>
 </div>
