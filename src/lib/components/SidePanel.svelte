@@ -115,6 +115,7 @@
     </div>
     <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
     <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>{`Klik op een ${($neerslagIndicatoren.includes($indicatorSelection)) ? 'gebied' : 'bolletje'} op de kaart`}</p>
+    <h4>Bron data: KNMI</h4>
   {/if}
   
 </div>
@@ -146,6 +147,17 @@
     width:100%;
     text-align:center;
     margin:30px 0px 15px 0px;
+  }
+
+  h4{
+    color:white;
+    width:100%;
+    text-align:left;
+    margin-left: 50px;
+    margin-bottom: 0px;
+    font-style: normal;
+    font-size: 14px;
+    
   }
 
   .themas{
