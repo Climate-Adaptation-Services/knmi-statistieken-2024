@@ -116,7 +116,7 @@
     <h3><strong class='step'>4</strong> Pas locatie aan op de kaart</h3>
     <p style='color:white; font-style:italic; font-size:12px; margin-top:0'>{`Klik op een ${($neerslagIndicatoren.includes($indicatorSelection)) ? 'gebied' : 'bolletje'} op de kaart`}</p>
   {/if}
-  <img class='knmilogo' src='/images/logo.svg'/>
+  
 </div>
 
 
