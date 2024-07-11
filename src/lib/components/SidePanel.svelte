@@ -152,8 +152,8 @@
   h4{
     color:white;
     width:100%;
-    text-align:left;
-    margin-left: 50px;
+    text-align:center;
+    
     margin-bottom: 0px;
     font-style: normal;
     font-size: 14px;
