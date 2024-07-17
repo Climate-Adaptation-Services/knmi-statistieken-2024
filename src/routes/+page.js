@@ -93,6 +93,7 @@ export async function load(){
     'Uurneerslag - eens per 1000 jaar':response[37],
     
   }
+
   
   return { NLsteden, indicator_data, indicator_metadata };
 }

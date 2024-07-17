@@ -153,7 +153,6 @@
     color:white;
     width:100%;
     text-align:center;
-    
     margin-bottom: 0px;
     font-style: normal;
     font-size: 14px;
