@@ -49,13 +49,13 @@
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
     </g>
     <image href='/images/info.png' width='16' y='27' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het laagste scenario presenteert de waarde voor het scenario dat de kleinste verandering laat zien. Dit is het Ln- of Ld-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.')} on:mouseout={infoMouseOut}/>
-    <g class='langjarig' style='fill:grey' transform='translate(-20,66)'>
+    <g class='langjarig' style='fill:grey' transform='translate(25,66)'>
       <circle r='4'/>
       <line x2={50} stroke='grey'/>
       <circle r='4' cx='50'/>
       <text font-size='12' x='65' y='0.32em'>Gemiddelde</text>
     </g>
-    <image href='/images/info.png' width='16' y='57' x='117' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='57' x='162' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.')} on:mouseout={infoMouseOut}/>
     <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
       <rect width='50' height='30' fill='grey' x='0' y='-15' opacity='0.2'/>
       <line x1='50' y1='-15' x2='50' y2='15' stroke='grey' stroke-dasharray='4 4' stroke-width='2'/>
