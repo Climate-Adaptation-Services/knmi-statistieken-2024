@@ -90,7 +90,7 @@
 
 <div class='sidepanel-content'>
   <img src='/images/about.png' width='30px' style='margin-top:20px;cursor:pointer' on:click={() => showModal('intro')}/>
-  <h3 style='margin-top:25px'><strong class='step'>1</strong> Selecteer een thema</h3>
+  <h3 style='margin-top:25px'><strong class='step'>1</strong> Select a theme</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
