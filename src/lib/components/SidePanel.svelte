@@ -145,6 +145,7 @@
   h2, h3{
     color:white;
     width:100%;
+    font-size: 2.3vh;
     text-align:center;
     margin:30px 0px 15px 0px;
   }
