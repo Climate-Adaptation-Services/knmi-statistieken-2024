@@ -28,11 +28,11 @@ export const themeSelection = writable('Heat')
 export const temperatuurIndicatoren = readable(['Gemiddelde jaartemperatuur', 'Gemiddelde zomertemperatuur','Gemiddelde wintertemperatuur'])
 export const neerslagIndicatoren = readable(['Uurneerslag - eens per jaar','Uurneerslag - eens per 10 jaar','Uurneerslag - eens per 100 jaar','Uurneerslag - eens per 1000 jaar','Dagneerslag - eens per jaar','Dagneerslag - eens per 10 jaar','Dagneerslag - eens per 100 jaar','Dagneerslag - eens per 1000 jaar','10-daagse neerslag - eens per jaar','10-daagse neerslag - eens per 10 jaar','10-daagse neerslag - eens per 100 jaar','10-daagse neerslag - eens per 1000 jaar'])
 export const period_options = readable([
-  { value: 'ref', label: 'Huidig klimaat'},
-  { value: '2050laag', label: '2050 laagste scenario'},
-  { value: '2050hoog', label: '2050 hoogste scenario'},
-  { value: '2100laag', label: '2100 laagste scenario'},
-  { value: '2100hoog', label: '2100 hoogste scenario'}
+  { value: 'ref', label: 'Current climate'},
+  { value: '2050laag', label: '2050 lowest scenario'},
+  { value: '2050hoog', label: '2050 highest scenario'},
+  { value: '2100laag', label: '2100 lowest scenario'},
+  { value: '2100hoog', label: '2100 highest scenario'}
 ]);
 
 export const indicatorSelectionMetaData = derived(
@@ -45,7 +45,7 @@ export const indicatorSelectionMetaData = derived(
 export const periodName = derived(
   [periodSelection],
   ([$periodSelection]) => ($periodSelection === 'ref')
-    ? 'Huidig klimaat'
+    ? 'Current climate'
     : ($periodSelection === '2100hoog' || $periodSelection === '2100laag')
       ? '2100'
       : '2050'
