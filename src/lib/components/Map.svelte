@@ -33,7 +33,7 @@
   
   $: path = geoPath(projection);
 
-  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Aantal tropische dagen')[0]
+  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === '')[0]
 
   colorScale.set(
     scaleLinear()
@@ -54,18 +54,18 @@
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
     <h3 class='indicator-title' style='margin-bottom:10px'>{$indicatorSelection}</h3>
-    {#if $indicatorSelection !== 'Zeespiegelstijging'}
+    {#if $indicatorSelection !== 'Sealevel rise'}
       <h3 style='margin-top:0px; margin-bottom:10px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
     {/if}
     {#if $neerslagIndicatoren.includes($indicatorSelection)}
-      <h3 style='margin-top:0px'><strong style='color:grey'>Neerslagregime: </strong>{$regimeSelection}</h3>
+      <h3 style='margin-top:0px'><strong style='color:grey'>Rainfall regime: </strong>{$regimeSelection}</h3>
     {/if}
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    {#if $indicatorSelection === 'Zeespiegelstijging'}
-      <!-- if zeespiegelstijging show country borders -->
+    {#if $indicatorSelection === 'Sealevel rise'}
+      <!-- if Sealevel rise show country borders -->
       <g class='borders' transform='translate({legendMargin},0)'>
         <path
           d={path(grenzen.features[0])}
