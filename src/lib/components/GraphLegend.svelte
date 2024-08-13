@@ -42,26 +42,26 @@
       <rect width='30' height='20' fill='red' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='red'/>
     </g>
-    <image href='/images/info.png' width='16' y='-3' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het hoogste scenario presenteert de waarde voor het scenario dat de grootste verandering laat zien. Dit is het Hn- of Hd-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='-3' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'The highest scenario presents the value for the scenario that shows the greatest change. This is the Hn or Hd scenario, depending on the indicator you are looking at. Below the figures, it indicates which scenario this is.')} on:mouseout={infoMouseOut}/>
     <g transform='translate(0,40)' on:mouseover={() => mouseOverScenario('laag', 'hoog')} on:mouseout={() => mouseOutScenario()}>
       <text class='legend-text-laag' fill='#17A3D3' cursor='default'>Lowest scenario</text>
       <rect width='30' height='20' fill='#17A3D3' x='150' y='-15' opacity='0.2'/>
       <line x1='150' y1='-5' x2='180' y2='-5' stroke='#17A3D3'/>
     </g>
-    <image href='/images/info.png' width='16' y='27' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Het laagste scenario presenteert de waarde voor het scenario dat de kleinste verandering laat zien. Dit is het Ln- of Ld-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='27' x='190' opacity='0.6' on:mouseover={(e) => infoHover(e, 'The lowest scenario presents the value for the scenario that shows the smallest change. This is the Ln or Ld scenario, depending on the indicator you are looking at. Below the figures, it indicates which scenario this is.')} on:mouseout={infoMouseOut}/>
     <g class='langjarig' style='fill:grey' transform='translate(25,66)'>
       <circle r='4'/>
       <line x2={50} stroke='grey'/>
       <circle r='4' cx='50'/>
       <text font-size='12' x='65' y='0.32em'>Mean value</text>
     </g>
-    <image href='/images/info.png' width='16' y='57' x='162' opacity='0.6' on:mouseover={(e) => infoHover(e, 'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='57' x='162' opacity='0.6' on:mouseover={(e) => infoHover(e, 'The points in the graph show the average for all available years for the current climate, around 2050, and 2100.')} on:mouseout={infoMouseOut}/>
     <g class='jaar-op-jaar' style='fill:grey' transform='translate(-20,100)'>
       <rect width='50' height='30' fill='grey' x='0' y='-15' opacity='0.2'/>
       <line x1='50' y1='-15' x2='50' y2='15' stroke='grey' stroke-dasharray='4 4' stroke-width='2'/>
       <text font-size='12' x='56' y='0.32em'>Year by year variation (90% band)</text>
     </g>
-    <image href='/images/info.png' width='16' y='91.5' x='219' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Door natuurlijke variatie zullen de waarden het ene jaar hoger en het andere jaar lager zijn dan de gemiddelde waarden weergeven met de punten. De figuur geeft daarom met lichtgekleurde blauwe en rode banden weer waarbinnen de 90% van de afzonderlijke jaarwaarden valt.')} on:mouseout={infoMouseOut}/>
+    <image href='/images/info.png' width='16' y='91.5' x='219' opacity='0.6' on:mouseover={(e) => infoHover(e, 'Due to natural variation, the values will be higher in some years and lower in others than the average values shown by the points. The figure therefore displays light-colored blue and red bands that indicate where 90% of the individual yearly values fall.')} on:mouseout={infoMouseOut}/>
   </g>
   <!-- <h3>Toon scenario grafiek</h3>
   <div class='switch-div'> -->

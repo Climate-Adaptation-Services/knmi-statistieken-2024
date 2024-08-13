@@ -106,7 +106,7 @@
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
 
 <rect class='gradientrect' pointer-events='none' x={-5} y={margin.top} width={w+10} height={innerHeight-margin.top} 
-  fill={($graphHover === 'Huidig klimaat') 
+  fill={($graphHover === 'Current climate') 
           ? 'url(#huidigGradient)' 
           : ($graphHover === '2050') 
             ? 'url(#2050Gradient)' 
