@@ -57,9 +57,9 @@
   {:catch error}
     <p>An error occurred!</p>
   {/await}
-  <!-- <div class='indicator-explanation'>
+  <div class='indicator-explanation'>
     <IndicatorExplanation />
-  </div> -->
+  </div>
 
   <Tooltip />
   
