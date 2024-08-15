@@ -3,7 +3,7 @@ import { writable, derived, readable } from "svelte/store"
 // circle shapes
 export const circleFeatures = writable(null)
 // only the indicator name
-export const indicatorSelection = writable('Aantal tropische dagen');
+export const indicatorSelection = writable('Number of tropical days');
 // all indicator data
 export const indicatorData = writable(null)
 // indicator metadata
@@ -25,8 +25,8 @@ export const graphHover = writable('null')
 // Hovered year for zeespiegelstijging
 export const hoveredYear = writable(null)
 export const themeSelection = writable('Heat')
-export const temperatuurIndicatoren = readable(['Gemiddelde jaartemperatuur', 'Gemiddelde zomertemperatuur','Gemiddelde wintertemperatuur'])
-export const neerslagIndicatoren = readable(['Uurneerslag - eens per jaar','Uurneerslag - eens per 10 jaar','Uurneerslag - eens per 100 jaar','Uurneerslag - eens per 1000 jaar','Dagneerslag - eens per jaar','Dagneerslag - eens per 10 jaar','Dagneerslag - eens per 100 jaar','Dagneerslag - eens per 1000 jaar','10-daagse neerslag - eens per jaar','10-daagse neerslag - eens per 10 jaar','10-daagse neerslag - eens per 100 jaar','10-daagse neerslag - eens per 1000 jaar'])
+export const temperatuurIndicatoren = readable(['Average annual temperature', 'Average summer temperature','Average winter temperature'])
+export const neerslagIndicatoren = readable(['10-day precipitation - once per year', '10-day precipitation - once per 10 years', '10-day precipitation - once per 100 years', '10-day precipitation - once per 1000 years', 'Daily precipitation - once per year', 'Daily precipitation - once per 10 years', 'Daily precipitation - once per 100 years', 'Daily precipitation - once per 1000 years', 'Hourly precipitation - once per year', 'Hourly precipitation - once per 10 years', 'Hourly precipitation - once per 100 years', 'Hourly precipitation - once per 1000 years'])
 export const period_options = readable([
   { value: 'ref', label: 'Current climate'},
   { value: '2050laag', label: '2050 lowest scenario'},
@@ -54,7 +54,7 @@ export const periodName = derived(
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
-    if($indicatorSelection === 'Sealevel rise' || $neerslagIndicatoren.includes($indicatorSelection)){
+    if($indicatorSelection === 'Sea level rise' || $neerslagIndicatoren.includes($indicatorSelection)){
       return null
     }else{
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]

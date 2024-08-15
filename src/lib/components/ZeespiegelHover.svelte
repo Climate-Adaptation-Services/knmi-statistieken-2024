@@ -38,7 +38,7 @@
           y='30'
           class='legendYear'
           font-size='14'
-        >Mediaan</text>
+        >Median</text>
         <text
           x='135'
           y='30'
@@ -139,8 +139,8 @@
   {:else}
     <g transform={`translate(${margin.left+90},${margin.top+40})`}>
       <text font-style='italic' text-anchor='middle' fill='#808080'>
-        <tspan>Beweeg de muis over de grafiek</tspan>
-        <tspan x=0 y='1em'>om meer detail de tonen </tspan>
+        <tspan>Hover over the graph</tspan>
+        <tspan x=0 y='1em'>to show more detail </tspan>
       </text>
       
     </g>

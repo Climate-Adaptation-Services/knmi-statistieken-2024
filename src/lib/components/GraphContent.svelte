@@ -22,12 +22,12 @@
     : $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0] 
   
   $: datalist_laag = [
-    {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
+    {'period':'Current climate', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'2050', 'median':dataSelected['2050laag'], 'p5':dataSelected['2050laag_p5'], 'p95':dataSelected['2050laag_p95']},
     {'period':'2100', 'median':dataSelected['2100laag'], 'p5':dataSelected['2100laag_p5'], 'p95':dataSelected['2100laag_p95']}
   ]
   $: datalist_hoog = [
-    {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
+    {'period':'Current climate', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'2050', 'median':dataSelected['2050hoog'], 'p5':dataSelected['2050hoog_p5'], 'p95':dataSelected['2050hoog_p95']},
     {'period':'2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]

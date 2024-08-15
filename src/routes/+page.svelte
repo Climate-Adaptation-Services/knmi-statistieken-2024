@@ -47,19 +47,19 @@
     </div>
     <div class='graph'>
       {#if mapWidth}
-        {#if $indicatorSelection !== 'Zeespiegelstijging'}
+        {#if $indicatorSelection !== 'Sea level rise'}
           <Graph w={mapWidth} h={mapHeight}/>
         {:else}
-          <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData['Zeespiegelstijging']}/>
+          <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData['Sea level rise']}/>
         {/if}
       {/if}
     </div>
   {:catch error}
     <p>An error occurred!</p>
   {/await}
-  <div class='indicator-explanation'>
+  <!-- <div class='indicator-explanation'>
     <IndicatorExplanation />
-  </div>
+  </div> -->
 
   <Tooltip />
   

@@ -93,7 +93,7 @@
   <h3 style='margin-top:25px'><strong class='step'>1</strong> Select a theme</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
-      {#each ['Heat', 'Drought', 'Waterlogging' , 'Sealevel rise'] as th,i}
+      {#each ['Heat', 'Drought', 'Waterlogging' , 'Sea level rise'] as th,i}
         <g class='thema' transform='translate({themeImageOffset*2+(themeImageOffset+themeImageSize)*i},{0})' opacity={($themeSelection !== th) ? '0.4' : '1'}>
           <circle r={themeImageSize/2} cx={themeImageSize/2} cy={themeImageSize/2} fill='white'/>
           <image href={'/images/' + th + '.png'} width={themeImageSize} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => onChangeTheme(th)}/>
@@ -104,7 +104,7 @@
       {/each}
     </svg>
   </div>
-  {#if $indicatorSelection !== 'Sealevel rise'}
+  {#if $indicatorSelection !== 'Sea level rise'}
     <h3><strong class='step'>2</strong> Select an indicator</h3>
     <div class='selection-div'>
       <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>

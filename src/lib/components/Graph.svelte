@@ -9,7 +9,7 @@
 
   $: hoogsteWaarde = ($neerslagIndicatoren.includes($indicatorSelection))
     ? '2100hoog'
-    : (['Aantal vorstdagen', 'Aantal ijsdagen', 'Verwarmingsgraaddagen', 'Zomerneerslag'].includes($indicatorSelection))
+    : (['Number of frost days', 'Number of ice days', 'Heating degree days', 'Summer precipitation'].includes($indicatorSelection))
       ? 'ref_p95'
       : '2100hoog_p95'
 
