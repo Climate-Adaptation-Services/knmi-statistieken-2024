@@ -29,7 +29,7 @@
 
   function onChangeIndicator(indicatorName){
     // als wissel van winter naar jaar regimes
-    if($indicatorSelection.slice(0,18) === '10-daagse neerslag' && indicatorName.slice(0,18) !== '10-daagse neerslag'){regimeSelection.set('L')}
+    if($indicatorSelection.slice(0,20) === '10-day precipitation' && indicatorName.slice(0,20) !== '10-day precipitation'){regimeSelection.set('L')}
 
     indicatorSelection.set(indicatorName)
 
