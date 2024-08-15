@@ -7,7 +7,7 @@
     <h2>Explanation of KNMI Scenarios</h2>
       <h3>In Brief</h3>
       <p>
-        The climate statistics on this page present the KNMI'23 climate scenarios for temperature, precipitation, and sea level rise. The data is provided by KNMI and the visualizations are created by the Climate Adaptation Services Foundation (CAS).
+        The climate statistics on this page present the KNMI'23 climate scenarios for temperature, precipitation, and sea level rise. The data is provided by KNMI and the visualizations are created by the Climate Adaptation Services (CAS).
       </p>
       <h3>Data Used</h3>
       <p>
