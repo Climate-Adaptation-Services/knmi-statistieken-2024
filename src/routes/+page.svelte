@@ -2,7 +2,7 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal } from '$lib/stores.js';
+  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal, lang } from '$lib/stores.js';
   import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
   import Zeespiegelstijging from '$lib/components/Zeespiegelstijging.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
@@ -12,6 +12,12 @@
   $: console.log(data)
   indicatorData.set(data.indicator_data)
   indicatorMetaData.set(data.indicator_metadata)
+
+  if(data.lang === 'en'){
+    lang.set('en')
+  }else{
+    lang.set('nl')
+  }
 
   const getData = (async () => {
 		const response = await Promise.all([

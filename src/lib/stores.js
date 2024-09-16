@@ -13,6 +13,9 @@ export const indicatorMetaData = writable(null)
 export const hoveredInfo = writable(null)
 export const mousePosition = writable(null)
 
+// huidige taal
+export const lang = writable('')
+
 export const modal = writable(null);
 
 export const gridSelection = writable(689)

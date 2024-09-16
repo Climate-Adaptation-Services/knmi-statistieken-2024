@@ -6,6 +6,7 @@
   import Select from 'svelte-select'
   import { bind } from 'svelte-simple-modal';
   import Info from './Info.svelte';
+  import { t } from '$lib/i18n/translate';
 
   export let w;
   export let h;
@@ -90,7 +91,7 @@
 
 <div class='sidepanel-content'>
   <img src='/images/about.png' width='30px' style='margin-top:20px;cursor:pointer' on:click={() => showModal('intro')}/>
-  <h3 style='margin-top:25px'><strong class='step'>1</strong> Selecteer een thema</h3>
+  <h3 style='margin-top:25px'><strong class='step'>1</strong>{' ' + t('thema-selectie')}</h3>
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
