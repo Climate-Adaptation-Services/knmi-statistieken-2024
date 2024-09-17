@@ -23,7 +23,7 @@ export const english = {
   'Jaar op jaar variatie':'Year by year variation (90% band)',
   'Hoogste info':'The highest scenario presents the value for the scenario that shows the greatest change. This is the Hn or Hd scenario, depending on the indicator you are looking at. Below the figures, it indicates which scenario this is.',
   'Laagste info':'The lowest scenario presents the value for the scenario that shows the smallest change. This is the Ln or Ld scenario, depending on the indicator you are looking at. Below the figures, it indicates which scenario this is.',
-  'gemiddelde info':'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.',
+  'gemiddelde info':'The points in the graph show the average for all available years for the current climate, around 2050, and 2100.',
   'jaar op jaar info':'Due to natural variation, the values will be higher in some years and lower in others than the average values shown by the points. The figure therefore displays light-colored blue and red bands that indicate where 90% of the individual yearly values fall.',
 
 
