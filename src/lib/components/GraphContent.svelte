@@ -18,6 +18,7 @@
   export let innerHeight;
   export let margin
 
+  $: console.log('selection', $indicatorData[$indicatorSelection])
   $: dataSelected = ($neerslagIndicatoren.includes($indicatorSelection))
     ? $indicatorData[$indicatorSelection].filter(d => d.regime === $regimeSelection)[0] 
     : $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0] 

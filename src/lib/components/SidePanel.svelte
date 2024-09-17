@@ -19,9 +19,9 @@
 
   let indicatorOptions
   function upDateIndicatorOptions(){
-    indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === $themeSelection).map((ind) => {
-      let label = (['Aantal dagen met neerslagsom >= 15 mm', 'Aantal dagen met neerslagsom >= 25 mm','Aantal dagen met max temp >= 35'].includes(ind['Indicator'] )) ? capitalizeFirstLetter(ind['Indicator'].slice(7).replace('som','')) : ind['Indicator'] 
-      label = (ind['Indicator'] == 'Maximaal neerslagtekort tussen 1 april en 30 september') ? 'Neerslagtekort april/september' : label
+    indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === t($themeSelection)).map((ind) => {
+      let label = ([t('Aantal dagen met neerslagsom >= 15 mm'), t('Aantal dagen met neerslagsom >= 25 mm'),t('Aantal dagen met max temp >= 35')].includes(ind['Indicator'] )) ? capitalizeFirstLetter(ind['Indicator'].slice(7).replace('som','')) : ind['Indicator'] 
+      label = (ind['Indicator'] == t('Maximaal neerslagtekort tussen 1 april en 30 september')) ? t('Neerslagtekort april/september') : label
         return {label:label, value:ind['Indicator']}
     })
   }
@@ -30,7 +30,7 @@
 
   function onChangeIndicator(indicatorName){
     // als wissel van winter naar jaar regimes
-    if($indicatorSelection.slice(0,18) === '10-daagse neerslag' && indicatorName.slice(0,18) !== '10-daagse neerslag'){regimeSelection.set('L')}
+    if($indicatorSelection.slice(0,18) === t('10-daagse neerslag - eens per jaar').slice(0,18) && indicatorName.slice(0,18) !== t('10-daagse neerslag - eens per jaar').slice(0,18)){regimeSelection.set('L')}
 
     indicatorSelection.set(indicatorName)
 
@@ -105,7 +105,7 @@
       {/each}
     </svg>
   </div>
-  {#if $indicatorSelection !== 'Zeespiegelstijging'}
+  {#if $indicatorSelection !== t('Zeespiegelstijging')}
     <h3><strong class='step'>2</strong> {t('indicator-selectie')}</h3>
     <div class='selection-div'>
       <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>

@@ -59,7 +59,7 @@
       <h3 style='margin-top:0px; margin-bottom:10px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
     {/if}
     {#if $neerslagIndicatoren.includes($indicatorSelection)}
-      <h3 style='margin-top:0px'><strong style='color:grey'>Neerslagregime: </strong>{$regimeSelection}</h3>
+      <h3 style='margin-top:0px'><strong style='color:grey'>{t('Neerslagregime')}: </strong>{$regimeSelection}</h3>
     {/if}
   </div>
 </div>

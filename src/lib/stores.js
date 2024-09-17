@@ -7,7 +7,7 @@ export const lang = writable('')
 // circle shapes
 export const circleFeatures = writable(null)
 // only the indicator name
-export const indicatorSelection = writable(t('Aantal tropische dagen'));
+export const indicatorSelection = writable('');
 // all indicator data
 export const indicatorData = writable(null)
 // indicator metadata
@@ -29,15 +29,9 @@ export const graphHover = writable('null')
 // Hovered year for zeespiegelstijging
 export const hoveredYear = writable(null)
 export const themeSelection = writable('Hitte')
-export const temperatuurIndicatoren = readable([t('Gemiddelde jaartemperatuur'), t('Gemiddelde zomertemperatuur','Gemiddelde wintertemperatuur')])
-export const neerslagIndicatoren = readable([t('Uurneerslag - eens per jaar'),t('Uurneerslag - eens per 10 jaar'),t('Uurneerslag - eens per 100 jaar'), t('Uurneerslag - eens per 1000 jaar'), t('Dagneerslag - eens per jaar'), t('Dagneerslag - eens per 10 jaar'), t('Dagneerslag - eens per 100 jaar'), t('Dagneerslag - eens per 1000 jaar'), t('10-daagse neerslag - eens per jaar'), t('10-daagse neerslag - eens per 10 jaar'), t('10-daagse neerslag - eens per 100 jaar'), t('10-daagse neerslag - eens per 1000 jaar')])
-export const period_options = readable([
-  { value: 'ref', label: t('Huidig klimaat')},
-  { value: '2050laag', label: t('2050 laagste scenario')},
-  { value: '2050hoog', label: t('2050 hoogste scenario')},
-  { value: '2100laag', label: t('2100 laagste scenario')},
-  { value: '2100hoog', label: t('2100 hoogste scenario')}
-]);
+export const temperatuurIndicatoren = writable([])
+export const neerslagIndicatoren = writable([])
+export const period_options = writable([]);
 
 export const indicatorSelectionMetaData = derived(
   [indicatorMetaData, indicatorSelection],
@@ -58,7 +52,7 @@ export const periodName = derived(
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
-    if($indicatorData || $indicatorSelection === t('Zeespiegelstijging') || $neerslagIndicatoren.includes($indicatorSelection)){
+    if(!$indicatorSelection || !$indicatorData || $indicatorSelection === t('Zeespiegelstijging') || $neerslagIndicatoren.includes($indicatorSelection)){
       return null
     }else{
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]
@@ -69,7 +63,7 @@ export const gridSelectionValue = derived(
 export const gridHoverValue = derived(
   [indicatorData, gridHover, periodSelection, indicatorSelection],
   ([$indicatorData, $gridHover, $periodSelection, $indicatorSelection]) => {
-    if($gridHover === null){
+    if(!$indicatorSelection || $gridHover === null){
       return null
     }else{
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection]

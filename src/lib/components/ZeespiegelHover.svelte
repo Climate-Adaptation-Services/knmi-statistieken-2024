@@ -1,5 +1,6 @@
 <script>
   import * as d3 from 'd3';
+  import { t } from '$lib/i18n/translate';
 
   export let dataProjection
   // export let dataHistoric
@@ -38,7 +39,7 @@
           y='30'
           class='legendYear'
           font-size='14'
-        >Mediaan</text>
+        >{t('Mediaan')}</text>
         <text
           x='135'
           y='30'
@@ -139,8 +140,8 @@
   {:else}
     <g transform={`translate(${margin.left+90},${margin.top+40})`}>
       <text font-style='italic' text-anchor='middle' fill='#808080'>
-        <tspan>Beweeg de muis over de grafiek</tspan>
-        <tspan x=0 y='1em'>om meer detail de tonen </tspan>
+        <tspan>{t('Beweeg de muis over de grafiek')}</tspan>
+        <tspan x=0 y='1em'>{t('om meer detail de tonen')} </tspan>
       </text>
       
     </g>

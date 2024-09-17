@@ -2,33 +2,20 @@
   import SidePanel from '$lib/components/SidePanel.svelte'
   import Map from '$lib/components/Map.svelte'
   import Graph from '$lib/components/Graph.svelte'
-  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal, lang } from '$lib/stores.js';
   import IndicatorExplanation from '$lib/components/IndicatorExplanation.svelte';
   import Zeespiegelstijging from '$lib/components/Zeespiegelstijging.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import Modal from 'svelte-simple-modal';
   import { t } from '$lib/i18n/translate';
+  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal, lang, temperatuurIndicatoren, neerslagIndicatoren, period_options } from '$lib/stores.js';
+  import { setupStores } from '$lib/noncomponents/setupStores.js';
 
   export let data
   $: console.log(data)
 
+  $: console.log('ind data', $indicatorData)
 
-  if(data.lang === 'en'){
-    lang.set('en')
-  }else{
-    lang.set('nl')
-  }
-
-  let indicator_data = {}
-  const indicatoren_namen = ['Aantal tropische dagen', 'Reeks droge dagen', 'Reeks zomerse dagen', 'Aantal tropische nachten', 'Aantal vorstdagen', 'Aantal warme dagen', 'Aantal zomerse dagen', 'Aantal ijsdagen', 'Aantal dagen ≥ 15 mm', 'Aantal dagen ≥ 25 mm', 'Jaarlijkse neerslag', 'Winterneerslag', 'Zomerneerslag', 'Gemiddelde jaartemperatuur', 'Gemiddelde wintertemperatuur', 'Gemiddelde zomertemperatuur', 'Koelgraaddagen', 'Verwarmingsgraaddagen', 'Lengte groeiseizoen', 'Aantal extreem hete dagen', 'Jaarlijkse referentieverdamping', 'Maximaal neerslagtekort', '10-daagse neerslag - eens per jaar', '10-daagse neerslag - eens per 10 jaar', '10-daagse neerslag - eens per 100 jaar', '10-daagse neerslag - eens per 1000 jaar', 'Dagneerslag - eens per jaar', 'Dagneerslag - eens per 10 jaar', 'Dagneerslag - eens per 100 jaar', 'Dagneerslag - eens per 1000 jaar', 'Uurneerslag - eens per jaar', 'Uurneerslag - eens per 10 jaar', 'Uurneerslag - eens per 100 jaar', 'Uurneerslag - eens per 1000 jaar']
-  for(let i=0;i<indicatoren_namen.length;i++){
-    indicator_data[t(indicatoren_namen[i])] = data.response[i]
-  }
-
-  console.log(indicator_data)
-
-  indicatorData.set(indicator_data)
-  indicatorMetaData.set(data.indicator_metadata)
+  setupStores(data)
 
   const getData = (async () => {
 		const response = await Promise.all([
@@ -65,10 +52,10 @@
       </div>
       <div class='graph'>
         {#if mapWidth}
-          {#if $indicatorSelection !== 'Zeespiegelstijging'}
+          {#if $indicatorSelection !== t('Zeespiegelstijging')}
             <Graph w={mapWidth} h={mapHeight}/>
           {:else}
-            <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData['Zeespiegelstijging']}/>
+            <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData[t('Zeespiegelstijging')]}/>
           {/if}
         {/if}
       </div>

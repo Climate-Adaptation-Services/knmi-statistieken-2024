@@ -1,6 +1,7 @@
 <script>
-  import { indicatorSelectionMetaData } from "$lib/stores";
+  import { indicatorSelectionMetaData, indicatorSelection } from "$lib/stores";
 
+  console.log($indicatorSelectionMetaData, $indicatorSelection)
 </script>
 
 <p>{$indicatorSelectionMetaData.Omschrijving}</p>
