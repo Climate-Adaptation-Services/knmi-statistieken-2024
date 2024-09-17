@@ -21,8 +21,10 @@ export const nederlands = {
   'Laagste scenario':'Laagste scenario',
   'Gemiddelde':'Gemiddelde',
   'Jaar op jaar variatie':'Jaar op jaar variatie (90% band)',
-
-
+  'Hoogste info':'Het hoogste scenario presenteert de waarde voor het scenario dat de grootste verandering laat zien. Dit is het Hn- of Hd-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.',
+  'Laagste info':'Het laagste scenario presenteert de waarde voor het scenario dat de kleinste verandering laat zien. Dit is het Ln- of Ld-scenario, en hangt af van de indicator die je bekijkt. Onder de figuren staat welk scenario dit is.',
+  'gemiddelde info':'De punten in de grafiek tonen voor het huidige klimaat, rond 2050 en 2100 het gemiddelde over alle beschikbare jaren.',
+  'jaar op jaar info':'Door natuurlijke variatie zullen de waarden het ene jaar hoger en het andere jaar lager zijn dan de gemiddelde waarden weergeven met de punten. De figuur geeft daarom met lichtgekleurde blauwe en rode banden weer waarbinnen de 90% van de afzonderlijke jaarwaarden valt.',
 
 
 
