@@ -53,7 +53,7 @@
   </g>
   <g class='texts-huidig'>
     {#each textLocations as perc}
-      {#if ($scenarioSelection !== 'beide' || $graphHover === 'Huidig klimaat') }
+      {#if ($scenarioSelection !== 'beide' || $graphHover === t('Huidig klimaat')) }
         <text x={xScale(datalist_hoog[0].period)} y={yScale(datalist_hoog[0][perc])} style='fill:black; font-size:13px;' dx='0.5em'>{rounding(datalist_hoog[0][perc])}</text>     
       {/if}
     {/each}

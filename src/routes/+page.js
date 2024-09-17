@@ -1,5 +1,4 @@
 import { dsv } from 'd3'
-import { t } from '$lib/i18n/translate';
 
 export async function load({ url }){
   // Access the URLSearchParams object

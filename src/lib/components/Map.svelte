@@ -7,6 +7,7 @@
   import MapShapes from './MapShapes.svelte';
   import rewind from '@turf/rewind'
   import flip from '@turf/flip'
+  import { t } from '$lib/i18n/translate';
 
   export let datajson
   export let w
@@ -33,7 +34,7 @@
   
   $: path = geoPath(projection);
 
-  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === 'Aantal tropische dagen')[0]
+  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === t('Aantal tropische dagen'))[0]
 
   colorScale.set(
     scaleLinear()
@@ -44,7 +45,7 @@
   afterUpdate(() => select('.id-' + $gridSelection).raise())
 
   $: neerslagRegimesFeatures = ($neerslagIndicatoren.includes($indicatorSelection))
-    ? ($indicatorSelection.slice(0,18) === '10-daagse neerslag') 
+    ? ($indicatorSelection.slice(0,18) === t('10-daagse neerslag - eens per jaar').slice(0,18)) 
       ? neerslagregimes_winter.features
       : neerslagregimes_jaar.features
     : null
@@ -54,7 +55,7 @@
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
     <h3 class='indicator-title' style='margin-bottom:10px'>{$indicatorSelection}</h3>
-    {#if $indicatorSelection !== 'Zeespiegelstijging'}
+    {#if $indicatorSelection !== t('Zeespiegelstijging')}
       <h3 style='margin-top:0px; margin-bottom:10px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
     {/if}
     {#if $neerslagIndicatoren.includes($indicatorSelection)}
@@ -64,7 +65,7 @@
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    {#if $indicatorSelection === 'Zeespiegelstijging'}
+    {#if $indicatorSelection === t('Zeespiegelstijging')}
       <!-- if zeespiegelstijging show country borders -->
       <g class='borders' transform='translate({legendMargin},0)'>
         <path

@@ -12,7 +12,11 @@ export const nederlands = {
   'Droogte':'Droogte',
   'Wateroverlast':'Wateroverlast',
   'Zeespiegelstijging':'Zeespiegelstijging',
-
+  'Huidig klimaat':'Huidig klimaat',
+  '2050 laagste scenario':'2050 laagste scenario',
+  '2100 laagste scenario':'2100 laagste scenario',
+  '2050 hoogste scenario':'2050 hoogste scenario',
+  '2100 hoogste scenario':'2100 hoogste scenario',
 
 
 

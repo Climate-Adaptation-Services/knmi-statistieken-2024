@@ -12,7 +12,11 @@ export const english = {
   'Droogte':'Drought',
   'Wateroverlast':'Waterlogging',
   'Zeespiegelstijging':'Sea level rise',
-
+  'Huidig klimaat':'Current climate',
+  '2050 laagste scenario':'2050 lowest scenario',
+  '2100 laagste scenario':'2100 lowest scenario',
+  '2050 hoogste scenario':'2050 highest scenario',
+  '2100 hoogste scenario':'2100 highest scenario',
 
   
 

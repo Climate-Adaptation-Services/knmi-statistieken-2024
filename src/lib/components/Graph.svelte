@@ -3,13 +3,14 @@
   import { afterUpdate } from 'svelte';
   import GraphContent from './GraphContent.svelte';
   import { indicatorData, indicatorSelection, indicatorSelectionMetaData, neerslagIndicatoren } from '$lib/stores';
+  import { t } from '$lib/i18n/translate';
 
   export let w
   export let h
 
   $: hoogsteWaarde = ($neerslagIndicatoren.includes($indicatorSelection))
     ? '2100hoog'
-    : (['Aantal vorstdagen', 'Aantal ijsdagen', 'Verwarmingsgraaddagen', 'Zomerneerslag'].includes($indicatorSelection))
+    : ([t('Aantal vorstdagen'), t('Aantal ijsdagen'), t('Verwarmingsgraaddagen'), t('Zomerneerslag')].includes($indicatorSelection))
       ? 'ref_p95'
       : '2100hoog_p95'
 
@@ -21,7 +22,7 @@
   $: innerHeight = graphHeight - margin.bottom - margin.top
 
   $: xScale = scalePoint()
-    .domain(['Huidig klimaat', '2050', '2100'])
+    .domain([t('Huidig klimaat'), '2050', '2100'])
     .range([0, innerWidth])
   
   $: yScale = scaleLinear()
