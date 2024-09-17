@@ -57,7 +57,7 @@ export const periodName = derived(
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
-    if($indicatorSelection === 'Zeespiegelstijging' || $neerslagIndicatoren.includes($indicatorSelection)){
+    if($indicatorData || $indicatorSelection === 'Zeespiegelstijging' || $neerslagIndicatoren.includes($indicatorSelection)){
       return null
     }else{
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]
