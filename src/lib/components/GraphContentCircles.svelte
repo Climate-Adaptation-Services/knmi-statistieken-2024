@@ -1,6 +1,7 @@
 <script>
   import { scenarioSelection, graphHover, temperatuurIndicatoren, neerslagIndicatoren, indicatorSelection } from "$lib/stores";
-  
+  import { t } from '$lib/i18n/translate';
+
   export let xScale
   export let yScale
   export let datalist_laag

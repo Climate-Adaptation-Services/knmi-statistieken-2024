@@ -17,8 +17,11 @@ export const english = {
   '2100 laagste scenario':'2100 lowest scenario',
   '2050 hoogste scenario':'2050 highest scenario',
   '2100 hoogste scenario':'2100 highest scenario',
+  'Hoogste scenario':'Highest scenario',
+  'Laagste scenario':'Lowest scenario',
+  'Gemiddelde':'Average',
+  'Jaar op jaar variatie':'Jaar op jaar variatie (90% band)',
 
-  
 
   'Aantal tropische dagen':'Number of tropical days',
   'Reeks droge dagen':'Series of dry days',

@@ -9,6 +9,7 @@
   import GradientDefs from './GradientDefs.svelte';
   import GraphContentLines from './GraphContentLines.svelte';
   import GraphContentCircles from './GraphContentCircles.svelte';
+    import { t } from '$lib/i18n/translate';
 
   export let xScale;
   export let yScale;
@@ -22,12 +23,12 @@
     : $indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0] 
   
   $: datalist_laag = [
-    {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
+    {'period':t('Huidig klimaat'), 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'2050', 'median':dataSelected['2050laag'], 'p5':dataSelected['2050laag_p5'], 'p95':dataSelected['2050laag_p95']},
     {'period':'2100', 'median':dataSelected['2100laag'], 'p5':dataSelected['2100laag_p5'], 'p95':dataSelected['2100laag_p95']}
   ]
   $: datalist_hoog = [
-    {'period':'Huidig klimaat', 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
+    {'period':t('Huidig klimaat'), 'median':dataSelected.ref, 'p5':dataSelected.ref_p5, 'p95':dataSelected.ref_p95},
     {'period':'2050', 'median':dataSelected['2050hoog'], 'p5':dataSelected['2050hoog_p5'], 'p95':dataSelected['2050hoog_p95']},
     {'period':'2100', 'median':dataSelected['2100hoog'], 'p5':dataSelected['2100hoog_p5'], 'p95':dataSelected['2100hoog_p95']}
   ]
@@ -106,7 +107,7 @@
 <rect class='whiterect' x={0} y={margin.top} width={w} height={innerHeight-margin.top} fill='#fcfbf2'/>
 
 <rect class='gradientrect' pointer-events='none' x={-5} y={margin.top} width={w+10} height={innerHeight-margin.top} 
-  fill={($graphHover === 'Huidig klimaat') 
+  fill={($graphHover === t('Huidig klimaat')) 
           ? 'url(#huidigGradient)' 
           : ($graphHover === '2050') 
             ? 'url(#2050Gradient)' 

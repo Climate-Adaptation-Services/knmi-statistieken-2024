@@ -17,6 +17,10 @@ export const nederlands = {
   '2100 laagste scenario':'2100 laagste scenario',
   '2050 hoogste scenario':'2050 hoogste scenario',
   '2100 hoogste scenario':'2100 hoogste scenario',
+  'Hoogste scenario':'Hoogste scenario',
+  'Laagste scenario':'Laagste scenario',
+  'Gemiddelde':'Gemiddelde',
+  'Jaar op jaar variatie':'Jaar op jaar variatie (90% band)',
 
 
 

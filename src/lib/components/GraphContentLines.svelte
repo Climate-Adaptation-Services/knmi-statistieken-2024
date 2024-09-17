@@ -1,5 +1,5 @@
 <script>
-
+  import { t } from '$lib/i18n/translate';
 
   export let xScale;
   export let yScale;
