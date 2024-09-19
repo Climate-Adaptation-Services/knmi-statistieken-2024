@@ -32,6 +32,7 @@ export const themeSelection = writable('Hitte')
 export const temperatuurIndicatoren = writable([])
 export const neerslagIndicatoren = writable([])
 export const period_options = writable([]);
+export const indicatorOptions = writable(null)
 
 export const indicatorSelectionMetaData = derived(
   [indicatorMetaData, indicatorSelection],
