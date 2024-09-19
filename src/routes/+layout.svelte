@@ -7,7 +7,7 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
   import Modal from 'svelte-simple-modal';
   import { t } from '$lib/i18n/translate';
-  import { colorScale, indicatorData, indicatorMetaData, indicatorSelection, modal, lang, temperatuurIndicatoren, neerslagIndicatoren, period_options } from '$lib/stores.js';
+  import { colorScale, indicatorData,indicatorSelection, lang, modal } from '$lib/stores.js';
   import { setupStores } from '$lib/noncomponents/setupStores.js';
 
   export let data
@@ -38,7 +38,7 @@
 <slot></slot>
 
 <div class='container'>
-  {#if $indicatorData}
+  {#if $indicatorData && $lang}
     {#if data}
       <div class='side-panel' bind:clientWidth={sidepanelWidth} bind:clientHeight={sidepanelHeight}>
         <SidePanel w={sidepanelWidth} h={sidepanelHeight}/>

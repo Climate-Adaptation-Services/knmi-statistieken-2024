@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
   import { geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures, neerslagIndicatoren, regimeSelection } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures, neerslagIndicatoren, regimeSelection, lang } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
   import MapShapes from './MapShapes.svelte';
@@ -34,6 +34,7 @@
   
   $: path = geoPath(projection);
 
+  // console.log('indicatorMetaData', $indicatorMetaData, $indicatorSelection, t($indicatorSelection), $lang)
   const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === t($indicatorSelection))[0]
 
   colorScale.set(
