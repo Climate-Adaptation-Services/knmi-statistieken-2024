@@ -21,11 +21,12 @@
 		const response = await Promise.all([
       fetch('https://cartomap.github.io/nl/wgs84/provincie_2024.geojson'),
       fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Punten_KNMImasker.geojson'),
+      fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Punten_KNMImasker_Brabant.geojson'),
       fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/NLgrenzen.json'),
       fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagregime_WINTER.json'),
       fetch('https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/Neerslagregime_JAAR-large.json')
     ])
-    return [await response[0].json(), await response[1].json(), await response[2].json(), await response[3].json(), await response[4].json()]
+    return [await response[0].json(), await response[1].json(), await response[2].json(), await response[3].json(), await response[4].json(), await response[5].json()]
 	})()
 
   let mapWidth;

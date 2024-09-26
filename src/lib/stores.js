@@ -4,6 +4,9 @@ import { t } from '$lib/i18n/translate';
 // huidige taal
 export const lang = writable('')
 
+// alleen brabant?
+export const brabantKEA = writable(true)
+
 // circle shapes
 export const circleFeatures = writable(null)
 // only the indicator name

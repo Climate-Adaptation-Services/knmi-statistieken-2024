@@ -6,6 +6,7 @@ export async function load({ url }){
 
   // Get individual query parameters
   const lang = searchParams.get('lang');
+  const regio = searchParams.get('regio');
 
   const NLsteden = await dsv(';', "https://gist.githubusercontent.com/stichtingcas/6e8f37f4fc7a47a093c2414d948e106c/raw/2a1ea5252d9baa76dd392a657235e128f01325e3/NLstedenCoordinaten")
   const indicator_metadata = await dsv(';', "https://raw.githubusercontent.com/Climate-Adaptation-Services/knmi-statistieken-data/main/metadata.csv")
@@ -54,5 +55,5 @@ export async function load({ url }){
   ])
 
   
-  return { NLsteden, response, indicator_metadata, indicator_metadata_english, lang };
+  return { NLsteden, response, indicator_metadata, indicator_metadata_english, lang, regio };
 }

@@ -1,15 +1,17 @@
 <script>
   import { afterUpdate, onMount } from "svelte";
-  import { circleFeatures, colorScale, gridSelection, gridHover, indicatorData, indicatorSelection, periodSelection } from "$lib/stores";
+  import { circleFeatures, colorScale, gridSelection, gridHover, indicatorData, indicatorSelection, periodSelection, brabantKEA } from "$lib/stores";
   import { select, selectAll } from "d3";
 
   export let projection
   export let w
 
   $: circleDistanceX = projection($circleFeatures[1].geometry.coordinates)[0] - projection($circleFeatures[0].geometry.coordinates)[0]
-  $: circleDistanceY = projection($circleFeatures[1].geometry.coordinates)[1] - projection($circleFeatures[2].geometry.coordinates)[1]
+  $: circleDistanceY = projection($circleFeatures[1].geometry.coordinates)[1] - projection($circleFeatures[4].geometry.coordinates)[1]
 
-  const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
+  const gridcode = ($brabantKEA)
+    ? 'cellen_lat'
+    : 'cellen_lat_lon_XYTableToPoint1_cellen'
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
@@ -37,6 +39,8 @@
   let circles
   let rects
   onMount(() => {
+    console.log('brabnt test', $indicatorData, $indicatorSelection)
+
     const circlesAndRects = select(".rasterdata")
 
     circles = circlesAndRects.selectAll('circle')

@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
   import { geoMercator, geoPath, scaleLinear, select } from 'd3';
-  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures, neerslagIndicatoren, regimeSelection, lang } from '$lib/stores';
+  import { colorScale, gridSelection, periodSelection, indicatorSelection, indicatorMetaData, period_options, circleFeatures, neerslagIndicatoren, regimeSelection, lang, brabantKEA } from '$lib/stores';
   import { afterUpdate } from 'svelte';
   import Legend from './Legend.svelte';
   import MapShapes from './MapShapes.svelte';
@@ -16,21 +16,27 @@
 
   const provincies = datajson[0]
   const cellen = datajson[1];
-  const grenzen = datajson[2];
-  const neerslagregimes_winter = datajson[3];
-  const neerslagregimes_jaar = datajson[4];
+  const cellen_brabant = datajson[2];
+  const grenzen = datajson[3];
+  const neerslagregimes_winter = datajson[4];
+  const neerslagregimes_jaar = datajson[5];
 
   console.log('datajson', datajson)
 
-  circleFeatures.set(cellen.features)
-
+  if($brabantKEA){circleFeatures.set(cellen_brabant.features)}
+  else{circleFeatures.set(cellen.features)}
+  
   const legendMargin = 50
 
   $: titleHeight = 0.2*h
   $: mapHeight = 0.8*h
 
+  const boundingbox = ($brabantKEA)
+    ? provincies.features[10]
+    : provincies
+
   $: projection = geoMercator()
-    .fitExtent([[60,10],[w-20-legendMargin, mapHeight - 40]], provincies)
+    .fitExtent([[110,10],[w-50-legendMargin, mapHeight - 40]], boundingbox)
   
   $: path = geoPath(projection);
 
