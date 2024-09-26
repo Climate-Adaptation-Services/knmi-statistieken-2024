@@ -31,12 +31,11 @@
   $: titleHeight = 0.2*h
   $: mapHeight = 0.8*h
 
-  const boundingbox = ($brabantKEA)
-    ? provincies.features[10]
-    : provincies
+  const boundingbox = ($brabantKEA) ? provincies.features[10] : provincies
+  $: xOffset = ($brabantKEA) ? w*0.3 : 60
 
   $: projection = geoMercator()
-    .fitExtent([[110,10],[w-50-legendMargin, mapHeight - 40]], boundingbox)
+    .fitExtent([[xOffset,10],[w-50-legendMargin, mapHeight - 40]], boundingbox)
   
   $: path = geoPath(projection);
 

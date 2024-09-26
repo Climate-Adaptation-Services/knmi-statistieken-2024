@@ -1,4 +1,4 @@
-import { lang, indicatorSelection, temperatuurIndicatoren, neerslagIndicatoren, period_options, indicatorMetaData, indicatorData, themeSelection, brabantKEA } from "$lib/stores"
+import { lang, indicatorSelection, temperatuurIndicatoren, neerslagIndicatoren, period_options, indicatorMetaData, indicatorData, themeSelection, brabantKEA, gridSelection } from "$lib/stores"
 import { t } from "$lib/i18n/translate"
 import { get } from "svelte/store"
 
@@ -9,6 +9,8 @@ export function setupStores(data){
 
   if(data.regio === 'brabant'){brabantKEA.set(true)}
   else{brabantKEA.set(false)}
+
+  if(get(brabantKEA)){gridSelection.set(388)}
 
   indicatorSelection.set(t('Aantal tropische dagen'))
   temperatuurIndicatoren.set([t('Gemiddelde jaartemperatuur'), t('Gemiddelde zomertemperatuur'),t('Gemiddelde wintertemperatuur')])
