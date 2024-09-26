@@ -9,13 +9,10 @@
 
   themeSelection.set(theme)
   if(theme !== t('Zeespiegelstijging')){
-    indicatorSelection.set(firstIndicator)
+    indicatorSelection.set(t(firstIndicator))
   }
-  console.log('a', $indicatorSelection)
   updateIndicatorOptions()
-  console.log('b', $indicatorSelection)
   onChangeIndicator($indicatorOptions[0].value)
-  console.log('c', $indicatorSelection)
-
+  
 
 </script>

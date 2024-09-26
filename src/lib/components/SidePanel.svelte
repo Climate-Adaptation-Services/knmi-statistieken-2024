@@ -1,8 +1,5 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection, neerslagIndicatoren, modal, indicatorOptions } from '$lib/stores';
-  import { select, scaleLinear, selectAll } from 'd3';
-  import rough from 'roughjs';
-  import { afterUpdate } from 'svelte';
+  import { indicatorSelection, lang, periodSelection, themeSelection, period_options, neerslagIndicatoren, modal, indicatorOptions } from '$lib/stores';
   import Select from 'svelte-select'
   import { bind } from 'svelte-simple-modal';
   import Info from './Info.svelte';
@@ -20,7 +17,8 @@
   }
 
   function onChangeTheme(th){
-    goto(`/${th.toLowerCase()}`)
+    if($lang === 'en'){goto(`/${th.toLowerCase()}?lang=en`)}
+    else{goto(`/${th.toLowerCase()}`)}
   }
 
   const themeImageOffset = 10

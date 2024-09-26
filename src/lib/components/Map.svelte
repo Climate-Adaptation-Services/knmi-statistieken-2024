@@ -35,7 +35,7 @@
   $: path = geoPath(projection);
 
   // console.log('indicatorMetaData', $indicatorMetaData, $indicatorSelection, t($indicatorSelection), $lang)
-  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === t($indicatorSelection))[0]
+  const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === $indicatorSelection)[0]
 
   colorScale.set(
     scaleLinear()
