@@ -27,7 +27,5 @@ export function setupStores(data){
     indicator_data[t(indicatoren_namen[i])] = data.response[i]
   }
 
-  console.log(indicator_data)
-
   indicatorData.set(indicator_data)
 }

@@ -1,77 +1,25 @@
 <script>
-  import { indicatorSelection, colorScale, periodSelection, themeSelection, indicatorMetaData, indicatorSelectionMetaData, period_options, circleFeatures, indicatorData, regimeSelection, neerslagIndicatoren, modal } from '$lib/stores';
-  import { select, scaleLinear, selectAll } from 'd3';
-  import rough from 'roughjs';
-  import { afterUpdate } from 'svelte';
+  import { indicatorSelection, lang, periodSelection, themeSelection, period_options, neerslagIndicatoren, modal, indicatorOptions } from '$lib/stores';
   import Select from 'svelte-select'
   import { bind } from 'svelte-simple-modal';
   import Info from './Info.svelte';
   import { t } from '$lib/i18n/translate';
+  import { goto } from '$app/navigation';
+  import { onChangeIndicator } from '$lib/noncomponents/onChangeIndicator';
 
   export let w;
   export let h;
 
-  const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
-
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  let indicatorOptions
-  function upDateIndicatorOptions(){
-    indicatorOptions = $indicatorMetaData.filter((ind) => ind.Thema === t($themeSelection)).map((ind) => {
-      let label = ([t('Aantal dagen met neerslagsom >= 15 mm'), t('Aantal dagen met neerslagsom >= 25 mm'),t('Aantal dagen met max temp >= 35')].includes(ind['Indicator'] )) ? capitalizeFirstLetter(ind['Indicator'].slice(7).replace('som','')) : ind['Indicator'] 
-      label = (ind['Indicator'] == t('Maximaal neerslagtekort tussen 1 april en 30 september')) ? t('Neerslagtekort april/september') : label
-        return {label:label, value:ind['Indicator']}
-    })
-  }
-  upDateIndicatorOptions()
-
-
-  function onChangeIndicator(indicatorName){
-    // als wissel van winter naar jaar regimes
-    if($indicatorSelection.slice(0,18) === t('10-daagse neerslag - eens per jaar').slice(0,18) && indicatorName.slice(0,18) !== t('10-daagse neerslag - eens per jaar').slice(0,18)){regimeSelection.set('L')}
-
-    indicatorSelection.set(indicatorName)
-
-    const domain = $indicatorSelectionMetaData['y-as domein'].split(',')
-    const range = $indicatorSelectionMetaData['Kleuren'].split(',')
-    
-    colorScale.set(
-      scaleLinear()
-      .domain(domain)
-      .range(range)
-    )
-  }
-
+  // const gridcode = 'cellen_lat_lon_XYTableToPoint1_cellen'
 
   function onChangePeriod(e){
     periodSelection.set(e.detail.value)
   }
 
   function onChangeTheme(th){
-    themeSelection.set(th)
-    upDateIndicatorOptions()
-    onChangeIndicator(indicatorOptions[0].value)
+    if($lang === 'en'){goto(`/${th.toLowerCase()}?lang=en`)}
+    else{goto(`/${th.toLowerCase()}`)}
   }
-  
-  // afterUpdate(() => {
-  //   // ik weet niet waarom deze timeout nodig is
-  //   setTimeout(() => {
-  //     const el_sel = document.getElementsByClassName('selection-div')[0]
-  //     const box_sel = el_sel.getBoundingClientRect()
-  //     select('.more-info')
-  //       .style('left', box_sel.right-35 + 'px')
-  //       .style('top', box_sel.top-12 + 'px')
-  //       .style('visibility', 'visible')
-      
-  //     const el_moreinfo = document.getElementsByClassName('more-info')[0]
-  //     const box_moreinfo = el_moreinfo.getBoundingClientRect()
-  //     select('.indicator-info')
-  //       .style('left', box_moreinfo.right+15 + 'px')
-  //       .style('top', box_moreinfo.top-80 + 'px')
-  //   }, 600);
-  // })
 
   const themeImageOffset = 10
   $: themeImageSize = (w - 7*themeImageOffset)/4
@@ -108,7 +56,7 @@
   {#if $indicatorSelection !== t('Zeespiegelstijging')}
     <h3><strong class='step'>2</strong> {t('indicator-selectie')}</h3>
     <div class='selection-div'>
-      <Select --font-size="14px" items={indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
+      <Select --font-size="14px" items={$indicatorOptions} placeholder="Selecteer indicator..." value={$indicatorSelection} clearable={false} on:change={e => onChangeIndicator(e.detail.value)}/>
     </div>
     <h3><strong class='step'>3</strong> {t('scenario-selectie')}</h3>
     <div class='selection-div'>
