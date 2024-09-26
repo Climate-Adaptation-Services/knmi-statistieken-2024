@@ -8,7 +8,7 @@
   export let firstIndicator
 
   themeSelection.set(theme)
-  if(theme !== t('Zeespiegelstijging')){
+  if(theme !== 'Zeespiegelstijging'){
     indicatorSelection.set(t(firstIndicator))
   }
   updateIndicatorOptions()

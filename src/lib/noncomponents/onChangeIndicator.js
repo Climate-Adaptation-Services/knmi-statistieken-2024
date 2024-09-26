@@ -7,7 +7,6 @@ export function onChangeIndicator(indicatorName){
   // als wissel van winter naar jaar regimes
   if(get(indicatorSelection).slice(0,18) === t('10-daagse neerslag - eens per jaar').slice(0,18) && indicatorName.slice(0,18) !== t('10-daagse neerslag - eens per jaar').slice(0,18)){regimeSelection.set('L')}
 
-  console.log('indicatorName', indicatorName)
   indicatorSelection.set(indicatorName)
 
   const domain = get(indicatorSelectionMetaData)['y-as domein'].split(',')
