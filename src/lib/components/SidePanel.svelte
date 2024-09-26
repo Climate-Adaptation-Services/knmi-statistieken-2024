@@ -1,5 +1,5 @@
 <script>
-  import { indicatorSelection, lang, periodSelection, themeSelection, period_options, neerslagIndicatoren, modal, indicatorOptions } from '$lib/stores';
+  import { indicatorSelection, lang, periodSelection, themeSelection, period_options, neerslagIndicatoren, modal, indicatorOptions, brabantKEA } from '$lib/stores';
   import Select from 'svelte-select'
   import { bind } from 'svelte-simple-modal';
   import Info from './Info.svelte';
@@ -17,8 +17,10 @@
   }
 
   function onChangeTheme(th){
-    if($lang === 'en'){goto(`/${th.toLowerCase()}?lang=en`)}
-    else{goto(`/${th.toLowerCase()}`)}
+    const engels = ($lang === 'en') ? 'lang=en' : ''
+    const brabant = ($brabantKEA === true) ? 'regio=brabant' : ''
+
+    goto(`/${th.toLowerCase()}?${engels}&${brabant}`)
   }
 
   const themeImageOffset = 10
