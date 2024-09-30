@@ -32,10 +32,10 @@
   $: mapHeight = 0.8*h
 
   const boundingbox = ($brabantKEA) ? provincies.features[10] : provincies
-  $: xOffset = ($brabantKEA) ? w*0.3 : 60
+  $: xOffset = ($brabantKEA) ? w*0.25 : 60
 
   $: projection = geoMercator()
-    .fitExtent([[xOffset,10],[w-50-legendMargin, mapHeight - 40]], boundingbox)
+    .fitExtent([[xOffset,10],[w-legendMargin-10, mapHeight-40]], boundingbox)
   
   $: path = geoPath(projection);
 
@@ -110,28 +110,32 @@
       <g transform='translate({legendMargin},0)'>
         <g class='provincies'>
           {#each provincies.features as feature}
-            <path
-              d={path(feature)}
-              class='shape'
-              fill='none'
-              stroke='grey'
-            />
+            {#if $brabantKEA === false || feature.properties.statnaam === 'Noord-Brabant'}
+              <path
+                d={path(feature)}
+                class='shape'
+                fill='none'
+                stroke='grey'
+              />
+            {/if}
           {/each}
         </g>
 
         <MapShapes {projection} {w} />
 
         {#each NLsteden as NLstad, i}
-          <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
-            <circle
-              fill={'#35575A'}
-              stroke='white'
-              r='3'
-            />
-            <text class='stad-text' style='fill:#35575A' font-size={w/60} y='1.32em' text-anchor='middle'>
-              {NLstad.Stad}
-            </text>
-          </g>
+          {#if $brabantKEA === false || ['Den Bosch', 'Tilburg', 'Eindhoven'].includes(NLstad.Stad)}
+            <g class='NLstad' transform='translate({projection([NLstad.lon, NLstad.lat])[0]},{projection([NLstad.lon, NLstad.lat])[1]})'>
+              <circle
+                fill={'#35575A'}
+                stroke='white'
+                r='3'
+              />
+              <text class='stad-text' style='fill:#35575A' font-size={w/60} y='1.32em' text-anchor='middle'>
+                {NLstad.Stad}
+              </text>
+            </g>
+          {/if}
         {/each}
       </g>
     {/if}
