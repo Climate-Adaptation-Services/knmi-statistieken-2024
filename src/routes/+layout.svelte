@@ -9,6 +9,7 @@
   import { t } from '$lib/i18n/translate';
   import { colorScale, indicatorData,indicatorSelection, lang, modal } from '$lib/stores.js';
   import { setupStores } from '$lib/noncomponents/setupStores.js';
+    import LoadingIcon from '$lib/components/LoadingIcon.svelte';
 
   export let data
   $: console.log(data)
@@ -46,7 +47,7 @@
       </div>
     {/if}
     {#await getData}
-      <pre style='color:white'>Loading...</pre>
+      <LoadingIcon />
     {:then res}
       <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
         {#if mapWidth && data}
@@ -62,10 +63,10 @@
           {/if}
         {/if}
       </div>
+      <div class='indicator-explanation'>
+        <IndicatorExplanation />
+      </div>
     {/await}
-    <div class='indicator-explanation'>
-      <IndicatorExplanation />
-    </div>
 
     <Tooltip />
     
@@ -83,6 +84,7 @@
     float:left;
     height:100%;
     width:22%;
+    z-index: 10000;
   }
 
   .map, .graph{
