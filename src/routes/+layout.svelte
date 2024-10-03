@@ -84,7 +84,6 @@
     float:left;
     height:100%;
     width:22%;
-    z-index: 10000;
   }
 
   .map, .graph{
