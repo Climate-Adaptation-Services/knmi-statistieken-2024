@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('https://knmi-statistieken-2024-dev.vercel.app/hitte');
-  await page.locator('rect:nth-child(589)').click();
+  const circleBox = (await page.locator('rect:nth-child(589)').boundingBox())!;
+  await page.mouse.click(circleBox.x + circleBox.width / 2, circleBox.y + circleBox.height - 5);
+
   await page.getByRole('textbox').first().click();
   await page.getByText('Aantal warme dagen', { exact: true }).click();
   await page.getByRole('textbox').nth(1).click();
