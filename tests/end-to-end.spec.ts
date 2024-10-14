@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 
-['-dev', ''].forEach(locationName => {
+
+  ['-dev', ''].forEach(locationName => {
   test(`${locationName}test`, async ({ page }) => {
+    test.slow()
+    
     await page.goto(`https://knmi-statistieken-2024${locationName}.vercel.app/hitte`);
     const circleBox = (await page.locator('rect:nth-child(589)').boundingBox())!;
     await page.mouse.click(circleBox.x + circleBox.width / 2, circleBox.y + circleBox.height - 5);
