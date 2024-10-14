@@ -50,9 +50,9 @@
       <LoadingIcon />
     {:then res}
       <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-        <!-- {#if mapWidth && data}
+        {#if mapWidth && data}
           <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
-        {/if} -->
+        {/if}
       </div>
       <div class='graph'>
         {#if mapWidth}
