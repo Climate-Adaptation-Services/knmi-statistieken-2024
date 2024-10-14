@@ -15,14 +15,14 @@ import { test, expect } from '@playwright/test';
     await page.mouse.click(box.x + box.width / 2, box.y + box.height - 5);
     await page.locator('rect:nth-child(551)').click();
     await page.getByRole('textbox').first().click();
-    await page.getByText('Maximaal neerslagtekort', { exact: true }).first().click();
+    await page.locator('.svelte-select-list .item').nth(2).click();
 
     box = (await page.locator('.image-Wateroverlast').boundingBox())!;
     await page.mouse.click(box.x + box.width / 2, box.y + box.height - 5);
     await page.getByRole('textbox').first().click();
-    await page.getByText('Uurneerslag - eens per 1000 jaar', { exact: true }).first().click();
+    await page.locator('.svelte-select-list .item').nth(2).click();
     await page.getByRole('textbox').nth(1).click();
-    await page.getByText('2100 laagste scenario', { exact: true }).first().click();
+    await page.locator('.svelte-select-list .item').nth(2).click();
 
     box = (await page.locator('.image-Zeespiegelstijging').boundingBox())!;
     await page.mouse.click(box.x + box.width / 2, box.y + box.height - 5);
@@ -31,6 +31,6 @@ import { test, expect } from '@playwright/test';
     await page.mouse.click(box.x + box.width / 2, box.y + box.height - 5);
     await page.locator('rect:nth-child(551)').click();
     await page.getByRole('textbox').first().click();
-    await page.getByText('Maximaal neerslagtekort', { exact: true }).first().click();
+    await page.locator('.svelte-select-list .item').nth(2).click();
   });
 })
