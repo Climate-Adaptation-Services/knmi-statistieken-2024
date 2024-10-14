@@ -12,7 +12,7 @@
     import LoadingIcon from '$lib/components/LoadingIcon.svelte';
 
   export let data
-  $: console.log(data)
+  $: console.log('data', data)
 
   $: console.log('ind data', $indicatorData)
 
