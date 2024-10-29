@@ -70,24 +70,6 @@
           </g>
         {/each}
       {/if}
-      <!-- {#if $hoveredYear < 2024}
-        {#each ['Trend metingen', 'Jaargemiddelde'] as d, i}
-          <g font-size='16' transform='translate(0,80)'>
-            <text
-              style='fill:black'
-              class='legendCircles'
-              x='-26'
-              y={35 + (2 - i) * 20}
-            >{d}</text>
-            <text
-              style='fill:black'
-              class='legendCircles'
-              x='100'
-              y={35 + (2 - i) * 20}
-            >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d]) + ' cm'}</text>
-          </g>
-        {/each}
-      {/if} -->
     </g>
 
     <!-- { /* dashed line to make extra clear what is hovered */ } -->
