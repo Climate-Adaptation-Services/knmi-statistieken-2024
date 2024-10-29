@@ -9,7 +9,8 @@
   import GradientDefs from './GradientDefs.svelte';
   import GraphContentLines from './GraphContentLines.svelte';
   import GraphContentCircles from './GraphContentCircles.svelte';
-    import { t } from '$lib/i18n/translate';
+  import { t } from '$lib/i18n/translate';
+  import GraphContentTexts from "./GraphContentTexts.svelte";
 
   export let xScale;
   export let yScale;
@@ -88,6 +89,9 @@
     <GraphContentLines {xScale} {yScale} {datalist_laag} {datalist_hoog} />
 
     <GraphContentCircles {xScale} {yScale} {datalist_laag} {datalist_hoog} />
+
+    <GraphContentTexts {xScale} {yScale} {datalist_laag} {datalist_hoog} />
+
   </g>
 
   <g class='current-map-selection'>
