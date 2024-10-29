@@ -7,6 +7,7 @@
   import Line from './Line.svelte';
   import Area from './Area.svelte'
   import ZeespiegelHover from './ZeespiegelHover.svelte';
+  import { hoveredYear } from '$lib/stores';
 
   export let dataProjection;
   export let w;
@@ -108,6 +109,23 @@
     <line x1={xScale(1918)} x2={xScale(1921)} y1={-8} y2={2} stroke='grey' stroke-width='1'/>
     <text x={xScale(1924)} font-size='12' dy='0.36em'>{t('Jaargemiddelde')}</text>
   </g>
+  {#if $hoveredYear}
+  <g class='historicHover' transform='translate({xScale(1930)},{0})'>
+    {#each ['Trend metingen', 'Jaargemiddelde'] as d, i}
+      {#if (d === 'Jaargemiddelde' && $hoveredYear < 2024) || $hoveredYear < 2007}
+        <g style='font-size:20px'>
+          <text
+            style='fill:black;font-size:15px'
+            class='legendCircles'
+            x='100'
+            y={(d === 'Trend metingen') ? yScale(18) : yScale(26)}
+            dy='0.36em'
+          >{Math.round(dataProjection.filter(d2 => d2.Jaar === $hoveredYear)[0][d]) + ' cm'}</text>
+        </g>
+      {/if}
+    {/each}
+    </g>
+  {/if}
 
   {#each median_lines as median_line}
     <g>
