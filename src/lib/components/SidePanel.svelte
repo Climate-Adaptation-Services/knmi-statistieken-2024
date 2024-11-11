@@ -6,6 +6,7 @@
   import { t } from '$lib/i18n/translate';
   import { goto } from '$app/navigation';
   import { onChangeIndicator } from '$lib/noncomponents/onChangeIndicator';
+    import { select, selectAll } from 'd3';
 
   export let w;
   export let h;
@@ -20,7 +21,19 @@
     const engels = ($lang === 'en') ? 'lang=en' : ''
     const brabant = ($brabantKEA === true) ? 'regio=brabant' : ''
 
+    selectAll('.thema').style('opacity', 0.4)
+    selectAll('.thema-' + th).style('opacity', 1)
+
     goto(`/${th.toLowerCase()}?${engels}&${brabant}`)
+  }
+
+  function mouseOver(th){
+    if(th !== $themeSelection){select('.thema-' + th).style('opacity', 0.8)}
+    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0.5)}
+  }
+  function mouseOut(th){
+    if(th !== $themeSelection){select('.thema-' + th).style('opacity', 0.4)}
+    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0)}
   }
 
   const themeImageOffset = 10
@@ -45,12 +58,12 @@
   <div class='themas'>
     <svg style='height:{themeImageSize*1.8}px'>
       {#each ['Hitte', 'Droogte', 'Wateroverlast' , 'Zeespiegelstijging'] as th,i}
-        <g class='thema' transform='translate({themeImageOffset*2+(themeImageOffset+themeImageSize)*i},{0})' opacity={($themeSelection !== th) ? '0.4' : '1'}>
+        <g class='thema thema-{th}' transform='translate({themeImageOffset*2+(themeImageOffset+themeImageSize)*i},{0})' opacity={($themeSelection !== th) ? '0.4' : '1'} on:mouseover={() => mouseOver(th)} on:mouseout={() => mouseOut(th)}>
           <circle r={themeImageSize/2} cx={themeImageSize/2} cy={themeImageSize/2} fill='white'/>
           <image class='image-{th}' href={'/images/' + th + '.png'} width={themeImageSize} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => onChangeTheme(th)}/>
-          {#if $themeSelection === th}
-            <text text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='fill:white; font-size:14px'>{t(th)}</text>
-          {/if}
+          
+          <text class='text-{th}' text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='opacity:{($themeSelection === th) ? 1 : 0};fill:white; font-size:14px'>{t(th)}</text>
+          
         </g>
       {/each}
     </svg>
