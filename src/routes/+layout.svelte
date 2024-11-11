@@ -7,9 +7,10 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
   import Modal from 'svelte-simple-modal';
   import { t } from '$lib/i18n/translate';
-  import { colorScale, indicatorData,indicatorSelection, lang, modal } from '$lib/stores.js';
+  import { colorScale, indicatorData,indicatorSelection, lang, modal, graphW} from '$lib/stores.js';
   import { setupStores } from '$lib/noncomponents/setupStores.js';
-    import LoadingIcon from '$lib/components/LoadingIcon.svelte';
+  import LoadingIcon from '$lib/components/LoadingIcon.svelte';
+  import { select } from 'd3';
 
   export let data
   $: console.log(data)
@@ -32,6 +33,8 @@
 
   let mapWidth;
   let mapHeight;
+  let graphWidth;
+  let graphHeight;
   let sidepanelWidth;
   let sidepanelHeight;
 
@@ -49,17 +52,19 @@
     {#await getData}
       <LoadingIcon />
     {:then res}
-      <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
-        {#if mapWidth && data}
-          <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
-        {/if}
-      </div>
-      <div class='graph'>
-        {#if mapWidth}
+      {#if $indicatorSelection !== t('Zeespiegelstijging')}
+        <div class='map' bind:clientWidth={mapWidth} bind:clientHeight={mapHeight}>
+          {#if mapWidth && data}
+            <Map datajson={res} w={mapWidth} h={mapHeight} NLsteden={data.NLsteden} />
+          {/if}
+        </div>
+      {/if}
+      <div class='graph' style='width:{$graphW}' bind:clientWidth={graphWidth} bind:clientHeight={graphHeight}>
+        {#if graphWidth}
           {#if $indicatorSelection !== t('Zeespiegelstijging')}
-            <Graph w={mapWidth} h={mapHeight}/>
+            <Graph w={graphWidth} h={graphHeight}/>
           {:else}
-            <Zeespiegelstijging w={mapWidth} h={mapHeight} dataProjection={$indicatorData[t('Zeespiegelstijging')]}/>
+            <Zeespiegelstijging w={graphWidth} h={graphHeight*1.4} dataProjection={$indicatorData[t('Zeespiegelstijging')]}/>
           {/if}
         {/if}
       </div>
@@ -93,9 +98,6 @@
 
   .map{
     width:39%;
-  }
-  .graph{
-    width:38%;
   }
 
   .indicator-explanation{

@@ -53,6 +53,13 @@ export const periodName = derived(
       : '2050'
 )
 
+export const graphW = derived(
+  [themeSelection],
+  ([$themeSelection]) => ($themeSelection === t('Zeespiegelstijging'))
+    ? '75%'
+    : '38%'
+)
+
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
