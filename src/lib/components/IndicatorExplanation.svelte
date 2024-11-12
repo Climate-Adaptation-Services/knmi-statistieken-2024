@@ -11,6 +11,12 @@
   p{
     font-size: 12px;
     width:85%;
+    color:#35575A;
+    background-color: white;
+    border: 4px solid #35575A;
+    padding:10px;
+    text-align: center;
+    border-radius: 10px;
   }
 
 </style>
