@@ -6,7 +6,7 @@
   import { t } from '$lib/i18n/translate';
   import { goto } from '$app/navigation';
   import { onChangeIndicator } from '$lib/noncomponents/onChangeIndicator';
-    import { select, selectAll } from 'd3';
+  import { select, selectAll } from 'd3';
 
   export let w;
   export let h;
@@ -23,21 +23,22 @@
 
     selectAll('.thema').style('opacity', 0.4)
     selectAll('.thema-' + th).style('opacity', 1)
+    select('.text-' + th).transition().duration(500).attr('y', themeImageSize+20)
 
     goto(`/${th.toLowerCase()}?${engels}&${brabant}`)
   }
 
+  const themeImageOffset = 10
+  $: themeImageSize = (w - 7*themeImageOffset)/4
+
   function mouseOver(th){
     if(th !== $themeSelection){select('.thema-' + th).style('opacity', 0.8)}
-    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0.5)}
+    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0.5).attr('y', themeImageSize+35)}
   }
   function mouseOut(th){
     if(th !== $themeSelection){select('.thema-' + th).style('opacity', 0.4)}
-    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0)}
+    if(th !== $themeSelection){select('.text-' + th).style('opacity', 0).attr('y', themeImageSize+20)}
   }
-
-  const themeImageOffset = 10
-  $: themeImageSize = (w - 7*themeImageOffset)/4
 
   const showModal = (type) => {
     modal.set(bind(Info, { type : type}))
