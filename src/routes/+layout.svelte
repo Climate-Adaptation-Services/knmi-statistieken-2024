@@ -7,10 +7,9 @@
   import Tooltip from '$lib/components/Tooltip.svelte';
   import Modal from 'svelte-simple-modal';
   import { t } from '$lib/i18n/translate';
-  import { colorScale, indicatorData,indicatorSelection, lang, modal, graphW} from '$lib/stores.js';
+  import { indicatorData,indicatorSelection, lang, modal, graphW} from '$lib/stores.js';
   import { setupStores } from '$lib/noncomponents/setupStores.js';
   import LoadingIcon from '$lib/components/LoadingIcon.svelte';
-  import { select } from 'd3';
 
   export let data
   $: console.log(data)
