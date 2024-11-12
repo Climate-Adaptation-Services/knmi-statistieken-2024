@@ -13,7 +13,7 @@
     width:85%;
     color:#35575A;
     background-color: white;
-    border: 2px solid #35575A;
+    border: 0.5px solid #35575A;
     padding:10px;
     text-align: center;
     border-radius: 10px;
