@@ -62,9 +62,12 @@
         <g class='thema thema-{th}' transform='translate({themeImageOffset*2+(themeImageOffset+themeImageSize)*i},{0})' opacity={($themeSelection !== th) ? '0.4' : '1'} on:mouseover={() => mouseOver(th)} on:mouseout={() => mouseOut(th)}>
           <circle r={themeImageSize/2} cx={themeImageSize/2} cy={themeImageSize/2} fill='white'/>
           <image class='image-{th}' href={'/images/' + th + '.png'} width={themeImageSize} style="cursor:pointer; opacity:{($themeSelection !== th) ? '0.4' : '1'}" on:click={() => onChangeTheme(th)}/>
-          
-          <text class='text-{th}' text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='opacity:{($themeSelection === th) ? 1 : 0};fill:white; font-size:14px'>{t(th)}</text>
-          
+          {#if th !== t('Zeespiegelstijging')}
+            <text class='text-{th}' text-anchor='middle' x={themeImageSize/2} y={themeImageSize+20} style='opacity:{($themeSelection === th) ? 1 : 0};fill:white; font-size:14px'>{t(th)}</text>
+          {:else}
+            <text class='text-{th}' text-anchor='middle' x={themeImageSize/2} y={themeImageSize+15} style='opacity:{($themeSelection === th) ? 1 : 0};fill:white; font-size:14px'>Zeespiegel</text>
+            <text class='text-{th}' text-anchor='middle' x={themeImageSize/2} y={themeImageSize+35} style='opacity:{($themeSelection === th) ? 1 : 0};fill:white; font-size:14px'>stijging</text>
+          {/if}
         </g>
       {/each}
     </svg>
