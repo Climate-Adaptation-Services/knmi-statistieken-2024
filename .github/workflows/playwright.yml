@@ -2,21 +2,122 @@ name: VERCEL Tests
 
 on:
   deployment_status:
+
 jobs:
   run-e2es:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
+      # Notify Slack that tests have started
+      - name: Notify Slack that tests have started
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "block_id": "section-1",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":bell: *Klimaatscenario's Tests Started* :bell:"
+                }
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
-      - name: Run tests
-        run: npx playwright test
+      - name: Run Playwright tests
+        id: test
+        run: |
+          echo "Running Playwright tests..."
+          npx playwright test
         env:
           BASE_URL: ${{ github.event.deployment_status.environment_url }}
-      - uses: actions/upload-artifact@v4
+
+      - name: Capture Test Result (Failure or Success)
+        id: result
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "::set-output name=test-status::failure"
+          else
+            echo "::set-output name=test-status::success"
+          fi
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      # Send Slack Notification on Success
+      - name: Send Slack Notification on Success
+        if: steps.result.outputs.test-status == 'success'  # Send notification only if tests pass
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Use GitHub secret for the Webhook URL
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "block_id": "section-1",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":tada: *Klimaatscenarios Tests Passed* :tada:"
+                }
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # Send Slack Notification on Failure
+      - name: Send Slack Notification on Failure
+        if: steps.result.outputs.test-status == 'failure'  # Send failure notification if tests failed
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Use GitHub secret for the Webhook URL
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "block_id": "section-1",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":x: *Klimaatscenarios Tests Failed* :x:"
+                }
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # Send Slack Notification on Timeout (Job Cancelled)
+      - name: Send Slack Notification on Timeout (Cancelled)
+        if: ${{ cancelled() }}  # Triggered if the job was cancelled due to timeout
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # Use GitHub secret for the Webhook URL
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "blocks": [
+              {
+                "type": "section",
+                "block_id": "section-1",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":x: *Klimaatscenarios Tests Timed Out* :x:"
+                }
+              },
+              {
+                "type": "section",
+                "block_id": "section-2",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "The Playwright tests timed out after 3 minutes."
+                }
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
