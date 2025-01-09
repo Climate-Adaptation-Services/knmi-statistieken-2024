@@ -20,7 +20,7 @@ jobs:
                 "block_id": "section-1",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":bell: *Klimaatscenario's Tests Started* :bell:"
+                  "text": ":bell: *Klimaatscenarios Tests Started* :bell:"
                 }
               }
             ]
