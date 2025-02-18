@@ -1,53 +1,48 @@
 <script>
   import { afterUpdate, onMount } from "svelte";
-  import { circleFeatures, colorScale, gridSelection, gridHover, indicatorData, indicatorSelection, periodSelection, brabantKEA } from "$lib/stores";
+  import { circleFeatures, colorScale, gridSelection, gridHover, indicatorData, indicatorSelection, periodSelection, gridcode } from "$lib/stores";
   import { select, selectAll } from "d3";
 
   export let projection
   export let w
 
-  $: circleDistanceX = projection($circleFeatures[1].geometry.coordinates)[0] - projection($circleFeatures[0].geometry.coordinates)[0]
+  $: circleDistanceX = projection($circleFeatures[50].geometry.coordinates)[0] - projection($circleFeatures[49].geometry.coordinates)[0]
   $: circleDistanceY = projection($circleFeatures[1].geometry.coordinates)[1] - projection($circleFeatures[4].geometry.coordinates)[1]
-
-  const gridcode = ($brabantKEA)
-    ? 'cellen_lat'
-    : 'cellen_lat_lon_XYTableToPoint1_cellen'
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
-    gridSelection.set(feature.properties[gridcode])
+    gridSelection.set(feature.properties[$gridcode])
 
     selectAll('.rasterblokje').attr('stroke', 'white').attr('stroke-width', '1')
-    select('.id-' + feature.properties[gridcode]).attr('stroke', 'cyan').attr('stroke-width', '3')
+    select('.id-' + feature.properties[$gridcode]).attr('stroke', 'cyan').attr('stroke-width', '3')
   }
 
   function mouseOver(feature){
-    gridHover.set(feature.properties[gridcode])
+    gridHover.set(feature.properties[$gridcode])
     select('.id-' + $gridHover).raise()
-    if(feature.properties[gridcode] !== $gridSelection){
-      select('.id-' + feature.properties[gridcode]).attr('stroke', 'grey')
+    if(feature.properties[$gridcode] !== $gridSelection){
+      select('.id-' + feature.properties[$gridcode]).attr('stroke', 'grey')
     }
   }
 
   function mouseOut(feature){
     gridHover.set(null)
-    if(feature.properties[gridcode] !== $gridSelection){
-      select('.id-' + feature.properties[gridcode]).attr('stroke', 'white')
+    if(feature.properties[$gridcode] !== $gridSelection){
+      select('.id-' + feature.properties[$gridcode]).attr('stroke', 'white')
     }
   }
 
   let circles
   let rects
   onMount(() => {
-    console.log('brabnt test', $indicatorData, $indicatorSelection)
 
     const circlesAndRects = select(".rasterdata")
 
     circles = circlesAndRects.selectAll('circle')
       .data($circleFeatures)
       .join("circle")
-        .attr("class", feature => 'rasterblokje ' + 'id-' + feature.properties[gridcode])
-        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+        .attr("class", feature => 'rasterblokje ' + 'id-' + feature.properties[$gridcode])
+        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[$gridcode])[0][$periodSelection]))
         .attr('stroke', 'white')
         .attr('stroke-width', '1')
         .style('pointer-events', 'none')
@@ -56,7 +51,7 @@
       .data($circleFeatures)
       .join("rect")
         .attr("class", 'hoverRect')
-        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+        .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[$gridcode])[0][$periodSelection]))
         .attr('stroke', 'black')
         .attr('stroke-opacity', '0')
         .attr('fill-opacity', '0')
@@ -89,7 +84,7 @@
       .style('opacity', 0.1)
       .transition('trans2').duration(1000).delay((d,i) => Math.random()*i*5)
       .style('opacity', 1)
-      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[gridcode])[0][$periodSelection]))
+      .attr('fill', feature => $colorScale(+$indicatorData[$indicatorSelection].filter(d => +d.index === feature.properties[$gridcode])[0][$periodSelection]))
   }
 
 </script>

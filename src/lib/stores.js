@@ -37,6 +37,22 @@ export const neerslagIndicatoren = writable([])
 export const period_options = writable([]);
 export const indicatorOptions = writable(null)
 
+
+export const gridcode = derived(
+  [brabantKEA],
+  ([$brabantKEA]) => $brabantKEA ? 'cellen_lat' : 'cellen_lat_lon_XYTableToPoint1_cellen'
+);
+
+export const locationName = derived(
+  [gridSelection, circleFeatures, gridcode],
+  ([$gridSelection, $circleFeatures, $gridcode]) => {
+    if (!$circleFeatures) return null;
+    const feature = $circleFeatures.filter((f) => f.properties[$gridcode] === $gridSelection)[0];
+    return feature ? feature.properties.gemeentenaam : null;
+  }
+)
+
+
 export const indicatorSelectionMetaData = derived(
   [indicatorMetaData, indicatorSelection],
   ([$indicatorMetaData, $indicatorSelection]) =>{
