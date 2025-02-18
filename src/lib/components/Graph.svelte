@@ -2,7 +2,7 @@
   import { scalePoint, scaleLinear, select, selectAll, axisBottom, axisLeft, max } from 'd3';
   import { afterUpdate } from 'svelte';
   import GraphContent from './GraphContent.svelte';
-  import { indicatorData, indicatorSelection, indicatorSelectionMetaData, neerslagIndicatoren } from '$lib/stores';
+  import { indicatorData, indicatorSelection, indicatorSelectionMetaData, neerslagIndicatoren, gridSelection, locationName } from '$lib/stores';
   import { t } from '$lib/i18n/translate';
 
   export let w
@@ -45,7 +45,7 @@
 
 <div class='title' style='height:{titleHeight}px'>
   <div class='title-white-bg'>
-    <h3 style='color:grey'>{t('Statistieken')}</h3>
+    <h3 style='color:grey'>{t('Huidige locatie') + ': '}<strong style='color:#34575A'>{$locationName}</strong></h3>
     <!-- <p style='font-style:italic; font-size:14px'>Beweeg de muis over de grafiek of legenda voor meer info</p> -->
   </div>
 </div>
