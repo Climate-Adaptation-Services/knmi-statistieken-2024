@@ -55,6 +55,10 @@
       ? neerslagregimes_winter.features
       : neerslagregimes_jaar.features
     : null
+
+  $: if($indicatorSelection.slice(0,3) === 'Uur'){
+    regimeSelection.set('R')
+  }
   
 </script>
 
@@ -71,36 +75,35 @@
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
   <svg>
-    {#if $indicatorSelection === t('Zeespiegelstijging')}
-      <!-- if zeespiegelstijging show country borders -->
-      <g class='borders' transform='translate({legendMargin},0)'>
-        <path
-          d={path(grenzen.features[0])}
-          class='shape'
-          fill='none'
-          stroke='grey'
-        />
-      </g>
-    {:else if $neerslagIndicatoren.includes($indicatorSelection)}
+    {#if $neerslagIndicatoren.includes($indicatorSelection)}
       <!-- if neerslagstatistieken show 4 delen -->
       <g transform='translate({legendMargin},0)'>
-        {#each neerslagRegimesFeatures as regime, i}
+        {#if $indicatorSelection.slice(0,3) === 'Uur'}
           <path
-            d={path(rewind(regime,{reverse:true}))}
+            d={path(grenzen.features[0])}
             class='shape'
-            fill='{(regime.properties.Regio === 'R') 
-              ? '#84C76E' 
-              : (regime.properties.Regio === 'L') 
-                ? '#F4815A' 
-                : (regime.properties.Regio === 'H') 
-                ? '#24BEC6' 
-                : 'purple'}'
+            fill='#84C76E'
             stroke='grey'
-            opacity={(regime.properties.Regio === $regimeSelection) ? 1 : 0.2}
-            on:click={() => regimeSelection.set(regime.properties.Regio)}
-            cursor='pointer'
           />
-        {/each}
+        {:else}
+          {#each neerslagRegimesFeatures as regime, i}
+            <path
+              d={path(rewind(regime,{reverse:true}))}
+              class='shape'
+              fill='{(regime.properties.Regio === 'R') 
+                ? '#84C76E' 
+                : (regime.properties.Regio === 'L') 
+                  ? '#F4815A' 
+                  : (regime.properties.Regio === 'H') 
+                  ? '#24BEC6' 
+                  : 'purple'}'
+              stroke='grey'
+              opacity={(regime.properties.Regio === $regimeSelection) ? 1 : 0.2}
+              on:click={() => regimeSelection.set(regime.properties.Regio)}
+              cursor='pointer'
+            />
+          {/each}
+        {/if}
       </g>
     {:else}
       {#if $colorScale}
