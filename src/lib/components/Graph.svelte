@@ -44,7 +44,7 @@
 </script>
 
 <div class='title' style='height:{titleHeight}px'>
-  <div class='title-white-bg'>
+  <div class='title-white-bg'> 
 
     <h3 style='color:grey'>
       {#if $themeSelection !== 'Wateroverlast'}
