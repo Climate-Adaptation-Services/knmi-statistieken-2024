@@ -49,7 +49,7 @@
     <h3 style='color:grey'>
       {#if $themeSelection !== 'Wateroverlast'}
         {t('Huidige locatie') + ': '}<strong style='color:#34575A'>{$locationName}</strong>
-      {:else}
+      {:else if $indicatorSelection.slice(0,3) !== 'Uur'}
         {t('Statistieken wateroverlast')}<strong style='color:#34575A'>{$regimeSelection}</strong>
       {/if}
     </h3>

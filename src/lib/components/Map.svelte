@@ -68,7 +68,7 @@
     {#if $indicatorSelection !== t('Zeespiegelstijging')}
       <h3 style='margin-top:0px; margin-bottom:10px'><strong style='color:grey'>Scenario: </strong>{$period_options.filter(po => po.value === $periodSelection)[0].label}</h3>
     {/if}
-    {#if $neerslagIndicatoren.includes($indicatorSelection)}
+    {#if $neerslagIndicatoren.includes($indicatorSelection) && $indicatorSelection.slice(0,3) !== 'Uur'}
       <h3 style='margin-top:0px'><strong style='color:grey'>{t('Neerslagregime')}: </strong>{$regimeSelection}</h3>
     {/if}
   </div>
