@@ -22,22 +22,56 @@
   const neerslagregimes_jaar = datajson[5];
 
   console.log('datajson', datajson)
+  console.log('cellen features count:', cellen.features?.length)
+  console.log('cellen_brabant features count:', cellen_brabant.features?.length)
+  console.log('first 3 cellen coords:', cellen.features?.slice(0,3).map(f => f.geometry.coordinates))
 
-  if($brabantKEA){circleFeatures.set(cellen_brabant.features)}
-  else{circleFeatures.set(cellen.features)}
-  
+  $: {
+    if($brabantKEA){
+      circleFeatures.set(cellen_brabant.features)
+      console.log('Set Brabant features:', cellen_brabant.features.length)
+    } else {
+      circleFeatures.set(cellen.features)
+      console.log('Set full NL features:', cellen.features.length)
+    }
+  }
+
   const legendMargin = 50
 
   $: titleHeight = 0.2*h
   $: mapHeight = 0.8*h
 
-  const boundingbox = ($brabantKEA) ? provincies.features[10] : provincies
+  $: boundingbox = ($brabantKEA) ? provincies.features[10] : cellen
   $: xOffset = ($brabantKEA) ? w*0.25 : 60
+
+  $: {
+    console.log('Creating projection with:', {
+      boundingbox: boundingbox?.type || boundingbox?.geometry?.type,
+      extent: [[xOffset,10],[w-legendMargin-10, mapHeight-40]],
+      isBrabant: $brabantKEA
+    });
+  }
 
   $: projection = geoMercator()
     .fitExtent([[xOffset,10],[w-legendMargin-10, mapHeight-40]], boundingbox)
-  
+
   $: path = geoPath(projection);
+
+  $: {
+    const testCoords = $circleFeatures?.[0]?.geometry?.coordinates;
+    const testProjected = testCoords ? projection(testCoords) : null;
+    console.log('Map debug:', {
+      brabantKEA: $brabantKEA,
+      w, h, mapHeight,
+      circleFeatures: $circleFeatures?.length,
+      firstCoords: testCoords,
+      projected: testProjected,
+      sample5: $circleFeatures?.slice(0, 5).map(f => ({
+        coords: f.geometry.coordinates,
+        proj: projection(f.geometry.coordinates)
+      }))
+    });
+  }
 
   // console.log('indicatorMetaData', $indicatorMetaData, $indicatorSelection, t($indicatorSelection), $lang)
   const firstIndicator = $indicatorMetaData.filter((ind) => ind['Indicator'] === $indicatorSelection)[0]
@@ -74,7 +108,7 @@
   </div>
 </div>
 <div class='map-svg' style='height:{mapHeight}px'>
-  <svg>
+  <svg width={w} height={mapHeight}>
     {#if $neerslagIndicatoren.includes($indicatorSelection)}
       <!-- if neerslagstatistieken show 4 delen -->
       <g transform='translate({legendMargin},0)'>

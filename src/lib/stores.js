@@ -5,7 +5,7 @@ import { t } from '$lib/i18n/translate';
 export const lang = writable('')
 
 // alleen brabant?
-export const brabantKEA = writable(true)
+export const brabantKEA = writable(false)
 
 // circle shapes
 export const circleFeatures = writable(null)
@@ -55,7 +55,7 @@ export const locationName = derived(
 
 export const indicatorSelectionMetaData = derived(
   [indicatorMetaData, indicatorSelection],
-  ([$indicatorMetaData, $indicatorSelection]) =>{
+  ([$indicatorMetaData, $indicatorSelection]) => {
     return $indicatorMetaData.filter((ind) => ind['Indicator'] === $indicatorSelection)[0]
   }
 )
@@ -79,9 +79,9 @@ export const graphW = derived(
 export const gridSelectionValue = derived(
   [indicatorData, gridSelection, periodSelection, indicatorSelection, neerslagIndicatoren],
   ([$indicatorData, $gridSelection, $periodSelection, $indicatorSelection, $neerslagIndicatoren]) => {
-    if(!$indicatorSelection || !$indicatorData || $indicatorSelection === t('Zeespiegelstijging') || $neerslagIndicatoren.includes($indicatorSelection)){
+    if (!$indicatorSelection || !$indicatorData || $indicatorSelection === t('Zeespiegelstijging') || $neerslagIndicatoren.includes($indicatorSelection)) {
       return null
-    }else{
+    } else {
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridSelection)[0][$periodSelection]
     }
   }
@@ -90,9 +90,9 @@ export const gridSelectionValue = derived(
 export const gridHoverValue = derived(
   [indicatorData, gridHover, periodSelection, indicatorSelection],
   ([$indicatorData, $gridHover, $periodSelection, $indicatorSelection]) => {
-    if(!$indicatorSelection || $gridHover === null){
+    if (!$indicatorSelection || $gridHover === null) {
       return null
-    }else{
+    } else {
       return +$indicatorData[$indicatorSelection].filter(d => +d.index === $gridHover)[0][$periodSelection]
     }
   }
