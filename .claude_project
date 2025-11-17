@@ -1,0 +1,99 @@
+# KNMI Statistieken 2024 - Climate Adaptation Services
+
+## Project Overview
+This is a SvelteKit web application for visualizing KNMI (Royal Netherlands Meteorological Institute) climate statistics. The application focuses on climate adaptation data for the Netherlands, displaying various climate indicators including heat, drought, water excess, and sea level rise.
+
+## Tech Stack
+- **Framework**: SvelteKit 2.x
+- **Language**: JavaScript (with JSDoc type checking)
+- **Visualization**: D3.js v7
+- **Mapping**: GeoJSON data visualization
+- **UI Components**: Svelte 4, svelte-select, svelte-simple-modal
+- **Styling**: Component-scoped CSS
+- **Build Tool**: Vite
+
+## Key Features
+1. **Interactive Map**: Displays climate data on a map of the Netherlands with province and municipal boundaries
+2. **Data Visualization**: Line graphs, area charts, and custom visualizations for different climate indicators
+3. **Multi-language Support**: Dutch (nl) and English (en) translations
+4. **Theme-based Navigation**: Four main themes - Heat (Hitte), Drought (Droogte), Water Excess (Wateroverlast), and Sea Level Rise (Zeespiegelstijging)
+5. **Climate Scenarios**: Shows current climate (ref), 2050, and 2100 projections with high/low scenarios
+6. **Interactive Tooltips**: Hover interactions for detailed data display
+
+## Project Structure
+```
+src/
+├── routes/              # SvelteKit routes
+│   ├── +layout.svelte  # Main layout with Map, Graph, and SidePanel
+│   ├── +layout.js      # Data loader
+│   ├── +page.svelte    # Home page
+│   ├── droogte/        # Drought theme page
+│   ├── hitte/          # Heat theme page
+│   ├── wateroverlast/  # Water excess theme page
+│   └── zeespiegelstijging/ # Sea level rise theme page
+├── lib/
+│   ├── components/     # Svelte components
+│   │   ├── Map.svelte           # Main map component
+│   │   ├── Graph.svelte         # Main graph component
+│   │   ├── SidePanel.svelte     # Control panel
+│   │   ├── axes/               # Chart axis components
+│   │   ├── Line.svelte         # Line chart component
+│   │   ├── Area.svelte         # Area chart component
+│   │   ├── Tooltip.svelte      # Tooltip display
+│   │   └── ...
+│   ├── noncomponents/  # Utility functions
+│   ├── i18n/          # Internationalization (nl.js, en.js, translate.js)
+│   └── stores.js      # Svelte stores for state management
+```
+
+## State Management (stores.js)
+The application uses Svelte stores extensively:
+- `lang`: Current language selection
+- `indicatorData`: All indicator data
+- `indicatorSelection`: Currently selected indicator
+- `gridSelection`: Selected grid cell (default: 689)
+- `periodSelection`: Time period (ref/2050/2100)
+- `scenarioSelection`: Climate scenario (hoog/laag/beide)
+- `themeSelection`: Current theme (Hitte/Droogte/etc.)
+- `hoveredInfo`, `mousePosition`: Tooltip state
+- Derived stores: `locationName`, `periodName`, `gridSelectionValue`, etc.
+
+## Data Sources
+The application fetches data from:
+1. **Province boundaries**: cartomap.github.io
+2. **KNMI point data**: Climate-Adaptation-Services GitHub repository
+3. **Grid masks**: Municipality names and coordinates
+4. **Climate projections**: JSON files with scenario data
+
+## Key Coding Patterns
+1. **Reactivity**: Heavy use of Svelte's reactive statements (`$:`)
+2. **Component Binding**: `bind:clientWidth` and `bind:clientHeight` for responsive sizing
+3. **Store Subscriptions**: `$storeName` syntax for auto-subscribing to stores
+4. **Async Data Loading**: `{#await}` blocks for data fetching
+5. **D3 Integration**: D3 scales, shapes, and utilities within Svelte components
+
+## Development Guidelines
+- Use consistent naming: Dutch for domain terms (gemeentenaam, neerslagregime), English for code
+- Maintain component modularity - separate concerns between Map, Graph, and control components
+- Keep stores focused - single responsibility for each store
+- Use derived stores for computed values to maintain reactivity
+- Follow Svelte best practices for component composition
+- Ensure all visualizations are responsive to container size changes
+
+## Common Tasks
+- **Add new indicator**: Update indicatorData, add to metadata, create visualization logic
+- **Modify graph types**: Work with GraphContent.svelte and related graph components
+- **Update translations**: Modify nl.js and en.js in lib/i18n/
+- **Adjust map display**: Edit Map.svelte and MapShapes.svelte
+- **Change color schemes**: Update GradientDefs.svelte and color scale logic
+
+## Data Flow
+1. Route loads initial data via +layout.js
+2. setupStores() initializes stores with loaded data
+3. User interactions update stores (indicatorSelection, periodSelection, etc.)
+4. Components react to store changes via $ subscriptions
+5. Map and Graph components visualize current store state
+6. Tooltips and hover states provide additional detail
+
+## Browser Compatibility
+The application uses modern JavaScript features and SVG for visualizations. Target browsers should support ES6+ and SVG 2.0.
