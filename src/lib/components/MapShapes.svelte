@@ -6,8 +6,14 @@
   export let projection
   export let w
 
-  $: circleDistanceX = projection($circleFeatures[50].geometry.coordinates)[0] - projection($circleFeatures[49].geometry.coordinates)[0]
-  $: circleDistanceY = projection($circleFeatures[1].geometry.coordinates)[1] - projection($circleFeatures[4].geometry.coordinates)[1]
+  // KNMI grid spacing in degrees
+  const LON_SPACING = 0.125;
+  const LAT_SPACING = 0.1;
+
+  // Calculate pixel distances based on fixed grid spacing (works for both NL and Brabant)
+  $: baseCoord = $circleFeatures[0]?.geometry?.coordinates || [5, 51];
+  $: circleDistanceX = projection([baseCoord[0] + LON_SPACING, baseCoord[1]])[0] - projection(baseCoord)[0];
+  $: circleDistanceY = projection(baseCoord)[1] - projection([baseCoord[0], baseCoord[1] + LAT_SPACING])[1];
 
   function click(feature){
     select('.whiterect').interrupt('ease').attr('x', 0)
