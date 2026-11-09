@@ -1,4 +1,8 @@
 import { dsv } from 'd3'
+import { browser } from '$app/environment'
+import { inject } from '@vercel/analytics'
+
+if (browser) inject()
 
 export async function load({ url }){
   // Access the URLSearchParams object
